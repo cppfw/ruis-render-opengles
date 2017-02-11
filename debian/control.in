@@ -3,7 +3,8 @@ Section: libs
 Priority: extra
 Maintainer: Ivan Gagis <igagis@gmail.com>
 Build-Depends: debhelper (>= 9), prorab,
-		libmorda-dev
+		libmorda-dev,
+		libgles2-mesa-dev
 Build-Depends-Indep: doxygen
 Standards-Version: 3.9.2
 
