@@ -28,7 +28,7 @@ OpenGLES2Renderer::OpenGLES2Renderer(std::unique_ptr<OpenGLES2Factory> factory) 
 void OpenGLES2Renderer::setFramebufferInternal(morda::FrameBuffer* fb) {
 	if(!this->defaultFramebufferInitialized){
 		//On some platforms the default framebuffer is not 0, so because of this
-		//check if default framebuffer value is saved or not everytime some
+		//check if default framebuffer value is saved or not every time some
 		//framebuffer is going to be bound and save the value if needed.
 		GLint oldFb;
 		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFb);

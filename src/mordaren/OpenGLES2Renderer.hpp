@@ -10,7 +10,7 @@ namespace mordaren{
 
 class OpenGLES2Renderer : public morda::Renderer{
 	bool defaultFramebufferInitialized = false;
-	std::uint32_t defaultFramebuffer;
+	std::uint32_t defaultFramebuffer; //NOTE: GLuint is fixed 32bit type, according to OpenGL specs, so use std::uint32_t.
 public:
 	OpenGLES2Renderer(std::unique_ptr<OpenGLES2Factory> factory = utki::makeUnique<OpenGLES2Factory>());
 	
