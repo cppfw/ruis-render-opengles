@@ -1,9 +1,15 @@
+#include <utki/config.hpp>
+
 #include "OpenGLES2FrameBuffer.hpp"
 #include "OpenGLES2Texture2D.hpp"
 
 #include "OpenGLES2_util.hpp"
 
-#include <GLES2/gl2.h>
+#if M_OS_NAME == M_OS_NAME_IOS
+#	include <OpenGlES/ES2/glext.h>
+#else
+#	include <GLES2/gl2.h>
+#endif
 
 using namespace mordaren;
 
