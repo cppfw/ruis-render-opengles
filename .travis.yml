@@ -17,6 +17,9 @@ matrix:
     - os: linux
       env: BUILD_NAME=debian
       compiler: gcc
+    - os: osx
+      env: BUILD_NAME=ios
+      compiler: clang
     - os: linux
       env: BUILD_NAME=ubuntu
       compiler: gcc
@@ -29,6 +32,24 @@ matrix:
 
 
 before_install:
+- if [ "$BUILD_NAME" == "ios" ]; then
+    brew tap igagis/tap &&
+    brew update > /dev/null &&
+    brew install prorab &&
+
+    brew install --force openssl &&
+    rvm install ruby-2.2.1 &&
+    rvm install ruby-2.2.2 &&
+    rvm use ruby-2.2.2 &&
+    
+    rvm 2.2.1 do gem uninstall bundler -v '>1.12.5' --force &&
+    rvm 2.2.1 do gem install bundler -v 1.12.5 --no-rdoc --no-ri --no-document --quiet &&
+    
+    sudo gem install cocoapods &&
+    rvm 2.2.1 do gem install cocoapods &&
+    pod repo add --silent igagis https://$PRORAB_GIT_USERNAME:$PRORAB_GIT_ACCESS_TOKEN@github.com/igagis/cocoapods-repo.git &&
+    pod install --project-directory=ios;
+  fi
 - if [ "$BUILD_NAME" == "debian" ]; then
     echo "deb http://dl.bintray.com/igagis/deb unstable main" | sudo tee /etc/apt/sources.list.d/igagis.list > /dev/null &&
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61 &&
@@ -79,6 +100,9 @@ before_install:
 
 
 script:
+- if [ "$BUILD_NAME" == "ios" ]; then
+    xcodebuild -workspace ios/tests.xcworkspace -scheme tests CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO;
+  fi
 - if [ "$BUILD_NAME" == "debian" ]; then
     prorab-deb-prepare.sh &&
     sg sbuild -c "sbuild -A -d testing-amd64-sbuild --run-lintian --debbuildopts '-us -uc'";
@@ -133,3 +157,9 @@ deploy:
   key:
     secure: "i69PiIo6waETMrstLNuHt6UrO9vQcyzmftBkujxpodyjVsTzJ1le7KHFBrh9CcgOz+2qkjOSLPkHkaCi9mlHnhMHwHt0OwHxl943dgdnUQqRM2pY+IeDnaP1BRrOJJxy1cDkq35Sj1lRw1zOG+jMtFS4WWKsGqYspRxHAzNdseSfQpEGNWqpjE4Nfc4xJHyP95AF/mzVbaykr5zI3vTW3b4nROK3p7woUqQcj7/jRLJdmGweldkvznbrZgMWUrBd+t7GGkNIa5rg7clo3NcfNXpLoX7rdI1fHkRec0uJFWAomMBvvFxCjH6jo1jTx1VNKYhXK5P7Ze4iXDXZ8i/5BPTDyBkDbOjMby77fcEYe//2C2ozpNL4Qmd+f3P99rSPwaTURV8Gc2JQiJG4TSN+BMRLrcmV/8BcT2v5XusY2JchmYo23puKh61Uqnzm2jsB75Yyl4vyukyUdd1k258DIKCtE3PBcsnN0QH/QKsk7birafPbUx1UDK4GSERUNZb0kPGJV7EUsSTNi2O5ygKy43u0TmACCN1buhC7+PpnRrqUhr3iGkdvPU8u45abPlDPXbWNDFcZiHuvDRL7aJUvbZGGfRNRbZz5XTfg8zqMGJdNobUyiYL9+e67iYKecDwigfvtK/9L/5Qjfa+0KjraBf1FKkyc2I4XVQam/YU3Miw="
   dry-run: false
+- provider: script
+  skip_cleanup: true
+  script: rvm 2.2.1 do prorab-deploy-cocoapods.sh -r igagis
+  on:
+    tags: true
+    condition: $BUILD_NAME = ios
