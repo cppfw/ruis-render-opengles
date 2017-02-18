@@ -102,7 +102,7 @@ before_install:
 script:
 - if [ "$BUILD_NAME" == "ios" ]; then
     set -o pipefail &&
-    xcodebuild -workspace ios/morda_test.xcworkspace -scheme tests CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+    xcodebuild -workspace ios/tests.xcworkspace -scheme tests CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
             | sed -e "s/export PATH=[^ ]*/export PATH=.../g"
             | sed -e "s/[^ ]*\/clang /clang /g"
             | sed -e "s/\(-[IWfFL]\)[^ ]*/% /g"
