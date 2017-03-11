@@ -32,11 +32,8 @@ ifeq ($(raspberrypi),true)
     this_ldflags += -L/opt/vc/lib
 endif
 
-this_cxxflags += -I$(d)/../../src
-
 ifeq ($(prorab_os), linux)
     this_cxxflags += -fPIC #generate position independent code
-    this_ldlibs += -lpthread
 else ifeq ($(prorab_os), windows)
 #    this_cxxflags += -Wno-format #due to bugs in some g++ versions it warns about format when not needed, so disable format warnings
 #    this_cxxflags += -I/usr/include -I/usr/local/include/ -I/usr/local/include/freetype2
@@ -56,6 +53,6 @@ else
     this_ldlibs += `pkg-config --libs glesv2`
 endif
 
-this_ldlibs += -lstdc++ -lm -lmorda
+this_ldlibs += 
 
 $(eval $(prorab-build-lib))

@@ -48,12 +48,11 @@
       <makefileType>
         <makeTool>
           <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>${MAKE}</buildCommand>
+          <buildCommand>${MAKE} -j8</buildCommand>
           <cleanCommand>${MAKE} clean</cleanCommand>
           <executablePath>src/libmorda-opengles2-ren.so.0</executablePath>
           <ccTool>
             <incDir>
-              <pElem>../src</pElem>
               <pElem>.</pElem>
             </incDir>
           </ccTool>
