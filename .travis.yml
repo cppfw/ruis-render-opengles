@@ -6,11 +6,11 @@ sudo: required
 
 matrix:
   include:
-    - os: osx
-      env: BUILD_NAME=macosx
-      compiler: clang
-      language: cpp
-      osx_image: xcode7.3
+#    - os: osx
+#      env: BUILD_NAME=macosx
+#      compiler: clang
+#      language: cpp
+#      osx_image: xcode7.3
     - os: osx
       env: BUILD_NAME=ios
       compiler: clang
