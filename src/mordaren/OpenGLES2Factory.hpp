@@ -1,11 +1,11 @@
 #pragma once
 
-#include <morda/render/Factory.hpp>
+#include <morda/render/RenderFactory.hpp>
 
 
 namespace mordaren{
 
-class OpenGLES2Factory : public morda::Factory{
+class OpenGLES2Factory : public morda::RenderFactory{
 public:
 	OpenGLES2Factory();
 	

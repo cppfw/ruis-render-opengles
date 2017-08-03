@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.12) unstable; urgency=medium
+
+  * test release
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 03 Aug 2017 21:49:20 +0300
+
 libmorda-opengles2-ren (0.1.11) unstable; urgency=medium
 
   * link to latest morda
