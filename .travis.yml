@@ -6,11 +6,6 @@ sudo: required
 
 matrix:
   include:
-#    - os: osx
-#      env: BUILD_NAME=macosx
-#      compiler: clang
-#      language: cpp
-#      osx_image: xcode7.3
     - os: osx
       env: BUILD_NAME=ios
       compiler: clang
@@ -119,12 +114,7 @@ before_install:
     sudo mkdir -p /srv/chroot/rasp-armhf/build &&
     sudo rsync -av $TRAVIS_BUILD_DIR/ /srv/chroot/rasp-armhf/build/;
   fi
-- if [ "$BUILD_NAME" == "clang" ]; then
-    echo "deb http://dl.bintray.com/igagis/deb /" | sudo tee /etc/apt/sources.list.d/igagis.list > /dev/null &&
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61 &&
-    sudo apt-get update -qq &&
-    sudo apt-get install -qq $linuxDependencies lintian;
-  fi
+
 
 before_script:
   # download and install android NDK
@@ -138,6 +128,11 @@ before_script:
       export LOCAL_ANDROID_NDK_HOST_PLATFORM="linux-x86_64" &&
       export PATH=$PATH:${ANDROID_NDK_HOME} &&
       env;
+    fi
+  - if [ "$BUILD_NAME" == "ios" ]; then
+      curl -L https://github.com/zackslash/Xcode-Proj-Adder/raw/master/bin/XcodeProjAdder -O &&
+      chmod +x XcodeProjAdder &&
+      (cd ios && ../XcodeProjAdder -XCP tests.xcodeproj -SCSV `echo $(find ../src -type f -name *.cpp) | sed -n -e 's/ /,/gp'`);
     fi
 
 script:
@@ -162,10 +157,6 @@ script:
 - if [ "$BUILD_NAME" == "ubuntu" ]; then
     prorab-deb-prepare.sh &&
     sg sbuild -c "sbuild -A -d xenial-amd64-sbuild --debbuildopts '-us -uc'";
-  fi
-- if [ "$BUILD_NAME" == "clang" ]; then
-    prorab-deb-prepare.sh &&
-    dpkg-buildpackage -uc -us;
   fi
 - if [ "$BUILD_NAME" == "raspberry_pi" ]; then
     sudo chroot /srv/chroot/rasp-armhf bash -c "cd /build && prorab-deb-prepare.sh" &&
