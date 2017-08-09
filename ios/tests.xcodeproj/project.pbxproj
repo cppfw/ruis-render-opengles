@@ -10,19 +10,6 @@
 		1F785B92C8F2DE0A7454BF7B /* libPods-tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 25D2F12B1922F2AADB1B7817 /* libPods-tests.a */; };
 		2CB101EE1E53743A007D33DA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CB101ED1E53743A007D33DA /* main.m */; };
 		2CB101F91E53743A007D33DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CB101F81E53743A007D33DA /* Assets.xcassets */; };
-		2CB1021F1E56160D007D33DA /* OpenGLES2Buffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB102051E56160C007D33DA /* OpenGLES2Buffer.cpp */; };
-		2CB102201E56160D007D33DA /* OpenGLES2Factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB102071E56160C007D33DA /* OpenGLES2Factory.cpp */; };
-		2CB102211E56160D007D33DA /* OpenGLES2FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB102091E56160C007D33DA /* OpenGLES2FrameBuffer.cpp */; };
-		2CB102221E56160D007D33DA /* OpenGLES2IndexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1020B1E56160C007D33DA /* OpenGLES2IndexBuffer.cpp */; };
-		2CB102231E56160D007D33DA /* OpenGLES2Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1020D1E56160C007D33DA /* OpenGLES2Renderer.cpp */; };
-		2CB102241E56160D007D33DA /* OpenGLES2Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1020F1E56160C007D33DA /* OpenGLES2Shader.cpp */; };
-		2CB102251E56160D007D33DA /* OpenGLES2ShaderColorPos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB102111E56160C007D33DA /* OpenGLES2ShaderColorPos.cpp */; };
-		2CB102261E56160D007D33DA /* OpenGLES2ShaderColorPosTex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB102131E56160D007D33DA /* OpenGLES2ShaderColorPosTex.cpp */; };
-		2CB102271E56160D007D33DA /* OpenGLES2ShaderPosClr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB102151E56160D007D33DA /* OpenGLES2ShaderPosClr.cpp */; };
-		2CB102281E56160D007D33DA /* OpenGLES2ShaderPosTex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB102171E56160D007D33DA /* OpenGLES2ShaderPosTex.cpp */; };
-		2CB102291E56160D007D33DA /* OpenGLES2Texture2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB102191E56160D007D33DA /* OpenGLES2Texture2D.cpp */; };
-		2CB1022A1E56160D007D33DA /* OpenGLES2VertexArray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1021B1E56160D007D33DA /* OpenGLES2VertexArray.cpp */; };
-		2CB1022B1E56160D007D33DA /* OpenGLES2VertexBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2CB1021D1E56160D007D33DA /* OpenGLES2VertexBuffer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,33 +19,6 @@
 		2CB101ED1E53743A007D33DA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2CB101F81E53743A007D33DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2CB101FD1E53743A007D33DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2CB102041E56160C007D33DA /* OpenGLES2_util.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2_util.hpp; sourceTree = "<group>"; };
-		2CB102051E56160C007D33DA /* OpenGLES2Buffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2Buffer.cpp; sourceTree = "<group>"; };
-		2CB102061E56160C007D33DA /* OpenGLES2Buffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2Buffer.hpp; sourceTree = "<group>"; };
-		2CB102071E56160C007D33DA /* OpenGLES2Factory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2Factory.cpp; sourceTree = "<group>"; };
-		2CB102081E56160C007D33DA /* OpenGLES2Factory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2Factory.hpp; sourceTree = "<group>"; };
-		2CB102091E56160C007D33DA /* OpenGLES2FrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2FrameBuffer.cpp; sourceTree = "<group>"; };
-		2CB1020A1E56160C007D33DA /* OpenGLES2FrameBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2FrameBuffer.hpp; sourceTree = "<group>"; };
-		2CB1020B1E56160C007D33DA /* OpenGLES2IndexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2IndexBuffer.cpp; sourceTree = "<group>"; };
-		2CB1020C1E56160C007D33DA /* OpenGLES2IndexBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2IndexBuffer.hpp; sourceTree = "<group>"; };
-		2CB1020D1E56160C007D33DA /* OpenGLES2Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2Renderer.cpp; sourceTree = "<group>"; };
-		2CB1020E1E56160C007D33DA /* OpenGLES2Renderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2Renderer.hpp; sourceTree = "<group>"; };
-		2CB1020F1E56160C007D33DA /* OpenGLES2Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2Shader.cpp; sourceTree = "<group>"; };
-		2CB102101E56160C007D33DA /* OpenGLES2Shader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2Shader.hpp; sourceTree = "<group>"; };
-		2CB102111E56160C007D33DA /* OpenGLES2ShaderColorPos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2ShaderColorPos.cpp; sourceTree = "<group>"; };
-		2CB102121E56160D007D33DA /* OpenGLES2ShaderColorPos.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2ShaderColorPos.hpp; sourceTree = "<group>"; };
-		2CB102131E56160D007D33DA /* OpenGLES2ShaderColorPosTex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2ShaderColorPosTex.cpp; sourceTree = "<group>"; };
-		2CB102141E56160D007D33DA /* OpenGLES2ShaderColorPosTex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2ShaderColorPosTex.hpp; sourceTree = "<group>"; };
-		2CB102151E56160D007D33DA /* OpenGLES2ShaderPosClr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2ShaderPosClr.cpp; sourceTree = "<group>"; };
-		2CB102161E56160D007D33DA /* OpenGLES2ShaderPosClr.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2ShaderPosClr.hpp; sourceTree = "<group>"; };
-		2CB102171E56160D007D33DA /* OpenGLES2ShaderPosTex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2ShaderPosTex.cpp; sourceTree = "<group>"; };
-		2CB102181E56160D007D33DA /* OpenGLES2ShaderPosTex.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2ShaderPosTex.hpp; sourceTree = "<group>"; };
-		2CB102191E56160D007D33DA /* OpenGLES2Texture2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2Texture2D.cpp; sourceTree = "<group>"; };
-		2CB1021A1E56160D007D33DA /* OpenGLES2Texture2D.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2Texture2D.hpp; sourceTree = "<group>"; };
-		2CB1021B1E56160D007D33DA /* OpenGLES2VertexArray.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2VertexArray.cpp; sourceTree = "<group>"; };
-		2CB1021C1E56160D007D33DA /* OpenGLES2VertexArray.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2VertexArray.hpp; sourceTree = "<group>"; };
-		2CB1021D1E56160D007D33DA /* OpenGLES2VertexBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES2VertexBuffer.cpp; sourceTree = "<group>"; };
-		2CB1021E1E56160D007D33DA /* OpenGLES2VertexBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OpenGLES2VertexBuffer.hpp; sourceTree = "<group>"; };
 		5609313774B0CCC5438D08AD /* Pods-tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-tests/Pods-tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,7 +55,6 @@
 		2CB101EB1E53743A007D33DA /* tests */ = {
 			isa = PBXGroup;
 			children = (
-				2CB102031E56160C007D33DA /* mordaren */,
 				2CB101F81E53743A007D33DA /* Assets.xcassets */,
 				2CB101FD1E53743A007D33DA /* Info.plist */,
 				2CB101EC1E53743A007D33DA /* Supporting Files */,
@@ -109,41 +68,6 @@
 				2CB101ED1E53743A007D33DA /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2CB102031E56160C007D33DA /* mordaren */ = {
-			isa = PBXGroup;
-			children = (
-				2CB102041E56160C007D33DA /* OpenGLES2_util.hpp */,
-				2CB102051E56160C007D33DA /* OpenGLES2Buffer.cpp */,
-				2CB102061E56160C007D33DA /* OpenGLES2Buffer.hpp */,
-				2CB102071E56160C007D33DA /* OpenGLES2Factory.cpp */,
-				2CB102081E56160C007D33DA /* OpenGLES2Factory.hpp */,
-				2CB102091E56160C007D33DA /* OpenGLES2FrameBuffer.cpp */,
-				2CB1020A1E56160C007D33DA /* OpenGLES2FrameBuffer.hpp */,
-				2CB1020B1E56160C007D33DA /* OpenGLES2IndexBuffer.cpp */,
-				2CB1020C1E56160C007D33DA /* OpenGLES2IndexBuffer.hpp */,
-				2CB1020D1E56160C007D33DA /* OpenGLES2Renderer.cpp */,
-				2CB1020E1E56160C007D33DA /* OpenGLES2Renderer.hpp */,
-				2CB1020F1E56160C007D33DA /* OpenGLES2Shader.cpp */,
-				2CB102101E56160C007D33DA /* OpenGLES2Shader.hpp */,
-				2CB102111E56160C007D33DA /* OpenGLES2ShaderColorPos.cpp */,
-				2CB102121E56160D007D33DA /* OpenGLES2ShaderColorPos.hpp */,
-				2CB102131E56160D007D33DA /* OpenGLES2ShaderColorPosTex.cpp */,
-				2CB102141E56160D007D33DA /* OpenGLES2ShaderColorPosTex.hpp */,
-				2CB102151E56160D007D33DA /* OpenGLES2ShaderPosClr.cpp */,
-				2CB102161E56160D007D33DA /* OpenGLES2ShaderPosClr.hpp */,
-				2CB102171E56160D007D33DA /* OpenGLES2ShaderPosTex.cpp */,
-				2CB102181E56160D007D33DA /* OpenGLES2ShaderPosTex.hpp */,
-				2CB102191E56160D007D33DA /* OpenGLES2Texture2D.cpp */,
-				2CB1021A1E56160D007D33DA /* OpenGLES2Texture2D.hpp */,
-				2CB1021B1E56160D007D33DA /* OpenGLES2VertexArray.cpp */,
-				2CB1021C1E56160D007D33DA /* OpenGLES2VertexArray.hpp */,
-				2CB1021D1E56160D007D33DA /* OpenGLES2VertexBuffer.cpp */,
-				2CB1021E1E56160D007D33DA /* OpenGLES2VertexBuffer.hpp */,
-			);
-			name = mordaren;
-			path = ../../src/mordaren;
 			sourceTree = "<group>";
 		};
 		CA744CFD587C01DF45726EC8 /* Pods */ = {
@@ -283,20 +207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CB1022A1E56160D007D33DA /* OpenGLES2VertexArray.cpp in Sources */,
-				2CB102201E56160D007D33DA /* OpenGLES2Factory.cpp in Sources */,
-				2CB102291E56160D007D33DA /* OpenGLES2Texture2D.cpp in Sources */,
-				2CB102271E56160D007D33DA /* OpenGLES2ShaderPosClr.cpp in Sources */,
-				2CB102211E56160D007D33DA /* OpenGLES2FrameBuffer.cpp in Sources */,
-				2CB102241E56160D007D33DA /* OpenGLES2Shader.cpp in Sources */,
-				2CB102251E56160D007D33DA /* OpenGLES2ShaderColorPos.cpp in Sources */,
 				2CB101EE1E53743A007D33DA /* main.m in Sources */,
-				2CB102281E56160D007D33DA /* OpenGLES2ShaderPosTex.cpp in Sources */,
-				2CB1022B1E56160D007D33DA /* OpenGLES2VertexBuffer.cpp in Sources */,
-				2CB102221E56160D007D33DA /* OpenGLES2IndexBuffer.cpp in Sources */,
-				2CB102231E56160D007D33DA /* OpenGLES2Renderer.cpp in Sources */,
-				2CB1021F1E56160D007D33DA /* OpenGLES2Buffer.cpp in Sources */,
-				2CB102261E56160D007D33DA /* OpenGLES2ShaderColorPosTex.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
