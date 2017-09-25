@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.13) unstable; urgency=medium
+
+  * ios
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 25 Sep 2017 23:07:28 +0300
+
 libmorda-opengles2-ren (0.1.12) unstable; urgency=medium
 
   * test release
