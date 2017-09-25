@@ -5,7 +5,7 @@
 using namespace mordaren;
 
 OpenGLES2ShaderColorPosTex::OpenGLES2ShaderColorPosTex() :
-		OpenGLES2Shader(
+		OpenGLES2ShaderBase(
 				R"qwertyuiop(
 						#ifndef GL_ES
 						#	define highp
@@ -48,12 +48,12 @@ OpenGLES2ShaderColorPosTex::OpenGLES2ShaderColorPosTex() :
 	this->colorUniform = this->getUniform("uniformColor");
 }
 
-void OpenGLES2ShaderColorPosTex::render(const kolme::Matr4f& m, const morda::Texture2D& tex, kolme::Vec4f color, const morda::VertexArray& va) {
+void OpenGLES2ShaderColorPosTex::render(const kolme::Matr4f& m, const morda::VertexArray& va, kolme::Vec4f color, const morda::Texture2D& tex) {
 	ASSERT(dynamic_cast<const OpenGLES2Texture2D*>(&tex))
 	static_cast<const OpenGLES2Texture2D&>(tex).bind(0);
 	this->bind();
 	
 	this->setUniform4f(this->colorUniform, color.x, color.y, color.z, color.w);
 	
-	this->OpenGLES2Shader::render(m, va);
+	this->OpenGLES2ShaderBase::render(m, va);
 }
