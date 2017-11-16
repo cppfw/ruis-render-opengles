@@ -51,20 +51,15 @@ env:
 
 before_install:
 - if [ "$BUILD_NAME" == "ios" ]; then
+    rvm install ruby-2.3.3 &&
+    rvm use ruby-2.3.3 &&
+    
+    brew update > /dev/null &&
     brew tap igagis/tap &&
     brew update > /dev/null &&
     brew install prorab &&
-
-    brew install --force openssl &&
-    rvm install ruby-2.2.1 &&
-    rvm install ruby-2.2.2 &&
-    rvm use ruby-2.2.2 &&
-    
-    rvm 2.2.1 do gem uninstall bundler -v '>1.12.5' --force &&
-    rvm 2.2.1 do gem install bundler -v 1.12.5 --no-rdoc --no-ri --no-document --quiet &&
     
     sudo gem install cocoapods &&
-    rvm 2.2.1 do gem install cocoapods &&
     pod repo add --silent igagis https://$PRORAB_GIT_USERNAME:$PRORAB_GIT_ACCESS_TOKEN@github.com/igagis/cocoapods-repo.git &&
     pod install --project-directory=ios;
   fi
@@ -215,7 +210,7 @@ deploy:
   dry-run: false
 - provider: script
   skip_cleanup: true
-  script: rvm 2.2.1 do prorab-deploy-cocoapods.sh -r igagis
+  script: prorab-deploy-cocoapods.sh -r igagis
   on:
     tags: true
     condition: $BUILD_NAME = ios
