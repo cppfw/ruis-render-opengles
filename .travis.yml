@@ -3,7 +3,7 @@ branches:
   - release
 
 sudo: required
-dist: precise
+dist: trusty
 
 matrix:
   include:
