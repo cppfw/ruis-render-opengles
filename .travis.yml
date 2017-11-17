@@ -3,6 +3,7 @@ branches:
   - release
 
 sudo: required
+dist: precise
 
 matrix:
   include:
@@ -15,17 +16,14 @@ matrix:
       env: BUILD_NAME=debian
       compiler: gcc
       language: cpp
-      dist: trusty
     - os: linux
       env: BUILD_NAME=ubuntu
       compiler: gcc
       language: cpp
-      dist: trusty
     - os: linux
       env: BUILD_NAME=raspberry_pi
       compiler: gcc
       language: cpp
-      dist: trusty
     - env: BUILD_NAME=android
       language: android
 
