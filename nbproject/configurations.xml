@@ -9,6 +9,8 @@
         <in>OpenGLES2IndexBuffer.cpp</in>
         <in>OpenGLES2Renderer.cpp</in>
         <in>OpenGLES2Shader.cpp</in>
+        <in>OpenGLES2ShaderBase.cpp</in>
+        <in>OpenGLES2ShaderColor.cpp</in>
         <in>OpenGLES2ShaderColorPos.cpp</in>
         <in>OpenGLES2ShaderColorPosTex.cpp</in>
         <in>OpenGLES2ShaderPosClr.cpp</in>
@@ -94,6 +96,20 @@
         </ccTool>
       </item>
       <item path="src/mordaren/OpenGLES2Shader.cpp" ex="false" tool="1" flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="src/mordaren/OpenGLES2ShaderBase.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
+        <ccTool flags="0">
+        </ccTool>
+      </item>
+      <item path="src/mordaren/OpenGLES2ShaderColor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="8">
         <ccTool flags="0">
         </ccTool>
       </item>
