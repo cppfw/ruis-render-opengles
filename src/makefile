@@ -48,7 +48,7 @@ endif
 
 
 ifeq ($(raspberrypi),true)
-    this_ldlibs += -lGLESv2
+    this_ldlibs += -lbrcmGLESv2
 else
     this_ldlibs += `pkg-config --libs glesv2`
 endif
