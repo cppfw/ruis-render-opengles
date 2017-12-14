@@ -50,11 +50,7 @@ endif
 ifeq ($(raspberrypi),true)
     this_ldlibs += -lbrcmGLESv2
 else
-    this_glesv2_libs := $(shell pkg-config --libs glesv2)
-    ifeq ($(this_glesv2_libs),)
-        $(error pkg-config failed!)
-    endif
-    this_ldlibs += $(this_glesv2_libs)
+    this_ldlibs += `pkg-config --libs glesv2`
 endif
 
 this_ldlibs += 
