@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.16) unstable; urgency=medium
+
+  * update to latest morda
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 14 Dec 2017 13:28:43 +0200
+
 libmorda-opengles2-ren (0.1.15) unstable; urgency=medium
 
   * update to latest morda
