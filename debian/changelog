@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.17) unstable; urgency=medium
+
+  * adding pkg-config build dependency'
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 14 Dec 2017 16:04:25 +0200
+
 libmorda-opengles2-ren (0.1.16) unstable; urgency=medium
 
   * update to latest morda
