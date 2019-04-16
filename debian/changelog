@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.19) unstable; urgency=medium
+
+  * deploy to bionic
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 16 Apr 2019 21:55:27 +0300
+
 libmorda-opengles2-ren (0.1.18) unstable; urgency=medium
 
   * color pos lum shader added
