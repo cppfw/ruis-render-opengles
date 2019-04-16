@@ -3,8 +3,8 @@ apply plugin: "com.android.model.library"
 
 model {
     android {
-        compileSdkVersion = 25
-        buildToolsVersion = '25.0.2'
+        compileSdkVersion = 26
+        buildToolsVersion = '26.0.2'
 
         defaultConfig {
             minSdkVersion.apiLevel = 9
@@ -22,6 +22,8 @@ model {
             cppFlags.add("-std=c++11")
             cppFlags.add("-fexceptions")
             cppFlags.add("-frtti")
+            cppFlags.add("-g")
+            cppFlags.add("-fintegrated-as") //needed to avoid assembler error since NDK r15
             cppFlags.add("-I" + projectDir.getAbsolutePath() + "/build/ndkLibs/include")
         }
         abis {
