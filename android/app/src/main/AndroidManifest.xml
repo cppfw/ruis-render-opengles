@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="io.github.igagis.mordaopengles2rentests">
+    package="io.github.igagis.morda_opengles2_ren_tests">
 
     <application
         android:allowBackup="true"
