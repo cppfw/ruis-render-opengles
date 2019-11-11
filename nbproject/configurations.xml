@@ -25,7 +25,7 @@
       <itemPath>.travis.yml</itemPath>
       <itemPath>debian/control.in</itemPath>
       <itemPath>nbproject/private/launcher.properties</itemPath>
-      <itemPath>android/libmorda_opengles2_ren-$(version).pom.in</itemPath>
+      <itemPath>android/morda_opengles2_ren-$(version).pom.in</itemPath>
       <itemPath>src/makefile</itemPath>
       <itemPath>travis_bintray_android.json.in</itemPath>
       <itemPath>travis_bintray_deb.json.in</itemPath>

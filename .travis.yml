@@ -1,9 +1,3 @@
-# build only master branch and version tags
-branches:
-  only:
-  - master
-  - /^\d*\.\d*\.\d*$/
-
 sudo: required
 
 services:
@@ -29,7 +23,7 @@ matrix:
     - name: ios
       os: osx
       compiler: clang
-      osx_image: xcode8.3
+      osx_image: xcode11
     - name: android
       language: android
       android:
@@ -74,16 +68,17 @@ before_install:
 - if [ "$TRAVIS_JOB_NAME" == "ios" ]; then
     rvm install ruby-2.3.3 &&
     rvm use ruby-2.3.3 &&
-    
+
     brew update > /dev/null &&
     brew tap igagis/tap &&
     brew update > /dev/null &&
     brew install myci &&
-    
+
     sudo gem install cocoapods &&
     pod repo add --silent igagis https://$MYCI_GIT_USERNAME:$MYCI_GIT_ACCESS_TOKEN@github.com/igagis/cocoapods-repo.git &&
-    pod install --project-directory=ios;
+    pod install --project-directory=xcode;
   fi
+- export PACKAGE_VERSION=$(myci-deb-version.sh debian/changelog)
 
 
 install:
@@ -100,7 +95,7 @@ before_script:
 - if [ "$TRAVIS_JOB_NAME" == "ios" ]; then
     curl -L https://github.com/zackslash/Xcode-Proj-Adder/raw/master/bin/XcodeProjAdder -O &&
     chmod +x XcodeProjAdder &&
-    (cd ios && ../XcodeProjAdder -XCP tests.xcodeproj -SCSV `echo $(find ../src -type f -name *.cpp) | sed -n -e 's/ /,/gp'`);
+    (cd xcode/$PACKAGE_NAME && ../../XcodeProjAdder -XCP $PACKAGE_NAME.xcodeproj -SCSV `echo $(find ../../src -type f -name *.cpp) | sed -E -e 's/ /,/g'`)
   fi
 
 script:
@@ -108,29 +103,17 @@ script:
     docker exec ccc dpkg-buildpackage -us -uc;
   fi
 - if [ "$TRAVIS_JOB_NAME" == "ios" ]; then
-    set -o pipefail &&
-    xcodebuild -workspace ios/tests.xcworkspace -scheme tests CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-            | sed -e "s/export PATH=[^ ]*/export PATH=.../g"
-            | sed -e "s/[^ ]*\/clang /clang /g"
-            | sed -e "s/\(-[IWfFL]\)[^ ]*/% /g"
-            | sed -e "s/-isystem [^ ]*/%/g"
-            | sed -e "s/-include [^ ]*/%/g"
-            | sed -e "s/-MF [^ ]*/-MF .../g"
-            | sed -e "s/--serialize-diagnostics [^ ]*/%/g"
-            | sed -e "s/-o [^ ]*/%/g"
-            | sed -e "s/-iquote [^ ]*/%/g"
-            | sed -e "s/-isysroot [^ ]*/%/g";
+    xcodebuild -workspace xcode/$PACKAGE_NAME.xcworkspace -scheme $PACKAGE_NAME CONFIGURATION_BUILD_DIR=../build -configuration Release &&
+    myci-create-zip-package.sh -h src -f xcode/build/lib$PACKAGE_NAME.a///lib/ios -f LICENSE $PACKAGE_NAME-`myci-deb-version.sh debian/changelog`.zip;
   fi
 - if [ "$TRAVIS_JOB_NAME" == "android" ]; then
     (cd android && ./gradlew build) &&
     myci-apply-version.sh -v `myci-deb-version.sh debian/changelog` android/*.pom.in &&
     myci-apply-version.sh -v `myci-deb-version.sh debian/changelog` android/*.aar.in --filename-only;
   fi
-  
+
 
 before_deploy:
-  - myci-apply-version.sh -v `myci-deb-version.sh debian/changelog` travis_bintray_*.json.in
-
 
 deploy:
 - provider: script
@@ -139,19 +122,15 @@ deploy:
     tags: true
     condition: $PACKAGE_TYPE = deb && -z "$TRAVIS_JOB_NAME"
   script: myci-deploy-debian-bintray.sh -u igagis -r $OS -p $PACKAGE_NAME -c main -d $OS_REL $TRAVIS_BUILD_DIR/../*.deb
-- provider: bintray
+- provider: script
   skip_cleanup: true
+  script: myci-deploy-maven-bintray.sh -u igagis -r android -d io/github/igagis -p $PACKAGE_NAME -v $PACKAGE_VERSION android/$PACKAGE_NAME-$PACKAGE_VERSION.aar
   on:
     tags: true
     condition: $TRAVIS_JOB_NAME = android
-  file: travis_bintray_android.json
-  user: igagis
-  key:
-    secure: "i69PiIo6waETMrstLNuHt6UrO9vQcyzmftBkujxpodyjVsTzJ1le7KHFBrh9CcgOz+2qkjOSLPkHkaCi9mlHnhMHwHt0OwHxl943dgdnUQqRM2pY+IeDnaP1BRrOJJxy1cDkq35Sj1lRw1zOG+jMtFS4WWKsGqYspRxHAzNdseSfQpEGNWqpjE4Nfc4xJHyP95AF/mzVbaykr5zI3vTW3b4nROK3p7woUqQcj7/jRLJdmGweldkvznbrZgMWUrBd+t7GGkNIa5rg7clo3NcfNXpLoX7rdI1fHkRec0uJFWAomMBvvFxCjH6jo1jTx1VNKYhXK5P7Ze4iXDXZ8i/5BPTDyBkDbOjMby77fcEYe//2C2ozpNL4Qmd+f3P99rSPwaTURV8Gc2JQiJG4TSN+BMRLrcmV/8BcT2v5XusY2JchmYo23puKh61Uqnzm2jsB75Yyl4vyukyUdd1k258DIKCtE3PBcsnN0QH/QKsk7birafPbUx1UDK4GSERUNZb0kPGJV7EUsSTNi2O5ygKy43u0TmACCN1buhC7+PpnRrqUhr3iGkdvPU8u45abPlDPXbWNDFcZiHuvDRL7aJUvbZGGfRNRbZz5XTfg8zqMGJdNobUyiYL9+e67iYKecDwigfvtK/9L/5Qjfa+0KjraBf1FKkyc2I4XVQam/YU3Miw="
-  dry-run: false
 - provider: script
   skip_cleanup: true
-  script: rvm 2.3.3 do myci-deploy-cocoapods.sh -r igagis
+  script: rvm 2.3.3 do myci-deploy-cocoapods.sh -r igagis -v `myci-deb-version.sh debian/changelog` -u igagis -b cocoapods -p $PACKAGE_NAME-`myci-deb-version.sh debian/changelog`.zip cocoapods/$PACKAGE_NAME.podspec.in
   on:
     tags: true
     condition: $TRAVIS_JOB_NAME = ios

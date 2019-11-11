@@ -1,1 +1,1 @@
-include ':app', ':libmorda_opengles2_ren'
+include ':app', ':morda_opengles2_ren'

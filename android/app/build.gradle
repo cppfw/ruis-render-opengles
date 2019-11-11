@@ -44,10 +44,10 @@ repositories {
     }
 }
 dependencies {
-    implementation 'io.github.igagis:libutki:+'
-    implementation 'io.github.igagis:libpapki:+'
-    implementation 'io.github.igagis:libunikod:+'
-    implementation project(path: ':libmorda_opengles2_ren', configuration: 'default')
+    implementation 'io.github.igagis:utki:+'
+    implementation 'io.github.igagis:papki:+'
+    implementation 'io.github.igagis:unikod:+'
+    implementation project(path: ':morda_opengles2_ren', configuration: 'default')
 }
 
 
