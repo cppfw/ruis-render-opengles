@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.23) unstable; urgency=medium
+
+  * android package fix
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 11 Nov 2019 20:50:12 +0200
+
 libmorda-opengles2-ren (0.1.22) unstable; urgency=medium
 
   * deploy to binary cocoapods
