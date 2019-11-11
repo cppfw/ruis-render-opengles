@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.22) unstable; urgency=medium
+
+  * deploy to binary cocoapods
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 11 Nov 2019 17:51:55 +0200
+
 libmorda-opengles2-ren (0.1.21) unstable; urgency=medium
 
   * update to r4
