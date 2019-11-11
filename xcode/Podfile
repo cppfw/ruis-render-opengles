@@ -1,0 +1,9 @@
+source 'https://github.com/igagis/cocoapods-repo.git'
+
+project 'morda-opengles2-ren/morda-opengles2-ren.xcodeproj'
+
+platform :ios, '8.0'
+
+target "morda-opengles2-ren" do
+	pod 'morda', '>= 0.5.25'
+end
