@@ -12,12 +12,12 @@ class OpenGLES2ShaderPosClr :
 {
 public:
 	OpenGLES2ShaderPosClr();
-	
+
 	OpenGLES2ShaderPosClr(const OpenGLES2ShaderPosClr&) = delete;
 	OpenGLES2ShaderPosClr& operator=(const OpenGLES2ShaderPosClr&) = delete;
-	
 
-	void render(const kolme::Matr4f& m, const morda::VertexArray& va) const override;
+
+	void render(const r4::mat4f& m, const morda::VertexArray& va) const override;
 };
 
 }

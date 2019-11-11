@@ -13,8 +13,8 @@ class OpenGLES2ShaderPosTex :
 	GLint textureUniform;
 public:
 	OpenGLES2ShaderPosTex();
-	
-	void render(const kolme::Matr4f& m, const morda::VertexArray& va, const morda::Texture2D& tex)const override;
+
+	void render(const r4::mat4f& m, const morda::VertexArray& va, const morda::Texture2D& tex)const override;
 };
 
 }

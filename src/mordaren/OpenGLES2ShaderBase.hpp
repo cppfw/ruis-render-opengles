@@ -5,7 +5,7 @@
 #include <utki/Exc.hpp>
 #include <utki/Buf.hpp>
 
-#include <kolme/Matrix4.hpp>
+#include <r4/matrix4.hpp>
 
 #include <vector>
 
@@ -46,53 +46,53 @@ struct ProgramWrapper{
 
 class OpenGLES2ShaderBase {
 	ProgramWrapper program;
-	
+
 	const GLint matrixUniform;
-	
+
 	static const OpenGLES2ShaderBase* boundShader;
 public:
 	OpenGLES2ShaderBase(const char* vertexShaderCode, const char* fragmentShaderCode);
-	
+
 	OpenGLES2ShaderBase(const OpenGLES2ShaderBase&) = delete;
 	OpenGLES2ShaderBase& operator=(const OpenGLES2ShaderBase&) = delete;
-	
+
 	virtual ~OpenGLES2ShaderBase()noexcept{}
 
 protected:
 	GLint getUniform(const char* n);
-	
+
 	void bind()const{
 		glUseProgram(program.p);
 		assertOpenGLNoError();
 		boundShader = this;
 	}
-	
+
 	bool isBound()const noexcept{
 		return this == boundShader;
 	}
-	
-	void setUniformMatrix4f(GLint id, const kolme::Matr4f& m)const{
+
+	void setUniformMatrix4f(GLint id, const r4::mat4f& m)const{
 		glUniformMatrix4fv(id, 1, GL_FALSE, reinterpret_cast<const GLfloat*>(&m));
 		assertOpenGLNoError();
 	}
-	
+
 	void setUniform4f(GLint id, float x, float y, float z, float a)const{
 		glUniform4f(id, x, y, z, a);
 		assertOpenGLNoError();
 	}
-	
-	void setMatrix(const kolme::Matr4f& m)const{
+
+	void setMatrix(const r4::mat4f& m)const{
 		this->setUniformMatrix4f(this->matrixUniform, m);
 		assertOpenGLNoError();
 	}
-	
+
 	static GLenum modeMap[];
-	
+
 	static GLenum modeToGLMode(morda::VertexArray::Mode_e mode){
 		return modeMap[unsigned(mode)];
 	}
-	
-	void render(const kolme::Matr4f& m, const morda::VertexArray& va)const;
+
+	void render(const r4::mat4f& m, const morda::VertexArray& va)const;
 };
 
 }

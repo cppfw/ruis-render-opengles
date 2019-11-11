@@ -30,9 +30,9 @@ OpenGLES2ShaderPosClr::OpenGLES2ShaderPosClr() :
 						#	define mediump
 						#	define lowp
 						#endif
-		
+
 						varying highp vec4 color_varying;
-						
+
 						void main(void){
 							gl_FragColor = color_varying;
 						}
@@ -41,9 +41,9 @@ OpenGLES2ShaderPosClr::OpenGLES2ShaderPosClr() :
 {
 }
 
-void OpenGLES2ShaderPosClr::render(const kolme::Matr4f& m, const morda::VertexArray& va) const {
+void OpenGLES2ShaderPosClr::render(const r4::mat4f& m, const morda::VertexArray& va) const {
 	this->bind();
-	
+
 	this->OpenGLES2ShaderBase::render(m, va);
 }
 
