@@ -11,7 +11,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/morda_opengles2_ren" />
+            <option value="$PROJECT_DIR$/morda-opengles2-ren" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

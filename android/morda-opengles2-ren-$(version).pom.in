@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.github.igagis</groupId>
-  <artifactId>morda_opengles2_ren</artifactId>
+  <artifactId>morda-opengles2-ren</artifactId>
   <version>$(version)</version>
   <packaging>aar</packaging>
   <dependencies>

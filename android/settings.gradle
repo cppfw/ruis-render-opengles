@@ -1,1 +1,1 @@
-include ':app', ':morda_opengles2_ren'
+include ':app', ':morda-opengles2-ren'
