@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.24) unstable; urgency=medium
+
+  * debian buster
+
+ -- Ivan Gagis <igagis@gmail.com>  Sat, 30 Nov 2019 02:18:31 +0200
+
 libmorda-opengles2-ren (0.1.23) unstable; urgency=medium
 
   * android package fix
