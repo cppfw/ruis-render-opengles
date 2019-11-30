@@ -20,6 +20,12 @@ addons:
     - binfmt-support
     - qemu-user-static
     - myci
+  homebrew:
+    update: true
+    taps:
+    - igagis/tap
+    packages:
+    - myci
 
 matrix:
   include:
