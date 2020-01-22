@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.26) unstable; urgency=medium
+
+  * debian/buster i386 packages
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 22 Jan 2020 16:17:31 +0200
+
 libmorda-opengles2-ren (0.1.25) unstable; urgency=medium
 
   * relink to libs
