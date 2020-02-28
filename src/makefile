@@ -16,7 +16,7 @@ this_cxxflags += -fno-operator-names # do not treat 'and', 'bitand','bitor','com
 this_cxxflags += -Werror # treat warnings as errors
 this_cxxflags += -Wfatal-errors # stop on first error encountered
 this_cxxflags += -fstrict-aliasing # in order to comply with the c++ standard more strictly
-this_cxxflags += -g #include debugging symbols
+this_cxxflags += -g # include debugging symbols
 this_cxxflags += -std=c++14
 
 ifeq ($(debug),true)
@@ -34,7 +34,7 @@ ifeq ($(os), linux)
     this_cxxflags += -fPIC # generate position independent code
 else ifeq ($(os), windows)
 else ifeq ($(os), macosx)
-    this_cxxflags += -stdlib=libc++ #this is needed to be able to use c++11 std lib
+    this_cxxflags += -stdlib=libc++ # this is needed to be able to use c++11 std lib
     this_ldlibs += -lc++
 endif
 
@@ -44,6 +44,6 @@ else
     this_ldlibs += `pkg-config --libs glesv2`
 endif
 
-this_ldlibs += 
+this_ldlibs += -lmorda
 
 $(eval $(prorab-build-lib))
