@@ -9,7 +9,7 @@
 
 #include <vector>
 
-#include <morda/render/VertexArray.hpp>
+#include <morda/render/vertex_array.hpp>
 
 #if M_OS_NAME == M_OS_NAME_IOS
 #	include <OpenGlES/ES2/glext.h>
@@ -44,55 +44,55 @@ struct ProgramWrapper{
 
 
 
-class OpenGLES2ShaderBase {
+class OpenGLES2ShaderBase{
 	ProgramWrapper program;
-
+	
 	const GLint matrixUniform;
-
+	
 	static const OpenGLES2ShaderBase* boundShader;
 public:
 	OpenGLES2ShaderBase(const char* vertexShaderCode, const char* fragmentShaderCode);
-
+	
 	OpenGLES2ShaderBase(const OpenGLES2ShaderBase&) = delete;
 	OpenGLES2ShaderBase& operator=(const OpenGLES2ShaderBase&) = delete;
-
+	
 	virtual ~OpenGLES2ShaderBase()noexcept{}
 
 protected:
 	GLint getUniform(const char* n);
-
+	
 	void bind()const{
 		glUseProgram(program.p);
 		assertOpenGLNoError();
 		boundShader = this;
 	}
-
+	
 	bool isBound()const noexcept{
 		return this == boundShader;
 	}
-
+	
 	void setUniformMatrix4f(GLint id, const r4::mat4f& m)const{
 		glUniformMatrix4fv(id, 1, GL_FALSE, reinterpret_cast<const GLfloat*>(&m));
 		assertOpenGLNoError();
 	}
-
+	
 	void setUniform4f(GLint id, float x, float y, float z, float a)const{
 		glUniform4f(id, x, y, z, a);
 		assertOpenGLNoError();
 	}
-
+	
 	void setMatrix(const r4::mat4f& m)const{
 		this->setUniformMatrix4f(this->matrixUniform, m);
 		assertOpenGLNoError();
 	}
-
+	
 	static GLenum modeMap[];
-
-	static GLenum modeToGLMode(morda::VertexArray::Mode_e mode){
+	
+	static GLenum modeToGLMode(morda::vertex_array::mode mode){
 		return modeMap[unsigned(mode)];
 	}
-
-	void render(const r4::mat4f& m, const morda::VertexArray& va)const;
+	
+	void render(const r4::mat4f& m, const morda::vertex_array& va)const;
 };
 
 }

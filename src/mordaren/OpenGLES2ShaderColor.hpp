@@ -1,24 +1,24 @@
 #pragma once
 
-#include <morda/render/ShaderColor.hpp>
+#include <morda/render/coloring_shader.hpp>
 
 #include "OpenGLES2ShaderBase.hpp"
 
-namespace mordaren{
+namespace mordaren{	
 
 class OpenGLES2ShaderColor :
-		public morda::ShaderColor,
+		public morda::coloring_shader,
 		public OpenGLES2ShaderBase
 {
 	GLint colorUniform;
 public:
 	OpenGLES2ShaderColor();
-
+	
 	OpenGLES2ShaderColor(const OpenGLES2ShaderColor&) = delete;
 	OpenGLES2ShaderColor& operator=(const OpenGLES2ShaderColor&) = delete;
+	
 
-
-	void render(const r4::mat4f& m, const morda::VertexArray& va, r4::vec4f color)const override;
+	void render(const r4::mat4f& m, const morda::vertex_array& va, r4::vec4f color)const override;
 };
 
 }

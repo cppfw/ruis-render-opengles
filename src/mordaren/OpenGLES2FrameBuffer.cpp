@@ -13,8 +13,8 @@
 
 using namespace mordaren;
 
-OpenGLES2FrameBuffer::OpenGLES2FrameBuffer(std::shared_ptr<morda::Texture2D> color) :
-		morda::FrameBuffer(std::move(color))
+OpenGLES2FrameBuffer::OpenGLES2FrameBuffer(std::shared_ptr<morda::texture_2d> color) :
+		morda::frame_buffer(std::move(color))
 {
 	glGenFramebuffers(1, &this->fbo);
 	assertOpenGLNoError();
