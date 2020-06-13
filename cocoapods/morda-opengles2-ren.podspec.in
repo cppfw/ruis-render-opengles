@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
 
   s.ios.vendored_library = "lib/ios/lib#{s.name}.a"
 
-  s.dependency 'morda', '>= 0.5.28'
+  s.dependency 'morda', '>= 0.5.110'
 end
