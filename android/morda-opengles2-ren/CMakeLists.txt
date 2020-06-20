@@ -12,22 +12,22 @@ cmake_minimum_required(VERSION 3.4.1)
 
 file(GLOB_RECURSE srcs "../../src/*.cpp")
 
-link_directories( build/ndkLibs/${ANDROID_ABI}/ )
+set(name morda-opengles2-ren)
 
-add_library( # Specifies the name of the library.
-             morda-opengles2-ren
+include (${ANDROID_GRADLE_NATIVE_BUNDLE_PLUGIN_MK})
 
-             # Sets the library as a shared library.
-             STATIC
+add_library(
+        # Specifies the name of the library.
+        ${name}
 
-             # Provides a relative path to your source file(s).
-             ${srcs} )
+        # Sets the library as a shared library.
+        STATIC
 
-
-
-include_directories( build/ndkLibs/include/ )
+        # Provides a relative path to your source file(s).
+        ${srcs}
+    )
 
 target_link_libraries(
-        morda-opengles2-ren
-        android log morda GLESv2
+        ${name}
+        android log GLESv2 ${ANDROID_GRADLE_NATIVE_MODULES}
     )
