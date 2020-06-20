@@ -9,8 +9,7 @@
 #	include <GLES2/gl2.h>
 #endif
 
-
-namespace mordaren{
+namespace morda{ namespace render_opengles2{
 
 inline void assertOpenGLNoError(){
 #ifdef DEBUG
@@ -40,4 +39,4 @@ inline void assertOpenGLNoError(){
 #endif
 }
 
-}
+}}

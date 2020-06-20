@@ -1,10 +1,9 @@
-#include "OpenGLES2ShaderPosClr.hpp"
+#include "shader_pos_clr.hpp"
 
-using namespace mordaren;
+using namespace morda::render_opengles2;
 
-
-OpenGLES2ShaderPosClr::OpenGLES2ShaderPosClr() :
-		OpenGLES2ShaderBase(
+shader_pos_clr::shader_pos_clr() :
+		shader_base(
 				R"qwertyuiop(
 						#ifndef GL_ES
 						#	define highp
@@ -38,12 +37,10 @@ OpenGLES2ShaderPosClr::OpenGLES2ShaderPosClr() :
 						}
 					)qwertyuiop"
 			)
-{
-}
+{}
 
-void OpenGLES2ShaderPosClr::render(const r4::mat4f& m, const morda::vertex_array& va) const {
+void shader_pos_clr::render(const r4::mat4f& m, const morda::vertex_array& va) const {
 	this->bind();
 	
-	this->OpenGLES2ShaderBase::render(m, va);
+	this->shader_base::render(m, va);
 }
-

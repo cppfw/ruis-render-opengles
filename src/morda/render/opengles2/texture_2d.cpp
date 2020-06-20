@@ -1,10 +1,10 @@
-#include "OpenGLES2Texture2D.hpp"
+#include "texture_2d.hpp"
 
-#include "OpenGLES2_util.hpp"
+#include "util.hpp"
 
-using namespace mordaren;
+using namespace morda::render_opengles2;
 
-OpenGLES2Texture2D::OpenGLES2Texture2D(r4::vec2f dims) :
+texture_2d::texture_2d(r4::vec2f dims) :
 		morda::texture_2d(dims)
 {
 	glGenTextures(1, &this->tex);
@@ -12,12 +12,11 @@ OpenGLES2Texture2D::OpenGLES2Texture2D(r4::vec2f dims) :
 	ASSERT(this->tex != 0)
 }
 
-
-OpenGLES2Texture2D::~OpenGLES2Texture2D()noexcept{
+texture_2d::~texture_2d()noexcept{
 	glDeleteTextures(1, &this->tex);
 }
 
-void OpenGLES2Texture2D::bind(unsigned unitNum) const {
+void texture_2d::bind(unsigned unitNum) const {
 	glActiveTexture(GL_TEXTURE0 + unitNum);
 	assertOpenGLNoError();
 	glBindTexture(GL_TEXTURE_2D, this->tex);

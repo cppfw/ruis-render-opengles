@@ -1,8 +1,8 @@
-#include "OpenGLES2Buffer.hpp"
+#include "opengl_buffer.hpp"
 
-#include "OpenGLES2_util.hpp"
+#include "util.hpp"
 
-using namespace mordaren;
+using namespace morda::render_opengles2;
 
 namespace{
 inline GLuint createGLBuffer(){
@@ -13,13 +13,13 @@ inline GLuint createGLBuffer(){
 }
 }
 
-OpenGLES2Buffer::OpenGLES2Buffer() :
+opengl_buffer::opengl_buffer() :
 		buffer(createGLBuffer())
 {
 }
 
 
-OpenGLES2Buffer::~OpenGLES2Buffer()noexcept{
+opengl_buffer::~opengl_buffer()noexcept{
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	assertOpenGLNoError();
 	glDeleteBuffers(1, &this->buffer);
