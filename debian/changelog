@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.29) unstable; urgency=medium
+
+  * naming convention update
+
+ -- Ivan Gagis <igagis@gmail.com>  Sat, 20 Jun 2020 11:32:40 +0300
+
 libmorda-opengles2-ren (0.1.28) unstable; urgency=medium
 
   * update to latest libs
