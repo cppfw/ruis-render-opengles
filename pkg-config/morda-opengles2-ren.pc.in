@@ -1,7 +1,7 @@
 Name: morda-opengles2-ren   # human-readable name
 Description: C++ OpenGL ES 2 renderer for morda GUI library
 Version: $(version)
-URL: https://github.com/igagis/morda-opengles2-ren
+URL: https://github.com/cppfw/morda-opengles2-ren
 Requires:
 Conflicts:
 Libs: -lmorda-opengles2-ren

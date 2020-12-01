@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "io.github.igagis.morda_opengles2_ren_tests"
+        applicationId "io.github.cppfw.morda_opengles2_ren_tests"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -40,13 +40,13 @@ android {
 
 repositories {
     maven {
-        url 'https://dl.bintray.com/igagis/android/'
+        url 'https://dl.bintray.com/cppfw/android/'
     }
 }
 dependencies {
-    implementation 'io.github.igagis:utki:+'
-    implementation 'io.github.igagis:papki:+'
-    implementation 'io.github.igagis:unikod:+'
+    implementation 'io.github.cppfw:utki:+'
+    implementation 'io.github.cppfw:papki:+'
+    implementation 'io.github.cppfw:unikod:+'
 //    implementation project(path: ':morda-opengles2-ren', configuration: 'default')
 }
 
