@@ -1,3 +1,9 @@
+libmorda-opengles2-ren (0.1.34) unstable; urgency=medium
+
+  * update to latest r4
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 31 Jan 2021 21:53:29 +0200
+
 libmorda-opengles2-ren (0.1.33) unstable; urgency=medium
 
   * github actions
