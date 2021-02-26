@@ -5,5 +5,5 @@ project 'morda-opengles2-ren/morda-opengles2-ren.xcodeproj'
 platform :ios, '8.0'
 
 target "morda-opengles2-ren" do
-	pod 'morda', '>= 0.5.158'
+	pod 'morda', '>= 0.5.160'
 end
