@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2C4A409D23799B890044BD10 /* libmorda-opengles2-ren.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmorda-opengles2-ren.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C4A409D23799B890044BD10 /* libmorda-render-opengles.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libmorda-render-opengles.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,7 +36,7 @@
 		2C4A409423799B890044BD10 = {
 			isa = PBXGroup;
 			children = (
-				2C4A409F23799B890044BD10 /* morda-opengles2-ren */,
+				2C4A409F23799B890044BD10 /* morda-render-opengles */,
 				2C4A409E23799B890044BD10 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -44,24 +44,24 @@
 		2C4A409E23799B890044BD10 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2C4A409D23799B890044BD10 /* libmorda-opengles2-ren.a */,
+				2C4A409D23799B890044BD10 /* libmorda-render-opengles.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2C4A409F23799B890044BD10 /* morda-opengles2-ren */ = {
+		2C4A409F23799B890044BD10 /* morda-render-opengles */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "morda-opengles2-ren";
+			path = "morda-render-opengles";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2C4A409C23799B890044BD10 /* morda-opengles2-ren */ = {
+		2C4A409C23799B890044BD10 /* morda-render-opengles */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2C4A40A623799B890044BD10 /* Build configuration list for PBXNativeTarget "morda-opengles2-ren" */;
+			buildConfigurationList = 2C4A40A623799B890044BD10 /* Build configuration list for PBXNativeTarget "morda-render-opengles" */;
 			buildPhases = (
 				2C4A409923799B890044BD10 /* Sources */,
 				2C4A409A23799B890044BD10 /* Frameworks */,
@@ -71,9 +71,9 @@
 			);
 			dependencies = (
 			);
-			name = "morda-opengles2-ren";
-			productName = "morda-opengles2-ren";
-			productReference = 2C4A409D23799B890044BD10 /* libmorda-opengles2-ren.a */;
+			name = "morda-render-opengles";
+			productName = "morda-render-opengles";
+			productReference = 2C4A409D23799B890044BD10 /* libmorda-render-opengles.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -90,7 +90,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2C4A409823799B890044BD10 /* Build configuration list for PBXProject "morda-opengles2-ren" */;
+			buildConfigurationList = 2C4A409823799B890044BD10 /* Build configuration list for PBXProject "morda-render-opengles" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -103,7 +103,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2C4A409C23799B890044BD10 /* morda-opengles2-ren */,
+				2C4A409C23799B890044BD10 /* morda-render-opengles */,
 			);
 		};
 /* End PBXProject section */
@@ -258,7 +258,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2C4A409823799B890044BD10 /* Build configuration list for PBXProject "morda-opengles2-ren" */ = {
+		2C4A409823799B890044BD10 /* Build configuration list for PBXProject "morda-render-opengles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C4A40A423799B890044BD10 /* Debug */,
@@ -267,7 +267,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2C4A40A623799B890044BD10 /* Build configuration list for PBXNativeTarget "morda-opengles2-ren" */ = {
+		2C4A40A623799B890044BD10 /* Build configuration list for PBXNativeTarget "morda-render-opengles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2C4A40A723799B890044BD10 /* Debug */,

@@ -1,1 +1,1 @@
-include ':app', ':morda-opengles2-ren'
+include ':app', ':morda-render-opengles'

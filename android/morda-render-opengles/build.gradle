@@ -15,7 +15,7 @@ android {
 
         externalNativeBuild {
             cmake {
-                targets "morda-opengles2-ren"
+                targets "morda-render-opengles"
             }
         }
     }

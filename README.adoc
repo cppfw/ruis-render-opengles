@@ -1,4 +1,4 @@
-:name: morda-opengles2-ren
+:name: morda-render-opengles
 
 = {name}
 

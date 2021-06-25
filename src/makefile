@@ -2,7 +2,7 @@ include prorab.mk
 
 include $(d)../raspberrypi.mk
 
-this_name := morda-opengles2-ren
+this_name := morda-render-opengles
 
 this_soname := $(shell cat $(d)soname.txt)
 

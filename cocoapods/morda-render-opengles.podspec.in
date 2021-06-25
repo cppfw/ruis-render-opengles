@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "morda-opengles2-ren"
+  s.name         = "morda-render-opengles"
   s.version      = "$(version)"
   s.summary      = "OpenGL ES 2 renderer for morda, a C++ cross-platform GUI library."
   s.homepage     = "https://github.com/cppfw/#{s.name}"

@@ -47,7 +47,7 @@ dependencies {
     implementation 'io.github.cppfw:utki:+'
     implementation 'io.github.cppfw:papki:+'
     implementation 'io.github.cppfw:unikod:+'
-//    implementation project(path: ':morda-opengles2-ren', configuration: 'default')
+//    implementation project(path: ':morda-render-opengles', configuration: 'default')
 }
 
 

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:morda-opengles2-ren.xcodeproj">
+      location = "self:morda-render-opengles.xcodeproj">
    </FileRef>
 </Workspace>
