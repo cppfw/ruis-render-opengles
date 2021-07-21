@@ -1,3 +1,9 @@
+libmorda-render-opengles (0.1.38) unstable; urgency=medium
+
+  * deploy to own repo
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 22 Jul 2021 01:00:34 +0300
+
 libmorda-render-opengles (0.1.37) unstable; urgency=medium
 
   * deploy to jfrog
