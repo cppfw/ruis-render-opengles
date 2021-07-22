@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "morda-render-opengles"
   s.version      = "$(version)"
-  s.summary      = "OpenGL ES 2 renderer for morda, a C++ cross-platform GUI library."
+  s.summary      = "OpenGL ES renderer for morda, a C++ cross-platform GUI library."
   s.homepage     = "https://github.com/cppfw/#{s.name}"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Ivan Gagis" => "igagis@gmail.com" }

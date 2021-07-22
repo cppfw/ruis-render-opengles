@@ -1,5 +1,5 @@
 Name: morda-render-opengles   # human-readable name
-Description: C++ OpenGL ES 2 renderer for morda GUI library
+Description: C++ OpenGL ES renderer for morda GUI library
 Version: $(version)
 URL: https://github.com/cppfw/morda-render-opengles
 Requires:
