@@ -24,7 +24,11 @@ Description: debugging symbols for libmorda-render-opengles$(soname) package.
 Package: libmorda-render-opengles-dev
 Section: libdevel
 Architecture: any
-Depends: libmorda-render-opengles$(soname) (= ${binary:Version}), libmorda-render-opengles$(soname)-dbg (= ${binary:Version}), ${misc:Depends}
+Depends:
+		libmorda-render-opengles$(soname) (= ${binary:Version}),
+		libmorda-render-opengles$(soname)-dbg (= ${binary:Version}),
+		libmorda-dev (>= 0.5.160),
+		${misc:Depends}
 Suggests: libmorda-render-opengles-doc
 Description: OpenGL ES 2 renderer for morda.
  OpenGL ES 2 renderer for morda GUI library.
