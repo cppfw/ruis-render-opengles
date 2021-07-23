@@ -7,7 +7,7 @@
 
 #include "util.hpp"
 
-using namespace morda::render_opengles2;
+using namespace morda::render_opengles;
 
 shader_pos_tex::shader_pos_tex() :
 		shader_base(
@@ -48,7 +48,7 @@ shader_pos_tex::shader_pos_tex() :
 					)qwertyuiop"
 			)
 {
-	this->textureUniform = this->getUniform("texture0");
+	this->textureUniform = this->get_uniform("texture0");
 }
 
 void shader_pos_tex::render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)const{

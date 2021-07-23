@@ -2,7 +2,7 @@
 
 #include <morda/render/render_factory.hpp>
 
-namespace morda{ namespace render_opengles2{
+namespace morda{ namespace render_opengles{
 
 class render_factory : public morda::render_factory{
 public:

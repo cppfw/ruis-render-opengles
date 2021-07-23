@@ -2,7 +2,7 @@
 
 #include "util.hpp"
 
-using namespace morda::render_opengles2;
+using namespace morda::render_opengles;
 
 namespace{
 inline GLuint createGLBuffer(){

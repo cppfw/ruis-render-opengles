@@ -9,7 +9,7 @@
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda{ namespace render_opengles2{
+namespace morda{ namespace render_opengles{
 
 inline void assertOpenGLNoError(){
 #ifdef DEBUG

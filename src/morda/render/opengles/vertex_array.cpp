@@ -4,7 +4,7 @@
 #include "vertex_buffer.hpp"
 #include "index_buffer.hpp"
 
-using namespace morda::render_opengles2;
+using namespace morda::render_opengles;
 
 vertex_array::vertex_array(
 		std::vector<std::shared_ptr<morda::vertex_buffer>>&& buffers,

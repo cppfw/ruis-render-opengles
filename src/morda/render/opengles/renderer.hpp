@@ -6,7 +6,7 @@
 
 #include "render_factory.hpp"
 
-namespace morda{ namespace render_opengles2{
+namespace morda{ namespace render_opengles{
 
 class renderer : public morda::renderer{
 	bool defaultFramebufferInitialized = false;

@@ -2,7 +2,7 @@
 
 #include "util.hpp"
 
-using namespace morda::render_opengles2;
+using namespace morda::render_opengles;
 
 texture_2d::texture_2d(r4::vector2<float> dims) :
 		morda::texture_2d(dims)

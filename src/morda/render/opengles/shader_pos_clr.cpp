@@ -1,6 +1,6 @@
 #include "shader_pos_clr.hpp"
 
-using namespace morda::render_opengles2;
+using namespace morda::render_opengles;
 
 shader_pos_clr::shader_pos_clr() :
 		shader_base(

@@ -10,11 +10,11 @@
 #	include <GLES2/gl2.h>
 #endif
 
-using namespace morda::render_opengles2;
+using namespace morda::render_opengles;
 
-index_buffer::index_buffer(utki::span<const std::uint16_t> indices) :
-		elementType(GL_UNSIGNED_SHORT),
-		elementsCount(GLsizei(indices.size()))
+index_buffer::index_buffer(utki::span<const uint16_t> indices) :
+		element_type(GL_UNSIGNED_SHORT),
+		elements_count(GLsizei(indices.size()))
 {	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->buffer);
 	assertOpenGLNoError();

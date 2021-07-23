@@ -22,7 +22,7 @@
 #	include <GLES2/gl2.h>
 #endif
 
-using namespace morda::render_opengles2;
+using namespace morda::render_opengles;
 
 render_factory::render_factory(){}
 

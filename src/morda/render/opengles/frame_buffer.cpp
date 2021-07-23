@@ -11,7 +11,7 @@
 #	include <GLES2/gl2.h>
 #endif
 
-using namespace morda::render_opengles2;
+using namespace morda::render_opengles;
 
 frame_buffer::frame_buffer(std::shared_ptr<morda::texture_2d> color) :
 		morda::frame_buffer(std::move(color))

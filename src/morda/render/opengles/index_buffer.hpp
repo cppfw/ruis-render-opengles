@@ -6,19 +6,18 @@
 
 #include "opengl_buffer.hpp"
 
-namespace morda{ namespace render_opengles2{
+namespace morda{ namespace render_opengles{
 
 class index_buffer : public morda::index_buffer, public opengl_buffer{
 public:
-	const GLenum elementType;
-	const GLsizei elementsCount;
+	const GLenum element_type;
+	const GLsizei elements_count;
 	
-	index_buffer(utki::span<const std::uint16_t> indices);
+	index_buffer(utki::span<const uint16_t> indices);
 	
 	index_buffer(const index_buffer&) = delete;
 	index_buffer& operator=(const index_buffer&) = delete;
-	
-	
+
 private:
 
 };

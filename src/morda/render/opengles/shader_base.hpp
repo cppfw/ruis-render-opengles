@@ -18,7 +18,7 @@
 
 #include "util.hpp"
 
-namespace morda{ namespace render_opengles2{
+namespace morda{ namespace render_opengles{
 
 struct shader_wrapper{
 	GLuint s;
@@ -54,7 +54,7 @@ public:
 	virtual ~shader_base()noexcept{}
 
 protected:
-	GLint getUniform(const char* n);
+	GLint get_uniform(const char* n);
 	
 	void bind()const{
 		glUseProgram(program.p);
@@ -62,11 +62,11 @@ protected:
 		boundShader = this;
 	}
 	
-	bool isBound()const noexcept{
+	bool is_bound()const noexcept{
 		return this == boundShader;
 	}
 	
-	void setUniformMatrix4f(GLint id, const r4::matrix4<float>& m)const{
+	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m)const{
 		auto mm = m.tpos();
 		glUniformMatrix4fv(
 				id,
@@ -79,20 +79,20 @@ protected:
 		assertOpenGLNoError();
 	}
 	
-	void setUniform4f(GLint id, float x, float y, float z, float a)const{
+	void set_uniform4f(GLint id, float x, float y, float z, float a)const{
 		glUniform4f(id, x, y, z, a);
 		assertOpenGLNoError();
 	}
 	
-	void setMatrix(const r4::matrix4<float>& m)const{
-		this->setUniformMatrix4f(this->matrixUniform, m);
+	void set_matrix(const r4::matrix4<float>& m)const{
+		this->set_uniform_matrix4f(this->matrixUniform, m);
 		assertOpenGLNoError();
 	}
 	
-	static GLenum modeMap[];
+	static GLenum mode_map[];
 	
-	static GLenum modeToGLMode(morda::vertex_array::mode mode){
-		return modeMap[unsigned(mode)];
+	static GLenum mode_to_gl_mode(morda::vertex_array::mode mode){
+		return mode_map[unsigned(mode)];
 	}
 	
 	void render(const r4::matrix4<float>& m, const morda::vertex_array& va)const;

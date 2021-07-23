@@ -4,7 +4,7 @@
 
 #include "shader_base.hpp"
 
-namespace morda{ namespace render_opengles2{
+namespace morda{ namespace render_opengles{
 
 class shader_pos_tex :
 		public morda::texturing_shader,
