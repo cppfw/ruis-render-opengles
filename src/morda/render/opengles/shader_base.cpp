@@ -146,11 +146,11 @@ GLint shader_base::get_uniform(const char* n) {
 void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array& va)const{
 	ASSERT(this->is_bound())
 	
-	ASSERT(dynamic_cast<const index_buffer*>(va.indices.get()))
-	auto& ivbo = static_cast<const index_buffer&>(*va.indices);
-	
 	this->set_matrix(m);
 	
+	ASSERT(dynamic_cast<const index_buffer*>(va.indices.get()))
+	auto& ivbo = static_cast<const index_buffer&>(*va.indices);
+
 	for(unsigned i = 0; i != va.buffers.size(); ++i){
 		ASSERT(dynamic_cast<vertex_buffer*>(va.buffers[i].get()))
 		auto& vbo = static_cast<vertex_buffer&>(*va.buffers[i]);
