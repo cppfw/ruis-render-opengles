@@ -31,16 +31,16 @@ namespace{
 bool checkForCompileErrors(GLuint shader) {
 	GLint value = 0;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &value);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	if (value == 0) { //if not compiled
 		GLint logLen = 0;
 		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLen);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		if (logLen > 1) {//1 char is a terminating 0
 			std::vector<char> log(logLen);
 			GLint len;
 			glGetShaderInfoLog(shader, GLsizei(log.size()), &len, &*log.begin());
-			assertOpenGLNoError();
+			assert_opengl_no_error();
 			TRACE( << "===Compile log===\n" << &*log.begin() << std::endl)
 		} else {
 			TRACE( << "Shader compile log is empty" << std::endl)
@@ -54,16 +54,16 @@ bool checkForCompileErrors(GLuint shader) {
 bool checkForLinkErrors(GLuint program){
 	GLint value = 0;
 	glGetProgramiv(program, GL_LINK_STATUS, &value);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	if(value == 0){ //if not linked
 		GLint logLen = 0;
 		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLen);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		if(logLen > 1){ //1 is for terminating 0 character.
 			std::vector<char> log(logLen);
 			GLint len;
 			glGetProgramInfoLog(program, GLsizei(log.size()), &len, &*log.begin());
-			assertOpenGLNoError();
+			assert_opengl_no_error();
 			TRACE(<< "===Link log===\n" << &*log.begin() << std::endl)
 		}
 		return true;
@@ -74,7 +74,7 @@ bool checkForLinkErrors(GLuint program){
 
 shader_wrapper::shader_wrapper(const char* code, GLenum type) {
 	this->s = glCreateShader(type);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 
 	if (this->s == 0) {
 		throw std::runtime_error("glCreateShader() failed");
@@ -83,13 +83,13 @@ shader_wrapper::shader_wrapper(const char* code, GLenum type) {
 	const char* c = code;
 
 	glShaderSource(this->s, 1, &c, 0);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	glCompileShader(this->s);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	if(checkForCompileErrors(this->s)) {
 		TRACE( << "Error while compiling:\n" << c << std::endl)
 		glDeleteShader(this->s);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		throw std::logic_error("Error compiling shader");
 	}
 }
@@ -99,15 +99,15 @@ program_wrapper::program_wrapper(const char* vertexShaderCode, const char* fragm
 		fragmentShader(fragmentShaderCode, GL_FRAGMENT_SHADER)
 {
 	this->p = glCreateProgram();
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	glAttachShader(this->p, vertexShader.s);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	glAttachShader(this->p, fragmentShader.s);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	
 	GLint maxAttribs;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxAttribs);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	ASSERT(maxAttribs >= 0)
 	
 	for(GLuint i = 0; i < GLuint(maxAttribs); ++i){
@@ -115,15 +115,15 @@ program_wrapper::program_wrapper(const char* vertexShaderCode, const char* fragm
 		ss << "a" << i;
 //		TRACE(<< ss.str() << std::endl)
 		glBindAttribLocation(this->p, i, ss.str().c_str());
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 	}
 	
 	glLinkProgram(this->p);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	if (checkForLinkErrors(this->p)) {
 		TRACE( << "Error while linking shader program" << vertexShaderCode << std::endl << fragmentShaderCode << std::endl)
 		glDeleteProgram(this->p);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		throw std::logic_error("Error linking shader program");
 	}
 }
@@ -136,7 +136,7 @@ shader_base::shader_base(const char* vertexShaderCode, const char* fragmentShade
 
 GLint shader_base::get_uniform(const char* n) {
 	GLint ret = glGetUniformLocation(this->program.p, n);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 	if(ret < 0){
 		throw std::logic_error("No uniform found in the shader program");
 	}
@@ -155,27 +155,27 @@ void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array&
 		ASSERT(dynamic_cast<vertex_buffer*>(va.buffers[i].get()))
 		auto& vbo = static_cast<vertex_buffer&>(*va.buffers[i]);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo.buffer);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		
 //		TRACE(<< "vbo.numComponents = " << vbo.num_components << " vbo.type = " << vbo.type << std::endl)
 		
 		glVertexAttribPointer(i, vbo.num_components, vbo.type, GL_FALSE, 0, nullptr);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		
 		glEnableVertexAttribArray(i);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 	}
 	
 	{
 		ASSERT(dynamic_cast<index_buffer*>(va.indices.get()))
 		auto& ivbo = static_cast<index_buffer&>(*va.indices);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ivbo.buffer);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 	}
 
 //	TRACE(<< "ivbo.elementsCount = " << ivbo.elementsCount << " ivbo.elementType = " << ivbo.elementType << std::endl)
 	
 	glDrawElements(mode_to_gl_mode(va.rendering_mode), ivbo.elements_count, ivbo.element_type, nullptr);
-	assertOpenGLNoError();
+	assert_opengl_no_error();
 }
 

@@ -58,7 +58,7 @@ protected:
 	
 	void bind()const{
 		glUseProgram(program.p);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 		boundShader = this;
 	}
 	
@@ -76,17 +76,17 @@ protected:
 				GL_FALSE,
 				reinterpret_cast<const GLfloat*>(&mm)
 			);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 	}
 	
 	void set_uniform4f(GLint id, float x, float y, float z, float a)const{
 		glUniform4f(id, x, y, z, a);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 	}
 	
 	void set_matrix(const r4::matrix4<float>& m)const{
 		this->set_uniform_matrix4f(this->matrixUniform, m);
-		assertOpenGLNoError();
+		assert_opengl_no_error();
 	}
 	
 	static GLenum mode_map[];

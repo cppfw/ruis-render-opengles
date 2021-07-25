@@ -11,7 +11,7 @@
 
 namespace morda{ namespace render_opengles{
 
-inline void assertOpenGLNoError(){
+inline void assert_opengl_no_error(){
 #ifdef DEBUG
 	GLenum error = glGetError();
 	switch(error){
