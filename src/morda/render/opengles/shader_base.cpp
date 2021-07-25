@@ -178,4 +178,3 @@ void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array&
 	glDrawElements(mode_to_gl_mode(va.rendering_mode), ivbo.elements_count, ivbo.element_type, nullptr);
 	assert_opengl_no_error();
 }
-
