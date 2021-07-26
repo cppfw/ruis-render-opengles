@@ -1,3 +1,9 @@
+libmorda-render-opengles (0.1.40) unstable; urgency=medium
+
+  * ogl 3 and 4
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 26 Jul 2021 12:07:50 +0300
+
 libmorda-render-opengles (0.1.39) unstable; urgency=medium
 
   * test release
