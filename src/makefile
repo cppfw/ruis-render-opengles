@@ -1,9 +1,8 @@
 include prorab.mk
 include prorab-license.mk
+include prorab-linux.mk
 
 $(eval $(call prorab-config, ../config))
-
-include $(d)../raspberrypi.mk
 
 this_name := morda-render-opengles
 
@@ -11,7 +10,7 @@ this_soname := $(shell cat $(d)soname.txt)
 
 this_srcs += $(call prorab-src-dir,.)
 
-ifeq ($(raspberrypi),true)
+ifeq ($(prorab_linux),raspbian)
     this_cxxflags += -I/opt/vc/include
     this_ldflags += -L/opt/vc/lib
     this_ldlibs += -lbrcmGLESv2
