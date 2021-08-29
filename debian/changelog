@@ -1,3 +1,9 @@
+libmorda-render-opengles (0.1.41) unstable; urgency=medium
+
+  * build for debian bullseye
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 30 Aug 2021 01:47:57 +0300
+
 libmorda-render-opengles (0.1.40) unstable; urgency=medium
 
   * ogl 3 and 4
