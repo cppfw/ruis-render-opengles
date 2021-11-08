@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		2C74862F27396F91003AA9A1 /* morda_render_opengles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = morda_render_opengles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C74862F27396F91003AA9A1 /* morda-render-opengles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "morda-render-opengles.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,7 +32,7 @@
 		2C74863027396F91003AA9A1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2C74862F27396F91003AA9A1 /* morda_render_opengles.framework */,
+				2C74862F27396F91003AA9A1 /* morda-render-opengles.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,7 +72,7 @@
 			);
 			name = "morda-render-opengles";
 			productName = "morda-render-opengles";
-			productReference = 2C74862F27396F91003AA9A1 /* morda_render_opengles.framework */;
+			productReference = 2C74862F27396F91003AA9A1 /* morda-render-opengles.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -269,7 +269,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.github.cppfw.morda-render-opengles";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "morda-render-opengles";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -299,7 +299,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.github.cppfw.morda-render-opengles";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = "morda-render-opengles";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
