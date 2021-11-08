@@ -88,11 +88,11 @@ protected:
 	}
 	
 	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m)const{
-		auto mm = m.tpos();
+		auto mm = m.tposed();
 		glUniformMatrix4fv(
 				id,
 				1,
-				// OpenGL ES2 doies not support transposing, see description of 'transpose' parameter
+				// OpenGL ES2 does not support transposing, see description of 'transpose' parameter
 				// of glUniformMatrix4fv(): https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glUniform.xml
 				GL_FALSE,
 				reinterpret_cast<const GLfloat*>(&mm)
