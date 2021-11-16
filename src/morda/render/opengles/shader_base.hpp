@@ -42,32 +42,32 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 namespace morda{ namespace render_opengles{
 
 struct shader_wrapper{
-	GLuint s;
+	GLuint id;
 	shader_wrapper(const char* code, GLenum type);
 	~shader_wrapper()noexcept{
-		glDeleteShader(this->s);
+		glDeleteShader(this->id);
 	}
 };
 
 struct program_wrapper{
-	shader_wrapper vertexShader;
-	shader_wrapper fragmentShader;
-	GLuint p;
-	program_wrapper(const char* vertexShaderCode, const char* fragmentShaderCode);
+	shader_wrapper vertex_shader;
+	shader_wrapper fragment_shader;
+	GLuint id;
+	program_wrapper(const char* vertex_shader_code, const char* fragment_shader_code);
 
 	virtual ~program_wrapper()noexcept{
-		glDeleteProgram(this->p);
+		glDeleteProgram(this->id);
 	}
 };
 
 class shader_base{
 	program_wrapper program;
 	
-	const GLint matrixUniform;
+	const GLint matrix_uniform;
 	
-	static const shader_base* boundShader;
+	static const shader_base* bound_shader;
 public:
-	shader_base(const char* vertexShaderCode, const char* fragmentShaderCode);
+	shader_base(const char* vertex_shader_code, const char* fragment_shader_code);
 	
 	shader_base(const shader_base&) = delete;
 	shader_base& operator=(const shader_base&) = delete;
@@ -78,13 +78,13 @@ protected:
 	GLint get_uniform(const char* n);
 	
 	void bind()const{
-		glUseProgram(program.p);
+		glUseProgram(program.id);
 		assert_opengl_no_error();
-		boundShader = this;
+		bound_shader = this;
 	}
 	
 	bool is_bound()const noexcept{
-		return this == boundShader;
+		return this == bound_shader;
 	}
 	
 	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m)const{
@@ -106,7 +106,7 @@ protected:
 	}
 	
 	void set_matrix(const r4::matrix4<float>& m)const{
-		this->set_uniform_matrix4f(this->matrixUniform, m);
+		this->set_uniform_matrix4f(this->matrix_uniform, m);
 		assert_opengl_no_error();
 	}
 	

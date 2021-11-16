@@ -38,7 +38,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengles;
 
-const shader_base* shader_base::boundShader = nullptr;
+const shader_base* shader_base::bound_shader = nullptr;
 
 GLenum shader_base::mode_map[] = {
 	GL_TRIANGLES,			// TRIANGLES
@@ -94,69 +94,68 @@ bool checkForLinkErrors(GLuint program){
 }
 
 shader_wrapper::shader_wrapper(const char* code, GLenum type) {
-	this->s = glCreateShader(type);
+	this->id = glCreateShader(type);
 	assert_opengl_no_error();
 
-	if (this->s == 0) {
+	if(this->id == 0){
 		throw std::runtime_error("glCreateShader() failed");
 	}
 
 	const char* c = code;
 
-	glShaderSource(this->s, 1, &c, 0);
+	glShaderSource(this->id, 1, &c, 0);
 	assert_opengl_no_error();
-	glCompileShader(this->s);
+	glCompileShader(this->id);
 	assert_opengl_no_error();
-	if(checkForCompileErrors(this->s)) {
+	if(checkForCompileErrors(this->id)) {
 		TRACE( << "Error while compiling:\n" << c << std::endl)
-		glDeleteShader(this->s);
+		glDeleteShader(this->id);
 		assert_opengl_no_error();
 		throw std::logic_error("Error compiling shader");
 	}
 }
 
-program_wrapper::program_wrapper(const char* vertexShaderCode, const char* fragmentShaderCode) :
-		vertexShader(vertexShaderCode, GL_VERTEX_SHADER),
-		fragmentShader(fragmentShaderCode, GL_FRAGMENT_SHADER)
+program_wrapper::program_wrapper(const char* vertex_shader_code, const char* fragment_shader_code) :
+		vertex_shader(vertex_shader_code, GL_VERTEX_SHADER),
+		fragment_shader(fragment_shader_code, GL_FRAGMENT_SHADER)
 {
-	this->p = glCreateProgram();
+	this->id = glCreateProgram();
 	assert_opengl_no_error();
-	glAttachShader(this->p, vertexShader.s);
+	glAttachShader(this->id, vertex_shader.id);
 	assert_opengl_no_error();
-	glAttachShader(this->p, fragmentShader.s);
+	glAttachShader(this->id, fragment_shader.id);
 	assert_opengl_no_error();
 	
-	GLint maxAttribs;
-	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &maxAttribs);
+	GLint max_num_attribs;
+	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &max_num_attribs);
 	assert_opengl_no_error();
-	ASSERT(maxAttribs >= 0)
+	ASSERT(max_num_attribs >= 0)
 	
-	for(GLuint i = 0; i < GLuint(maxAttribs); ++i){
+	for(GLuint i = 0; i < GLuint(max_num_attribs); ++i){
 		std::stringstream ss;
 		ss << "a" << i;
 //		TRACE(<< ss.str() << std::endl)
-		glBindAttribLocation(this->p, i, ss.str().c_str());
+		glBindAttribLocation(this->id, i, ss.str().c_str());
 		assert_opengl_no_error();
 	}
 	
-	glLinkProgram(this->p);
+	glLinkProgram(this->id);
 	assert_opengl_no_error();
-	if (checkForLinkErrors(this->p)) {
+	if(checkForLinkErrors(this->id)){
 		TRACE( << "Error while linking shader program" << vertexShaderCode << std::endl << fragmentShaderCode << std::endl)
-		glDeleteProgram(this->p);
+		glDeleteProgram(this->id);
 		assert_opengl_no_error();
 		throw std::logic_error("Error linking shader program");
 	}
 }
 
-shader_base::shader_base(const char* vertexShaderCode, const char* fragmentShaderCode) :
-		program(vertexShaderCode, fragmentShaderCode),
-		matrixUniform(this->get_uniform("matrix"))
-{
-}
+shader_base::shader_base(const char* vertex_shader_code, const char* fragment_shader_code) :
+		program(vertex_shader_code, fragment_shader_code),
+		matrix_uniform(this->get_uniform("matrix"))
+{}
 
 GLint shader_base::get_uniform(const char* n) {
-	GLint ret = glGetUniformLocation(this->program.p, n);
+	GLint ret = glGetUniformLocation(this->program.id, n);
 	assert_opengl_no_error();
 	if(ret < 0){
 		throw std::logic_error("No uniform found in the shader program");
