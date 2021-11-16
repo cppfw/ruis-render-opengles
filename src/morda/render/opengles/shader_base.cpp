@@ -48,22 +48,22 @@ GLenum shader_base::mode_map[] = {
 };
 
 namespace{
-//return true if not compiled
-bool checkForCompileErrors(GLuint shader) {
+// return true if not compiled
+bool checkForCompileErrors(GLuint shader){
 	GLint value = 0;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &value);
 	assert_opengl_no_error();
-	if (value == 0) { //if not compiled
-		GLint logLen = 0;
-		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLen);
+	if(value == 0){ // if not compiled
+		GLint log_len = 0;
+		glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &log_len);
 		assert_opengl_no_error();
-		if (logLen > 1) {//1 char is a terminating 0
-			std::vector<char> log(logLen);
+		if(log_len > 1){ // 1 char is a terminating 0
+			std::vector<char> log(log_len);
 			GLint len;
 			glGetShaderInfoLog(shader, GLsizei(log.size()), &len, &*log.begin());
 			assert_opengl_no_error();
 			TRACE( << "===Compile log===\n" << &*log.begin() << std::endl)
-		} else {
+		}else{
 			TRACE( << "Shader compile log is empty" << std::endl)
 		}
 		return true;
@@ -71,17 +71,17 @@ bool checkForCompileErrors(GLuint shader) {
 	return false;
 }
 
-//return true if not linked
+// return true if not linked
 bool checkForLinkErrors(GLuint program){
 	GLint value = 0;
 	glGetProgramiv(program, GL_LINK_STATUS, &value);
 	assert_opengl_no_error();
-	if(value == 0){ //if not linked
-		GLint logLen = 0;
-		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLen);
+	if(value == 0){ // if not linked
+		GLint log_len = 0;
+		glGetProgramiv(program, GL_INFO_LOG_LENGTH, &log_len);
 		assert_opengl_no_error();
-		if(logLen > 1){ //1 is for terminating 0 character.
-			std::vector<char> log(logLen);
+		if(log_len > 1){ // 1 is for terminating 0 character.
+			std::vector<char> log(log_len);
 			GLint len;
 			glGetProgramInfoLog(program, GLsizei(log.size()), &len, &*log.begin());
 			assert_opengl_no_error();
@@ -93,7 +93,7 @@ bool checkForLinkErrors(GLuint program){
 }
 }
 
-shader_wrapper::shader_wrapper(const char* code, GLenum type) {
+shader_wrapper::shader_wrapper(const char* code, GLenum type){
 	this->id = glCreateShader(type);
 	assert_opengl_no_error();
 
@@ -154,8 +154,8 @@ shader_base::shader_base(const char* vertex_shader_code, const char* fragment_sh
 		matrix_uniform(this->get_uniform("matrix"))
 {}
 
-GLint shader_base::get_uniform(const char* n) {
-	GLint ret = glGetUniformLocation(this->program.id, n);
+GLint shader_base::get_uniform(const char* name){
+	GLint ret = glGetUniformLocation(this->program.id, name);
 	assert_opengl_no_error();
 	if(ret < 0){
 		throw std::logic_error("No uniform found in the shader program");

@@ -75,7 +75,7 @@ public:
 	virtual ~shader_base()noexcept{}
 
 protected:
-	GLint get_uniform(const char* n);
+	GLint get_uniform(const char* name);
 	
 	void bind()const{
 		glUseProgram(program.id);
