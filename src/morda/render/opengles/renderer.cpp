@@ -38,7 +38,7 @@ unsigned getMaxTextureSize(){
 	GLint val;
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
 	assert_opengl_no_error();
-	ASSERT_INFO(val > 0, "val = " << val)
+	ASSERT(val > 0, [&](auto&o){o << "val = " << val;})
 	return unsigned(val);
 }
 }
