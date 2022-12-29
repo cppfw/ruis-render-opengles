@@ -59,10 +59,10 @@ void renderer::set_framebuffer_internal(morda::frame_buffer* fb){
 		// On some platforms the default framebuffer is not 0, so because of this
 		// check if default framebuffer value is saved or not every time some
 		// framebuffer is going to be bound and save the value if needed.
-		GLint oldFb;
-		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFb);
-		LOG([&](auto&o){o << "oldFb = " << oldFb << std::endl;})
-		this->defaultFramebuffer = decltype(this->defaultFramebuffer)(oldFb);
+		GLint old_fb;
+		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
+		LOG([&](auto&o){o << "old_fb = " << old_fb << std::endl;})
+		this->defaultFramebuffer = decltype(this->defaultFramebuffer)(old_fb);
 		this->defaultFramebufferInitialized = true;
 	}
 	
