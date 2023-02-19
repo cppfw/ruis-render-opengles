@@ -1,3 +1,9 @@
+libmorda-render-opengles (0.1.43) unstable; urgency=medium
+
+  * shared_ref
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 19 Feb 2023 21:39:11 +0200
+
 libmorda-render-opengles (0.1.42) unstable; urgency=medium
 
   * xcode: static framework
