@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
 
   s.ios.vendored_framework = "lib/ios/#{s.name}.xcframework"
 
-  s.dependency 'morda', '>= 0.5.163'
+  s.dependency 'morda', '>= 0.5.199'
 end
