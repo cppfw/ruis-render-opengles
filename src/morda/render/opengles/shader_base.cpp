@@ -169,11 +169,11 @@ void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array&
 	this->set_matrix(m);
 	
 	ASSERT(dynamic_cast<const index_buffer*>(va.indices.get()))
-	auto& ivbo = static_cast<const index_buffer&>(*va.indices);
+	auto& ivbo = static_cast<const index_buffer&>(va.indices.get());
 
 	for(unsigned i = 0; i != va.buffers.size(); ++i){
 		ASSERT(dynamic_cast<vertex_buffer*>(va.buffers[i].get()))
-		const auto& vbo = static_cast<const vertex_buffer&>(*va.buffers[i]);
+		const auto& vbo = static_cast<const vertex_buffer&>(va.buffers[i].get());
 		glBindBuffer(GL_ARRAY_BUFFER, vbo.buffer);
 		assert_opengl_no_error();
 		
@@ -188,7 +188,7 @@ void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array&
 	
 	{
 		ASSERT(dynamic_cast<index_buffer*>(va.indices.get()))
-		const auto& ivbo = static_cast<const index_buffer&>(*va.indices);
+		const auto& ivbo = static_cast<const index_buffer&>(va.indices.get());
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ivbo.buffer);
 		assert_opengl_no_error();
 	}
