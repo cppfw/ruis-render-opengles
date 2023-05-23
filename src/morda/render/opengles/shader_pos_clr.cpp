@@ -26,12 +26,6 @@ using namespace morda::render_opengles;
 shader_pos_clr::shader_pos_clr() :
 		shader_base(
 				R"qwertyuiop(
-						#ifndef GL_ES
-						#	define highp
-						#	define mediump
-						#	define lowp
-						#endif
-
 						uniform highp mat4 matrix;
 
 						attribute highp vec4 a0;
@@ -45,12 +39,6 @@ shader_pos_clr::shader_pos_clr() :
 						}
 					)qwertyuiop",
 				R"qwertyuiop(
-						#ifndef GL_ES
-						#	define highp
-						#	define mediump
-						#	define lowp
-						#endif
-		
 						varying highp vec4 color_varying;
 						
 						void main(void){

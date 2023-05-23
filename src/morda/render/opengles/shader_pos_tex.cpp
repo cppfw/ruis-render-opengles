@@ -33,12 +33,6 @@ using namespace morda::render_opengles;
 shader_pos_tex::shader_pos_tex() :
 		shader_base(
 				R"qwertyuiop(
-						#ifndef GL_ES
-						#	define highp
-						#	define mediump
-						#	define lowp
-						#endif
-
 						attribute highp vec4 a0; //position
 
 						attribute highp vec2 a1; //texture coordinates
@@ -53,12 +47,6 @@ shader_pos_tex::shader_pos_tex() :
 						}
 					)qwertyuiop",
 				R"qwertyuiop(
-						#ifndef GL_ES
-						#	define highp
-						#	define mediump
-						#	define lowp
-						#endif
-		
 						uniform sampler2D texture0;
 		
 						varying highp vec2 tc0;

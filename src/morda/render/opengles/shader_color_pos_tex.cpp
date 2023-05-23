@@ -28,12 +28,6 @@ using namespace morda::render_opengles;
 shader_color_pos_tex::shader_color_pos_tex() :
 		shader_base(
 				R"qwertyuiop(
-						#ifndef GL_ES
-						#	define highp
-						#	define mediump
-						#	define lowp
-						#endif
-
 						attribute highp vec4 a0;
 
 						attribute highp vec2 a1;
@@ -48,12 +42,6 @@ shader_color_pos_tex::shader_color_pos_tex() :
 						}
 					)qwertyuiop",
 				R"qwertyuiop(
-						#ifndef GL_ES
-						#	define highp
-						#	define mediump
-						#	define lowp
-						#endif
-		
 						uniform sampler2D texture0;
 		
 						uniform highp vec4 uniform_color;
