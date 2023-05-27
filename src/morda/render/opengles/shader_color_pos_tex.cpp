@@ -29,11 +29,10 @@ shader_color_pos_tex::shader_color_pos_tex() :
 		shader_base(
 				R"qwertyuiop(
 						attribute highp vec4 a0;
-
 						attribute highp vec2 a1;
 
 						uniform highp mat4 matrix;
-
+						
 						varying highp vec2 tc0;
 
 						void main(void){
