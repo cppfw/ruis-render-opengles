@@ -55,7 +55,7 @@ inline void assert_opengl_no_error(){
 			ASSERT(false, [](auto&o){o << "OpenGL error: GL_OUT_OF_MEMORY";})
 			break;
 		default:
-			ASSERT(false, [](auto&o){o << "Unknown OpenGL error, code = " << int(error);})
+			ASSERT(false, [&](auto&o){o << "Unknown OpenGL error, code = " << int(error);})
 			break;
 	}
 #endif
