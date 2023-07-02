@@ -1,3 +1,9 @@
+libmorda-render-opengles (0.1.45) unstable; urgency=medium
+
+  * raster image
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 02 Jul 2023 12:07:49 +0300
+
 libmorda-render-opengles (0.1.44) unstable; urgency=medium
 
   * relink
