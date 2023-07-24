@@ -36,7 +36,7 @@ namespace morda{ namespace render_opengles{
 class vertex_array : public morda::vertex_array{
 public:	
 	vertex_array(
-		std::vector<utki::shared_ref<const morda::vertex_buffer>>&& buffers, // TODO: pass by value
+		buffers_type buffers,
 		const utki::shared_ref<const morda::index_buffer>& indices,
 		mode rendering_mode
 	);
