@@ -25,22 +25,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengles;
 
-namespace{
-inline GLuint createGLBuffer(){
+namespace {
+inline GLuint createGLBuffer()
+{
 	GLuint ret;
 	glGenBuffers(1, &ret);
 	assert_opengl_no_error();
 	return ret;
 }
-}
+} // namespace
 
 opengl_buffer::opengl_buffer() :
-		buffer(createGLBuffer())
+	buffer(createGLBuffer())
+{}
+
+opengl_buffer::~opengl_buffer() noexcept
 {
-}
-
-
-opengl_buffer::~opengl_buffer()noexcept{
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	assert_opengl_no_error();
 	glDeleteBuffers(1, &this->buffer);

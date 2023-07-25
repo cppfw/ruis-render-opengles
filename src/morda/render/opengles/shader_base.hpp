@@ -21,15 +21,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <utki/config.hpp>
-#include <utki/debug.hpp>
-#include <utki/span.hpp>
-
-#include <r4/matrix.hpp>
-
 #include <vector>
 
 #include <morda/render/vertex_array.hpp>
+#include <r4/matrix.hpp>
+#include <utki/config.hpp>
+#include <utki/debug.hpp>
+#include <utki/span.hpp>
 
 #if M_OS_NAME == M_OS_NAME_IOS
 #	include <OpenGlES/ES2/glext.h>
@@ -39,84 +37,98 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-namespace morda{ namespace render_opengles{
+namespace morda {
+namespace render_opengles {
 
-struct shader_wrapper{
+struct shader_wrapper {
 	GLuint id;
 	shader_wrapper(const char* code, GLenum type);
-	~shader_wrapper()noexcept{
+
+	~shader_wrapper() noexcept
+	{
 		glDeleteShader(this->id);
 	}
 };
 
-struct program_wrapper{
+struct program_wrapper {
 	shader_wrapper vertex_shader;
 	shader_wrapper fragment_shader;
 	GLuint id;
 	program_wrapper(const char* vertex_shader_code, const char* fragment_shader_code);
 
-	virtual ~program_wrapper()noexcept{
+	virtual ~program_wrapper() noexcept
+	{
 		glDeleteProgram(this->id);
 	}
 };
 
-class shader_base{
+class shader_base
+{
 	program_wrapper program;
-	
+
 	const GLint matrix_uniform;
-	
+
 	static const shader_base* bound_shader;
+
 public:
 	shader_base(const char* vertex_shader_code, const char* fragment_shader_code);
-	
+
 	shader_base(const shader_base&) = delete;
 	shader_base& operator=(const shader_base&) = delete;
-	
-	virtual ~shader_base()noexcept{}
+
+	virtual ~shader_base() noexcept {}
 
 protected:
 	GLint get_uniform(const char* name);
-	
-	void bind()const{
+
+	void bind() const
+	{
 		glUseProgram(program.id);
 		assert_opengl_no_error();
 		bound_shader = this;
 	}
-	
-	bool is_bound()const noexcept{
+
+	bool is_bound() const noexcept
+	{
 		return this == bound_shader;
 	}
-	
-	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m)const{
+
+	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m) const
+	{
 		auto mm = m.tposed();
 		glUniformMatrix4fv(
-				id,
-				1,
-				// OpenGL ES2 does not support transposing, see description of 'transpose' parameter
-				// of glUniformMatrix4fv(): https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glUniform.xml
-				GL_FALSE,
-				reinterpret_cast<const GLfloat*>(&mm)
-			);
+			id,
+			1,
+			// OpenGL ES2 does not support transposing, see description of
+			// 'transpose' parameter of glUniformMatrix4fv():
+			// https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glUniform.xml
+			GL_FALSE,
+			reinterpret_cast<const GLfloat*>(&mm)
+		);
 		assert_opengl_no_error();
 	}
-	
-	void set_uniform4f(GLint id, float x, float y, float z, float a)const{
+
+	void set_uniform4f(GLint id, float x, float y, float z, float a) const
+	{
 		glUniform4f(id, x, y, z, a);
 		assert_opengl_no_error();
 	}
-	
-	void set_matrix(const r4::matrix4<float>& m)const{
+
+	void set_matrix(const r4::matrix4<float>& m) const
+	{
 		this->set_uniform_matrix4f(this->matrix_uniform, m);
 		assert_opengl_no_error();
 	}
-	
+
 	static GLenum mode_map[];
-	
-	static GLenum mode_to_gl_mode(morda::vertex_array::mode mode){
+
+	static GLenum mode_to_gl_mode(morda::vertex_array::mode mode)
+	{
 		return mode_map[unsigned(mode)];
 	}
-	
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va)const;
+
+	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const;
 };
 
-}}
+} // namespace render_opengles
+} // namespace morda

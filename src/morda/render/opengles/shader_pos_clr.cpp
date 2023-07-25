@@ -24,8 +24,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace morda::render_opengles;
 
 shader_pos_clr::shader_pos_clr() :
-		shader_base(
-				R"qwertyuiop(
+	shader_base(
+		R"qwertyuiop(
 						uniform highp mat4 matrix;
 
 						attribute highp vec4 a0;
@@ -38,18 +38,19 @@ shader_pos_clr::shader_pos_clr() :
 							color_varying = a1;
 						}
 					)qwertyuiop",
-				R"qwertyuiop(
+		R"qwertyuiop(
 						varying highp vec4 color_varying;
 						
 						void main(void){
 							gl_FragColor = color_varying;
 						}
 					)qwertyuiop"
-			)
+	)
 {}
 
-void shader_pos_clr::render(const r4::matrix4<float>& m, const morda::vertex_array& va) const {
+void shader_pos_clr::render(const r4::matrix4<float>& m, const morda::vertex_array& va) const
+{
 	this->bind();
-	
+
 	this->shader_base::render(m, va);
 }

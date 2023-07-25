@@ -21,16 +21,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "vertex_array.hpp"
 
+#include "index_buffer.hpp"
 #include "util.hpp"
 #include "vertex_buffer.hpp"
-#include "index_buffer.hpp"
 
 using namespace morda::render_opengles;
 
 vertex_array::vertex_array(
-		buffers_type buffers,
-		const utki::shared_ref<const morda::index_buffer>& indices,
-		mode rendering_mode
-	) :
-		morda::vertex_array(std::move(buffers), indices, rendering_mode)
+	buffers_type buffers,
+	const utki::shared_ref<const morda::index_buffer>& indices,
+	mode rendering_mode
+) :
+	morda::vertex_array(std::move(buffers), indices, rendering_mode)
 {}

@@ -19,9 +19,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
+#include "renderer.hpp"
+
 #include <utki/config.hpp>
 
-#include "renderer.hpp"
 #include "frame_buffer.hpp"
 #include "util.hpp"
 
@@ -33,113 +34,124 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengles;
 
-namespace{
-unsigned getMaxTextureSize(){
+namespace {
+unsigned getMaxTextureSize()
+{
 	GLint val;
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
 	assert_opengl_no_error();
-	ASSERT(val > 0, [&](auto&o){o << "val = " << val;})
+	ASSERT(val > 0, [&](auto& o) {
+		o << "val = " << val;
+	})
 	return unsigned(val);
 }
-}
+} // namespace
 
 renderer::renderer(std::unique_ptr<render_factory> factory) :
-		morda::renderer(
-				std::move(factory),
-				[](){
-					renderer::params p;
-					p.max_texture_size = getMaxTextureSize();
-					return p;
-				}()
-			)
+	morda::renderer(std::move(factory), []() {
+		renderer::params p;
+		p.max_texture_size = getMaxTextureSize();
+		return p;
+	}())
 {}
 
-void renderer::set_framebuffer_internal(morda::frame_buffer* fb){
-	if(!this->defaultFramebufferInitialized){
+void renderer::set_framebuffer_internal(morda::frame_buffer* fb)
+{
+	if (!this->defaultFramebufferInitialized) {
 		// On some platforms the default framebuffer is not 0, so because of this
 		// check if default framebuffer value is saved or not every time some
 		// framebuffer is going to be bound and save the value if needed.
 		GLint old_fb;
 		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
-		LOG([&](auto&o){o << "old_fb = " << old_fb << std::endl;})
+		LOG([&](auto& o) {
+			o << "old_fb = " << old_fb << std::endl;
+		})
 		this->defaultFramebuffer = decltype(this->defaultFramebuffer)(old_fb);
 		this->defaultFramebufferInitialized = true;
 	}
-	
-	if(!fb){
+
+	if (!fb) {
 		glBindFramebuffer(GL_FRAMEBUFFER, GLuint(this->defaultFramebuffer));
 		assert_opengl_no_error();
 		return;
 	}
-	
+
 	ASSERT(dynamic_cast<frame_buffer*>(fb))
 	auto& ogl2fb = static_cast<frame_buffer&>(*fb);
-	
+
 	glBindFramebuffer(GL_FRAMEBUFFER, ogl2fb.fbo);
 	assert_opengl_no_error();
 }
 
-void renderer::clear_framebuffer(){
+void renderer::clear_framebuffer()
+{
 	glClearColor(0, 0, 0, 1);
 	assert_opengl_no_error();
 	glClear(GL_COLOR_BUFFER_BIT);
 	assert_opengl_no_error();
-	
+
 	glClearDepthf(0);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 	assert_opengl_no_error();
-	
+
 	glClearStencil(0);
 	glClear(GL_STENCIL_BUFFER_BIT);
 	assert_opengl_no_error();
 }
 
-bool renderer::is_scissor_enabled()const{
+bool renderer::is_scissor_enabled() const
+{
 	return glIsEnabled(GL_SCISSOR_TEST) ? true : false; // "? true : false" is to avoid warning under MSVC
 }
 
-void renderer::set_scissor_enabled(bool enabled){
-	if(enabled){
+void renderer::set_scissor_enabled(bool enabled)
+{
+	if (enabled) {
 		glEnable(GL_SCISSOR_TEST);
-	}else{
+	} else {
 		glDisable(GL_SCISSOR_TEST);
 	}
 }
 
-r4::rectangle<int> renderer::get_scissor()const{
+r4::rectangle<int> renderer::get_scissor() const
+{
 	GLint osb[4];
 	glGetIntegerv(GL_SCISSOR_BOX, osb);
 	return r4::rectangle<int>(osb[0], osb[1], osb[2], osb[3]);
 }
 
-void renderer::set_scissor(r4::rectangle<int> r){
+void renderer::set_scissor(r4::rectangle<int> r)
+{
 	glScissor(r.p.x(), r.p.y(), r.d.x(), r.d.y());
 	assert_opengl_no_error();
 }
 
-r4::rectangle<int> renderer::get_viewport()const{
+r4::rectangle<int> renderer::get_viewport() const
+{
 	GLint vp[4];
 
 	glGetIntegerv(GL_VIEWPORT, vp);
-	
+
 	return r4::rectangle<int>(vp[0], vp[1], vp[2], vp[3]);
 }
 
-void renderer::set_viewport(r4::rectangle<int> r){
+void renderer::set_viewport(r4::rectangle<int> r)
+{
 	glViewport(r.p.x(), r.p.y(), r.d.x(), r.d.y());
 	assert_opengl_no_error();
 }
 
-void renderer::set_blend_enabled(bool enable){
-	if(enable){
+void renderer::set_blend_enabled(bool enable)
+{
+	if (enable) {
 		glEnable(GL_BLEND);
-	}else{
+	} else {
 		glDisable(GL_BLEND);
 	}
 }
 
-namespace{
+namespace {
 
 GLenum blendFunc[] = {
 	GL_ZERO,
@@ -159,13 +171,19 @@ GLenum blendFunc[] = {
 	GL_SRC_ALPHA_SATURATE
 };
 
-}
+} // namespace
 
-void renderer::set_blend_func(blend_factor src_color, blend_factor dst_color, blend_factor src_alpha, blend_factor dst_alpha){
+void renderer::set_blend_func(
+	blend_factor src_color,
+	blend_factor dst_color,
+	blend_factor src_alpha,
+	blend_factor dst_alpha
+)
+{
 	glBlendFuncSeparate(
-			blendFunc[unsigned(src_color)],
-			blendFunc[unsigned(dst_color)],
-			blendFunc[unsigned(src_alpha)],
-			blendFunc[unsigned(dst_alpha)]
-		);
+		blendFunc[unsigned(src_color)],
+		blendFunc[unsigned(dst_color)],
+		blendFunc[unsigned(src_alpha)],
+		blendFunc[unsigned(dst_alpha)]
+	);
 }

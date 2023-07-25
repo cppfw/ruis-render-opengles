@@ -19,24 +19,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#include <utki/config.hpp>
-
 #include "render_factory.hpp"
 
-#include "vertex_buffer.hpp"
-#include "vertex_array.hpp"
+#include <utki/config.hpp>
 
-#include "util.hpp"
+#include "frame_buffer.hpp"
 #include "index_buffer.hpp"
-
-#include "texture_2d.hpp"
-#include "shader_pos_tex.hpp"
 #include "shader_color.hpp"
-#include "shader_pos_clr.hpp"
+#include "shader_color_pos_lum.hpp"
 #include "shader_color_pos_tex.hpp"
 #include "shader_color_pos_tex_alpha.hpp"
-#include "shader_color_pos_lum.hpp"
-#include "frame_buffer.hpp"
+#include "shader_pos_clr.hpp"
+#include "shader_pos_tex.hpp"
+#include "texture_2d.hpp"
+#include "util.hpp"
+#include "vertex_array.hpp"
+#include "vertex_buffer.hpp"
 
 #if M_OS_NAME == M_OS_NAME_IOS
 #	include <OpenGlES/ES2/glext.h>
@@ -46,31 +44,27 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengles;
 
-render_factory::render_factory(){}
+render_factory::render_factory() {}
 
-render_factory::~render_factory()noexcept{}
+render_factory::~render_factory() noexcept {}
 
 utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
-		rasterimage::format format,
-		rasterimage::dimensioned::dimensions_type dims
-	)
+	rasterimage::format format,
+	rasterimage::dimensioned::dimensions_type dims
+)
 {
-	return this->create_texture_2d_internal(
-				format,
-				dims,
-				nullptr);
+	return this->create_texture_2d_internal(format, dims, nullptr);
 }
 
-utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rasterimage::image_variant& imvar){
+utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rasterimage::image_variant& imvar)
+{
 	return std::visit(
-		[this, &imvar](const auto& im){
+		[this, &imvar](const auto& im) {
 			auto data = im.pixels();
 			return this->create_texture_2d_internal(
 				imvar.get_format(),
 				im.dims(),
-				utki::make_span(
-					reinterpret_cast<const uint8_t*>(data.data())
-					, data.size_bytes())
+				utki::make_span(reinterpret_cast<const uint8_t*>(data.data()), data.size_bytes())
 			);
 		},
 		imvar.variant
@@ -78,24 +72,24 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(const rast
 }
 
 utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
-		rasterimage::format type,
-		rasterimage::dimensioned::dimensions_type dims,
-		utki::span<const uint8_t> data
-	)
+	rasterimage::format type,
+	rasterimage::dimensioned::dimensions_type dims,
+	utki::span<const uint8_t> data
+)
 {
-	//TODO: turn these asserts to real checks with exceptions throwing
+	// TODO: turn these asserts to real checks with exceptions throwing
 	ASSERT(data.size() % rasterimage::to_num_channels(type) == 0)
 	ASSERT(data.size() % dims.x() == 0)
 
 	ASSERT(data.size() == 0 || data.size() / rasterimage::to_num_channels(type) / dims.x() == dims.y())
-	
+
 	auto ret = utki::make_shared<texture_2d>(dims.to<float>());
-	
-	//TODO: save previous bind and restore it after?
+
+	// TODO: save previous bind and restore it after?
 	ret.get().bind(0);
-	
+
 	GLint internalFormat;
-	switch(type){
+	switch (type) {
 		default:
 			ASSERT(false)
 		case decltype(type)::grey:
@@ -117,16 +111,16 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 	assert_opengl_no_error();
 
 	glTexImage2D(
-			GL_TEXTURE_2D,
-			0, // 0th level, no mipmaps
-			internalFormat, // internal format
-			dims.x(),
-			dims.y(),
-			0, // border, should be 0!
-			internalFormat, // format of the texel data
-			GL_UNSIGNED_BYTE,
-			data.size() == 0 ? nullptr : &*data.begin()
-		);
+		GL_TEXTURE_2D,
+		0, // 0th level, no mipmaps
+		internalFormat, // internal format
+		dims.x(),
+		dims.y(),
+		0, // border, should be 0!
+		internalFormat, // format of the texel data
+		GL_UNSIGNED_BYTE,
+		data.size() == 0 ? nullptr : &*data.begin()
+	);
 	assert_opengl_no_error();
 
 	// NOTE: on OpenGL ES 2 it is necessary to set the filter parameters
@@ -135,43 +129,55 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 	assert_opengl_no_error();
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	assert_opengl_no_error();
-	
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	
+
 	return ret;
 }
 
-utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector4<float>> vertices){
+utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(
+	utki::span<const r4::vector4<float>> vertices
+)
+{
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector3<float>> vertices){
+utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(
+	utki::span<const r4::vector3<float>> vertices
+)
+{
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector2<float>> vertices){
+utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(
+	utki::span<const r4::vector2<float>> vertices
+)
+{
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const float> vertices){
+utki::shared_ref<morda::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const float> vertices)
+{
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
 utki::shared_ref<morda::vertex_array> render_factory::create_vertex_array(
-		std::vector<utki::shared_ref<const morda::vertex_buffer>> buffers,
-		const utki::shared_ref<const morda::index_buffer>& indices,
-		morda::vertex_array::mode rendering_mode
-	)
+	std::vector<utki::shared_ref<const morda::vertex_buffer>> buffers,
+	const utki::shared_ref<const morda::index_buffer>& indices,
+	morda::vertex_array::mode rendering_mode
+)
 {
 	return utki::make_shared<vertex_array>(std::move(buffers), indices, rendering_mode);
 }
 
-utki::shared_ref<morda::index_buffer> render_factory::create_index_buffer(utki::span<const uint16_t> indices){
+utki::shared_ref<morda::index_buffer> render_factory::create_index_buffer(utki::span<const uint16_t> indices)
+{
 	return utki::make_shared<index_buffer>(indices);
 }
 
-std::unique_ptr<morda::render_factory::shaders> render_factory::create_shaders(){
+std::unique_ptr<morda::render_factory::shaders> render_factory::create_shaders()
+{
 	auto ret = std::make_unique<morda::render_factory::shaders>();
 	ret->pos_tex = std::make_unique<shader_pos_tex>();
 	ret->color_pos = std::make_unique<shader_color>();

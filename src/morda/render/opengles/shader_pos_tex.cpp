@@ -21,18 +21,17 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_pos_tex.hpp"
 
-#include "texture_2d.hpp"
-#include "vertex_buffer.hpp"
-#include "vertex_array.hpp"
 #include "index_buffer.hpp"
-
+#include "texture_2d.hpp"
 #include "util.hpp"
+#include "vertex_array.hpp"
+#include "vertex_buffer.hpp"
 
 using namespace morda::render_opengles;
 
 shader_pos_tex::shader_pos_tex() :
-		shader_base(
-				R"qwertyuiop(
+	shader_base(
+		R"qwertyuiop(
 						attribute highp vec4 a0; //position
 
 						attribute highp vec2 a1; //texture coordinates
@@ -46,7 +45,7 @@ shader_pos_tex::shader_pos_tex() :
 							tc0 = a1;
 						}
 					)qwertyuiop",
-				R"qwertyuiop(
+		R"qwertyuiop(
 						uniform sampler2D texture0;
 		
 						varying highp vec2 tc0;
@@ -55,15 +54,17 @@ shader_pos_tex::shader_pos_tex() :
 							gl_FragColor = texture2D(texture0, tc0);
 						}
 					)qwertyuiop"
-			)
+	)
 {
 	this->textureUniform = this->get_uniform("texture0");
 }
 
-void shader_pos_tex::render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)const{
+void shader_pos_tex::render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)
+	const
+{
 	ASSERT(dynamic_cast<const texture_2d*>(&tex))
 	static_cast<const texture_2d&>(tex).bind(0);
 	this->bind();
-	
+
 	this->shader_base::render(m, va);
 }

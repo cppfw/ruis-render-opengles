@@ -21,9 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <utki/config.hpp>
-
 #include <morda/render/vertex_array.hpp>
+#include <utki/config.hpp>
 
 #if M_OS_NAME == M_OS_NAME_IOS
 #	include <OpenGlES/ES2/glext.h>
@@ -31,21 +30,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda{ namespace render_opengles{
+namespace morda {
+namespace render_opengles {
 
-class vertex_array : public morda::vertex_array{
-public:	
-	vertex_array(
-		buffers_type buffers,
-		const utki::shared_ref<const morda::index_buffer>& indices,
-		mode rendering_mode
-	);
-	
+class vertex_array : public morda::vertex_array
+{
+public:
+	vertex_array(buffers_type buffers, const utki::shared_ref<const morda::index_buffer>& indices, mode rendering_mode);
+
 	vertex_array(const vertex_array&) = delete;
 	vertex_array& operator=(const vertex_array&) = delete;
 
 private:
-
 };
 
-}}
+} // namespace render_opengles
+} // namespace morda

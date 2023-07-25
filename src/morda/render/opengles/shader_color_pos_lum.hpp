@@ -22,24 +22,26 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include <morda/render/coloring_shader.hpp>
+
 #include "shader_base.hpp"
 
-namespace morda{ namespace render_opengles{
+namespace morda {
+namespace render_opengles {
 
-class shader_color_pos_lum :
-		public morda::coloring_shader,
-		private shader_base
+class shader_color_pos_lum : public morda::coloring_shader, private shader_base
 {
 	GLint colorUniform;
+
 public:
 	shader_color_pos_lum();
-	
+
 	shader_color_pos_lum(const shader_color_pos_lum&) = delete;
 	shader_color_pos_lum& operator=(const shader_color_pos_lum&) = delete;
-	
+
 	using morda::coloring_shader::render;
-	
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color)const override;
+
+	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color) const override;
 };
 
-}}
+} // namespace render_opengles
+} // namespace morda

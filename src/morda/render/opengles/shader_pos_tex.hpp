@@ -25,17 +25,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_base.hpp"
 
-namespace morda{ namespace render_opengles{
+namespace morda {
+namespace render_opengles {
 
-class shader_pos_tex :
-		public morda::texturing_shader,
-		public shader_base
+class shader_pos_tex : public morda::texturing_shader, public shader_base
 {
 	GLint textureUniform;
+
 public:
 	shader_pos_tex();
-	
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)const override;
+
+	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)
+		const override;
 };
 
-}}
+} // namespace render_opengles
+} // namespace morda

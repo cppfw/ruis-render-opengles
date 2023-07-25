@@ -21,10 +21,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <utki/config.hpp>
-
 #include <morda/render/frame_buffer.hpp>
 #include <morda/render/texture_2d.hpp>
+#include <utki/config.hpp>
 
 #if M_OS_NAME == M_OS_NAME_IOS
 #	include <OpenGlES/ES2/glext.h>
@@ -32,20 +31,23 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda{ namespace render_opengles{
+namespace morda {
+namespace render_opengles {
 
-class frame_buffer : public morda::frame_buffer{
+class frame_buffer : public morda::frame_buffer
+{
 public:
 	GLuint fbo;
-	
+
 	frame_buffer(const utki::shared_ref<morda::texture_2d>& color);
-	
+
 	frame_buffer(const frame_buffer&) = delete;
 	frame_buffer& operator=(const frame_buffer&) = delete;
-	
-	~frame_buffer()noexcept;
-private:
 
+	~frame_buffer() noexcept;
+
+private:
 };
 
-}}
+} // namespace render_opengles
+} // namespace morda

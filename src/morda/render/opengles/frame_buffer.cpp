@@ -19,11 +19,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
+#include "frame_buffer.hpp"
+
 #include <utki/config.hpp>
 
-#include "frame_buffer.hpp"
 #include "texture_2d.hpp"
-
 #include "util.hpp"
 
 #if M_OS_NAME == M_OS_NAME_IOS
@@ -35,24 +35,24 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace morda::render_opengles;
 
 frame_buffer::frame_buffer(const utki::shared_ref<morda::texture_2d>& color) :
-		morda::frame_buffer(color)
+	morda::frame_buffer(color)
 {
 	glGenFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();
-	
+
 	GLint oldFb;
 	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &oldFb);
-	
+
 	glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
 	assert_opengl_no_error();
-	
+
 	ASSERT(dynamic_cast<texture_2d*>(&this->color.get()))
 	auto& tex = static_cast<texture_2d&>(this->color.get());
-	
+
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
 	assert_opengl_no_error();
-	
-	//Check for completeness
+
+	// Check for completeness
 #ifdef DEBUG
 	{
 		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
@@ -60,13 +60,13 @@ frame_buffer::frame_buffer(const utki::shared_ref<morda::texture_2d>& color) :
 		ASSERT(status == GL_FRAMEBUFFER_COMPLETE)
 	}
 #endif
-	
+
 	glBindFramebuffer(GL_FRAMEBUFFER, oldFb);
 	assert_opengl_no_error();
 }
 
-
-frame_buffer::~frame_buffer()noexcept{
+frame_buffer::~frame_buffer() noexcept
+{
 	glDeleteFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();
 }

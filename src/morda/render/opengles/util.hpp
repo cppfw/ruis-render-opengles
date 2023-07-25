@@ -30,35 +30,50 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda{ namespace render_opengles{
+namespace morda {
+namespace render_opengles {
 
-inline void assert_opengl_no_error(){
+inline void assert_opengl_no_error()
+{
 #ifdef DEBUG
 	GLenum error = glGetError();
-	switch(error){
+	switch (error) {
 		case GL_NO_ERROR:
 			return;
 		case GL_INVALID_ENUM:
-			ASSERT(false, [](auto&o){o << "OpenGL error: GL_INVALID_ENUM";})
+			ASSERT(false, [](auto& o) {
+				o << "OpenGL error: GL_INVALID_ENUM";
+			})
 			break;
 		case GL_INVALID_VALUE:
-			ASSERT(false, [](auto&o){o << "OpenGL error: GL_INVALID_VALUE";})
+			ASSERT(false, [](auto& o) {
+				o << "OpenGL error: GL_INVALID_VALUE";
+			})
 			break;
 		case GL_INVALID_OPERATION:
-			ASSERT(false, [](auto&o){o << "OpenGL error: GL_INVALID_OPERATION";})
+			ASSERT(false, [](auto& o) {
+				o << "OpenGL error: GL_INVALID_OPERATION";
+			})
 			break;
 		case GL_INVALID_FRAMEBUFFER_OPERATION:
-			ASSERT(false, [](auto&o){o << "OpenGL error: GL_INVALID_FRAMEBUFFER_OPERATION";})
+			ASSERT(false, [](auto& o) {
+				o << "OpenGL error: GL_INVALID_FRAMEBUFFER_OPERATION";
+			})
 			break;
 		case GL_OUT_OF_MEMORY:
 			// TODO: throw exception
-			ASSERT(false, [](auto&o){o << "OpenGL error: GL_OUT_OF_MEMORY";})
+			ASSERT(false, [](auto& o) {
+				o << "OpenGL error: GL_OUT_OF_MEMORY";
+			})
 			break;
 		default:
-			ASSERT(false, [&](auto&o){o << "Unknown OpenGL error, code = " << int(error);})
+			ASSERT(false, [&](auto& o) {
+				o << "Unknown OpenGL error, code = " << int(error);
+			})
 			break;
 	}
 #endif
 }
 
-}}
+} // namespace render_opengles
+} // namespace morda

@@ -29,21 +29,23 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda{ namespace render_opengles{
+namespace morda {
+namespace render_opengles {
 
-class opengl_buffer{
+class opengl_buffer
+{
 public:
 	const GLuint buffer;
 
 	opengl_buffer();
-	
+
 	opengl_buffer(const opengl_buffer&) = delete;
 	opengl_buffer& operator=(const opengl_buffer&) = delete;
-	
-	virtual ~opengl_buffer()noexcept;
-	
-private:
 
+	virtual ~opengl_buffer() noexcept;
+
+private:
 };
 
-}}
+} // namespace render_opengles
+} // namespace morda
