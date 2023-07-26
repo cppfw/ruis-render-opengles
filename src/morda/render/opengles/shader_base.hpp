@@ -103,7 +103,7 @@ protected:
 			// 'transpose' parameter of glUniformMatrix4fv():
 			// https://www.khronos.org/registry/OpenGL-Refpages/es2.0/xhtml/glUniform.xml
 			GL_FALSE,
-			reinterpret_cast<const GLfloat*>(&mm)
+			mm.front().data()
 		);
 		assert_opengl_no_error();
 	}
