@@ -25,18 +25,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengles;
 
-namespace {
-inline GLuint createGLBuffer()
-{
-	GLuint ret;
-	glGenBuffers(1, &ret);
-	assert_opengl_no_error();
-	return ret;
-}
-} // namespace
-
 opengl_buffer::opengl_buffer() :
-	buffer(createGLBuffer())
+	buffer([](){
+		// the variable is initialized via output argument, so no need to initialize it here
+		// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+		GLuint ret;
+		glGenBuffers(1, &ret);
+		assert_opengl_no_error();
+		return ret;
+	}())
 {}
 
 opengl_buffer::~opengl_buffer()

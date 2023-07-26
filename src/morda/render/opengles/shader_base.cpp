@@ -48,7 +48,7 @@ const std::array<GLenum, 4> shader_base::mode_map = { // TODO: use enum_size
 
 namespace {
 // return true if not compiled
-bool checkForCompileErrors(GLuint shader)
+bool check_for_compile_errors(GLuint shader)
 {
 	GLint value = 0;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &value);
@@ -59,6 +59,8 @@ bool checkForCompileErrors(GLuint shader)
 		assert_opengl_no_error();
 		if (log_len > 1) { // 1 char is a terminating 0
 			std::vector<char> log(log_len);
+			// the variable is initialized via output argument, so no need to initialize it here
+			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 			GLint len;
 			glGetShaderInfoLog(shader, GLsizei(log.size()), &len, log.data());
 			assert_opengl_no_error();
@@ -117,7 +119,7 @@ shader_wrapper::shader_wrapper(const char* code, GLenum type) :
 	assert_opengl_no_error();
 	glCompileShader(this->id);
 	assert_opengl_no_error();
-	if (checkForCompileErrors(this->id)) {
+	if (check_for_compile_errors(this->id)) {
 		LOG([&](auto& o) {
 			o << "Error while compiling:\n" << c << std::endl;
 		})

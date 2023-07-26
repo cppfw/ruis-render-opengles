@@ -36,7 +36,7 @@ namespace morda::render_opengles {
 class frame_buffer : public morda::frame_buffer
 {
 public:
-	GLuint fbo;
+	GLuint fbo = 0;
 
 	frame_buffer(const utki::shared_ref<morda::texture_2d>& color);
 
