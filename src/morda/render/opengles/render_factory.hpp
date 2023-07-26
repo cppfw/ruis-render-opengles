@@ -28,7 +28,7 @@ namespace morda::render_opengles {
 class render_factory : public morda::render_factory
 {
 public:
-	render_factory();
+	render_factory() = default;
 
 	render_factory(const render_factory&) = delete;
 	render_factory& operator=(const render_factory&) = delete;
