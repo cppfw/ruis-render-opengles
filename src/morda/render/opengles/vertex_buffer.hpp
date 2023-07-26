@@ -27,8 +27,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "opengl_buffer.hpp"
 
-namespace morda {
-namespace render_opengles {
+namespace morda::render_opengles {
 
 class vertex_buffer : public morda::vertex_buffer, public opengl_buffer
 {
@@ -47,9 +46,13 @@ public:
 	vertex_buffer(const vertex_buffer&) = delete;
 	vertex_buffer& operator=(const vertex_buffer&) = delete;
 
+	vertex_buffer(vertex_buffer&&) = delete;
+	vertex_buffer& operator=(vertex_buffer&&) = delete;
+
+	~vertex_buffer() override = default;
+
 private:
 	void init(GLsizeiptr size, const GLvoid* data);
 };
 
-} // namespace render_opengles
 } // namespace morda

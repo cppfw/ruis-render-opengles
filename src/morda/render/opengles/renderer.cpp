@@ -34,49 +34,50 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengles;
 
-namespace {
-unsigned getMaxTextureSize()
-{
-	GLint val;
-	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
-	assert_opengl_no_error();
-	ASSERT(val > 0, [&](auto& o) {
-		o << "val = " << val;
-	})
-	return unsigned(val);
-}
-} // namespace
-
 renderer::renderer(std::unique_ptr<render_factory> factory) :
 	morda::renderer(std::move(factory), []() {
 		renderer::params p;
-		p.max_texture_size = getMaxTextureSize();
+		p.max_texture_size = [](){
+			// the variable is initialized via output argument, so no need to initialize it here
+			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+			GLint val;
+			glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
+			assert_opengl_no_error();
+			ASSERT(val > 0, [&](auto& o) {
+				o << "val = " << val;
+			})
+			return unsigned(val);
+		}();
 		return p;
 	}())
 {}
 
 void renderer::set_framebuffer_internal(morda::frame_buffer* fb)
 {
-	if (!this->defaultFramebufferInitialized) {
+	if (!this->default_framebuffer_initialized) {
 		// On some platforms the default framebuffer is not 0, so because of this
 		// check if default framebuffer value is saved or not every time some
 		// framebuffer is going to be bound and save the value if needed.
+
+		// the variable is initialized via output argument, so no need to initialize it here
+		// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 		GLint old_fb;
 		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
 		LOG([&](auto& o) {
 			o << "old_fb = " << old_fb << std::endl;
 		})
-		this->defaultFramebuffer = decltype(this->defaultFramebuffer)(old_fb);
-		this->defaultFramebufferInitialized = true;
+		this->default_framebuffer = decltype(this->default_framebuffer)(old_fb);
+		this->default_framebuffer_initialized = true;
 	}
 
 	if (!fb) {
-		glBindFramebuffer(GL_FRAMEBUFFER, GLuint(this->defaultFramebuffer));
+		glBindFramebuffer(GL_FRAMEBUFFER, GLuint(this->default_framebuffer));
 		assert_opengl_no_error();
 		return;
 	}
 
 	ASSERT(dynamic_cast<frame_buffer*>(fb))
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	auto& ogl2fb = static_cast<frame_buffer&>(*fb);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, ogl2fb.fbo);
@@ -116,9 +117,11 @@ void renderer::set_scissor_enabled(bool enabled)
 
 r4::rectangle<int> renderer::get_scissor() const
 {
-	GLint osb[4];
-	glGetIntegerv(GL_SCISSOR_BOX, osb);
-	return r4::rectangle<int>(osb[0], osb[1], osb[2], osb[3]);
+	// the variable is initialized via output argument, so no need to initialize it here
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
+	std::array<GLint, 4> osb;
+	glGetIntegerv(GL_SCISSOR_BOX, osb.data());
+	return {osb[0], osb[1], osb[2], osb[3]};
 }
 
 void renderer::set_scissor(r4::rectangle<int> r)
@@ -129,11 +132,13 @@ void renderer::set_scissor(r4::rectangle<int> r)
 
 r4::rectangle<int> renderer::get_viewport() const
 {
-	GLint vp[4];
+	// the variable is initialized via output argument, so no need to initialize it here
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-member-init)
+	std::array<GLint, 4> vp;
 
-	glGetIntegerv(GL_VIEWPORT, vp);
+	glGetIntegerv(GL_VIEWPORT, vp.data());
 
-	return r4::rectangle<int>(vp[0], vp[1], vp[2], vp[3]);
+	return {vp[0], vp[1], vp[2], vp[3]};
 }
 
 void renderer::set_viewport(r4::rectangle<int> r)
@@ -153,7 +158,7 @@ void renderer::set_blend_enabled(bool enable)
 
 namespace {
 
-GLenum blendFunc[] = {
+const std::array<GLenum, 15> blend_func = {
 	GL_ZERO,
 	GL_ONE,
 	GL_SRC_COLOR,
@@ -181,9 +186,9 @@ void renderer::set_blend_func(
 )
 {
 	glBlendFuncSeparate(
-		blendFunc[unsigned(src_color)],
-		blendFunc[unsigned(dst_color)],
-		blendFunc[unsigned(src_alpha)],
-		blendFunc[unsigned(dst_alpha)]
+		blend_func[unsigned(src_color)],
+		blend_func[unsigned(dst_color)],
+		blend_func[unsigned(src_alpha)],
+		blend_func[unsigned(dst_alpha)]
 	);
 }

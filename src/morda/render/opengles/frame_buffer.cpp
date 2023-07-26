@@ -47,6 +47,7 @@ frame_buffer::frame_buffer(const utki::shared_ref<morda::texture_2d>& color) :
 	assert_opengl_no_error();
 
 	ASSERT(dynamic_cast<texture_2d*>(&this->color.get()))
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	auto& tex = static_cast<texture_2d&>(this->color.get());
 
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
@@ -65,7 +66,7 @@ frame_buffer::frame_buffer(const utki::shared_ref<morda::texture_2d>& color) :
 	assert_opengl_no_error();
 }
 
-frame_buffer::~frame_buffer() noexcept
+frame_buffer::~frame_buffer()
 {
 	glDeleteFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();

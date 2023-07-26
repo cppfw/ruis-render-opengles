@@ -30,18 +30,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda {
-namespace render_opengles {
+namespace morda::render_opengles {
 
 struct texture_2d : public morda::texture_2d {
 	GLuint tex;
 
 	texture_2d(r4::vector2<float> dims);
 
-	~texture_2d() noexcept;
+	texture_2d(const texture_2d&) = delete;
+	texture_2d& operator=(const texture_2d&) = delete;
 
-	void bind(unsigned unitNum) const;
+	texture_2d(texture_2d&&) = delete;
+	texture_2d& operator=(texture_2d&&) = delete;
+
+	~texture_2d() override;
+
+	void bind(unsigned unit_num) const;
 };
 
-} // namespace render_opengles
 } // namespace morda

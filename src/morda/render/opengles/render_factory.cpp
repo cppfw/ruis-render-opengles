@@ -44,10 +44,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengles;
 
-render_factory::render_factory() {}
-
-render_factory::~render_factory() noexcept {}
-
 utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d(
 	rasterimage::format format,
 	rasterimage::dimensioned::dimensions_type dims
@@ -92,23 +88,20 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 	// TODO: save previous bind and restore it after?
 	ret.get().bind(0);
 
-	GLint internalFormat;
-	switch (type) {
-		default:
-			ASSERT(false)
-		case decltype(type)::grey:
-			internalFormat = GL_LUMINANCE;
-			break;
-		case decltype(type)::greya:
-			internalFormat = GL_LUMINANCE_ALPHA;
-			break;
-		case decltype(type)::rgb:
-			internalFormat = GL_RGB;
-			break;
-		case decltype(type)::rgba:
-			internalFormat = GL_RGBA;
-			break;
-	}
+	GLint internal_format = [&type](){
+		switch (type) {
+			default:
+				ASSERT(false)
+			case decltype(type)::grey:
+				return GL_LUMINANCE;
+			case decltype(type)::greya:
+				return GL_LUMINANCE_ALPHA;
+			case decltype(type)::rgb:
+				return GL_RGB;
+			case decltype(type)::rgba:
+				return GL_RGBA;
+		}
+	}();
 
 	// we will be passing pixels to OpenGL which are 1-byte aligned
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -117,13 +110,13 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 	glTexImage2D(
 		GL_TEXTURE_2D,
 		0, // 0th level, no mipmaps
-		internalFormat, // internal format
-		dims.x(),
-		dims.y(),
+		internal_format, // internal format
+		GLsizei(dims.x()),
+		GLsizei(dims.y()),
 		0, // border, should be 0!
-		internalFormat, // format of the texel data
+		internal_format, // format of the texel data
 		GL_UNSIGNED_BYTE,
-		data.size() == 0 ? nullptr : &*data.begin()
+		data.size() == 0 ? nullptr : data.data()
 	);
 	assert_opengl_no_error();
 

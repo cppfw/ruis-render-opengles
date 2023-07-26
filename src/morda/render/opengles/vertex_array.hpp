@@ -30,8 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda {
-namespace render_opengles {
+namespace morda::render_opengles {
 
 class vertex_array : public morda::vertex_array
 {
@@ -41,8 +40,12 @@ public:
 	vertex_array(const vertex_array&) = delete;
 	vertex_array& operator=(const vertex_array&) = delete;
 
+	vertex_array(vertex_array&&) = delete;
+	vertex_array& operator=(vertex_array&&) = delete;
+
+	~vertex_array() override = default;
+
 private:
 };
 
-} // namespace render_opengles
 } // namespace morda

@@ -31,8 +31,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda {
-namespace render_opengles {
+namespace morda::render_opengles {
 
 class frame_buffer : public morda::frame_buffer
 {
@@ -44,10 +43,12 @@ public:
 	frame_buffer(const frame_buffer&) = delete;
 	frame_buffer& operator=(const frame_buffer&) = delete;
 
-	~frame_buffer() noexcept;
+	frame_buffer(frame_buffer&&) = delete;
+	frame_buffer& operator=(frame_buffer&&) = delete;
+
+	~frame_buffer()override;
 
 private:
 };
 
-} // namespace render_opengles
 } // namespace morda

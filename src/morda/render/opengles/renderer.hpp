@@ -26,20 +26,24 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "render_factory.hpp"
 
-namespace morda {
-namespace render_opengles {
+namespace morda::render_opengles {
 
 class renderer : public morda::renderer
 {
-	bool defaultFramebufferInitialized = false;
-	uint32_t defaultFramebuffer; // NOTE: GLuint is fixed 32bit type, according to
+	bool default_framebuffer_initialized = false;
+	uint32_t default_framebuffer; // NOTE: GLuint is fixed 32bit type, according to
 								 // OpenGL specs, so use uint32_t.
 
 public:
 	renderer(std::unique_ptr<render_factory> factory = std::make_unique<render_factory>());
 
-	renderer(const renderer& orig) = delete;
-	renderer& operator=(const renderer& orig) = delete;
+	renderer(const renderer&) = delete;
+	renderer& operator=(const renderer&) = delete;
+
+	renderer(renderer&&) = delete;
+	renderer& operator=(renderer&&) = delete;
+
+	~renderer() override = default;
 
 	void set_framebuffer_internal(morda::frame_buffer* fb) override;
 
@@ -63,5 +67,4 @@ public:
 		override;
 };
 
-} // namespace render_opengles
 } // namespace morda

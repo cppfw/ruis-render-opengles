@@ -25,12 +25,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_base.hpp"
 
-namespace morda {
-namespace render_opengles {
+namespace morda::render_opengles {
 
 class shader_pos_tex : public morda::texturing_shader, public shader_base
 {
-	GLint textureUniform;
+	GLint texture_uniform;
 
 public:
 	shader_pos_tex();
@@ -39,5 +38,4 @@ public:
 		const override;
 };
 
-} // namespace render_opengles
 } // namespace morda

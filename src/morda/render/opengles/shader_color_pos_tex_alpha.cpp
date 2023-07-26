@@ -56,10 +56,9 @@ shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
                             );
 						}
 					)qwertyuiop"
-	)
-{
-	this->colorUniform = this->get_uniform("uniform_color");
-}
+	),
+	color_uniform(this->get_uniform("uniform_color"))
+{}
 
 void shader_color_pos_tex_alpha::render(
 	const r4::matrix4<float>& m,
@@ -69,10 +68,11 @@ void shader_color_pos_tex_alpha::render(
 ) const
 {
 	ASSERT(dynamic_cast<const texture_2d*>(&tex))
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	static_cast<const texture_2d&>(tex).bind(0);
 	this->bind();
 
-	this->set_uniform4f(this->colorUniform, color.x(), color.y(), color.z(), color.w());
+	this->set_uniform4f(this->color_uniform, color.x(), color.y(), color.z(), color.w());
 
 	this->shader_base::render(m, va);
 }

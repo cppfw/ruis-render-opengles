@@ -25,12 +25,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "shader_base.hpp"
 
-namespace morda {
-namespace render_opengles {
+namespace morda::render_opengles {
 
 class shader_color : public morda::coloring_shader, public shader_base
 {
-	GLint colorUniform;
+	GLint color_uniform;
 
 public:
 	shader_color();
@@ -38,8 +37,12 @@ public:
 	shader_color(const shader_color&) = delete;
 	shader_color& operator=(const shader_color&) = delete;
 
+	shader_color(shader_color&&) = delete;
+	shader_color& operator=(shader_color&&) = delete;
+
+	~shader_color() override = default;
+
 	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color) const override;
 };
 
-} // namespace render_opengles
 } // namespace morda

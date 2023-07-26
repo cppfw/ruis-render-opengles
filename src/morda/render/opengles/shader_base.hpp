@@ -37,14 +37,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-namespace morda {
-namespace render_opengles {
+namespace morda::render_opengles {
 
 struct shader_wrapper {
 	GLuint id;
 	shader_wrapper(const char* code, GLenum type);
 
-	~shader_wrapper() noexcept
+	shader_wrapper(const shader_wrapper&) = delete;
+	shader_wrapper& operator=(const shader_wrapper&) = delete;
+
+	shader_wrapper(shader_wrapper&&) = delete;
+	shader_wrapper& operator=(shader_wrapper&&) = delete;
+
+	~shader_wrapper()
 	{
 		glDeleteShader(this->id);
 	}
@@ -56,7 +61,13 @@ struct program_wrapper {
 	GLuint id;
 	program_wrapper(const char* vertex_shader_code, const char* fragment_shader_code);
 
-	virtual ~program_wrapper() noexcept
+	program_wrapper(const program_wrapper&) = delete;
+	program_wrapper& operator=(const program_wrapper&) = delete;
+
+	program_wrapper(program_wrapper&&) = delete;
+	program_wrapper& operator=(program_wrapper&&) = delete;
+
+	~program_wrapper()
 	{
 		glDeleteProgram(this->id);
 	}
@@ -68,15 +79,16 @@ class shader_base
 
 	const GLint matrix_uniform;
 
-	static const shader_base* bound_shader;
-
 public:
 	shader_base(const char* vertex_shader_code, const char* fragment_shader_code);
 
 	shader_base(const shader_base&) = delete;
 	shader_base& operator=(const shader_base&) = delete;
 
-	virtual ~shader_base() noexcept {}
+	shader_base(shader_base&&) = delete;
+	shader_base& operator=(shader_base&&) = delete;
+
+	virtual ~shader_base() = default;
 
 protected:
 	GLint get_uniform(const char* name);
@@ -85,12 +97,15 @@ protected:
 	{
 		glUseProgram(program.id);
 		assert_opengl_no_error();
-		bound_shader = this;
 	}
 
 	bool is_bound() const noexcept
 	{
-		return this == bound_shader;
+		GLint prog = 0;
+		glGetIntegerv(GL_CURRENT_PROGRAM, &prog);
+
+		ASSERT(prog >= 0)
+		return GLuint(prog) == this->program.id;
 	}
 
 	void set_uniform_matrix4f(GLint id, const r4::matrix4<float>& m) const
@@ -120,7 +135,7 @@ protected:
 		assert_opengl_no_error();
 	}
 
-	static GLenum mode_map[];
+	static const std::array<GLenum, 4> mode_map; // TODO: use enum_size
 
 	static GLenum mode_to_gl_mode(morda::vertex_array::mode mode)
 	{
@@ -130,5 +145,4 @@ protected:
 	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const;
 };
 
-} // namespace render_opengles
 } // namespace morda

@@ -30,8 +30,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda {
-namespace render_opengles {
+namespace morda::render_opengles {
 
 inline void assert_opengl_no_error()
 {
@@ -75,5 +74,4 @@ inline void assert_opengl_no_error()
 #endif
 }
 
-} // namespace render_opengles
 } // namespace morda
