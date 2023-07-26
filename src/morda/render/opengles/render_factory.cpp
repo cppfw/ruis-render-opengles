@@ -92,13 +92,13 @@ utki::shared_ref<morda::texture_2d> render_factory::create_texture_2d_internal(
 		switch (type) {
 			default:
 				ASSERT(false)
-			case decltype(type)::grey:
+			case rasterimage::format::grey:
 				return GL_LUMINANCE;
-			case decltype(type)::greya:
+			case rasterimage::format::greya:
 				return GL_LUMINANCE_ALPHA;
-			case decltype(type)::rgb:
+			case rasterimage::format::rgb:
 				return GL_RGB;
-			case decltype(type)::rgba:
+			case rasterimage::format::rgba:
 				return GL_RGBA;
 		}
 	}();
