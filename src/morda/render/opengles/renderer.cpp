@@ -37,7 +37,7 @@ using namespace morda::render_opengles;
 renderer::renderer(std::unique_ptr<render_factory> factory) :
 	morda::renderer(std::move(factory), []() {
 		renderer::params p;
-		p.max_texture_size = [](){
+		p.max_texture_size = []() {
 			// the variable is initialized via output argument, so no need to initialize it here
 			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 			GLint val;

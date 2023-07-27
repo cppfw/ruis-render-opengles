@@ -48,4 +48,4 @@ struct texture_2d : public morda::texture_2d {
 	void bind(unsigned unit_num) const;
 };
 
-} // namespace morda
+} // namespace morda::render_opengles

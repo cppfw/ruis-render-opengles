@@ -145,4 +145,4 @@ protected:
 	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const;
 };
 
-} // namespace morda
+} // namespace morda::render_opengles

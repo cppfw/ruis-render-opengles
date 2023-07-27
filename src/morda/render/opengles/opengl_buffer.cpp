@@ -26,7 +26,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace morda::render_opengles;
 
 opengl_buffer::opengl_buffer() :
-	buffer([](){
+	buffer([]() {
 		// the variable is initialized via output argument, so no need to initialize it here
 		// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 		GLuint ret;

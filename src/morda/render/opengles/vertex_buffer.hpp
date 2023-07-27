@@ -55,4 +55,4 @@ private:
 	void init(GLsizeiptr size, const GLvoid* data);
 };
 
-} // namespace morda
+} // namespace morda::render_opengles

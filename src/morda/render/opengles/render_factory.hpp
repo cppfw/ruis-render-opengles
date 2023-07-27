@@ -70,4 +70,4 @@ private:
 	);
 };
 
-} // namespace morda
+} // namespace morda::render_opengles

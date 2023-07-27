@@ -74,4 +74,4 @@ inline void assert_opengl_no_error()
 #endif
 }
 
-} // namespace morda
+} // namespace morda::render_opengles

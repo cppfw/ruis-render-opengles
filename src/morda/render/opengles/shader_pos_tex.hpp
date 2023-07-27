@@ -38,4 +38,4 @@ public:
 		const override;
 };
 
-} // namespace morda
+} // namespace morda::render_opengles
