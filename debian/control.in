@@ -2,9 +2,15 @@ Source: libmorda-render-opengles
 Section: libs
 Priority: extra
 Maintainer: Ivan Gagis <igagis@gmail.com>
-Build-Depends: debhelper (>= 9), prorab, prorab-extra, pkg-config,
-		libmorda-dev (>= 0.5.160),
-		libgles2-mesa-dev
+Build-Depends:
+	debhelper (>= 9),
+	prorab,
+	prorab-extra,
+	pkg-config,
+	clang-format,
+	clang-tidy,
+	libmorda-dev (>= 0.5.160),
+	libgles2-mesa-dev
 Build-Depends-Indep: doxygen
 Standards-Version: 3.9.2
 
