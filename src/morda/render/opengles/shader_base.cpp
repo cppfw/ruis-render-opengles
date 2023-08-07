@@ -39,8 +39,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace morda::render_opengles;
 
-const std::array<GLenum, 4> shader_base::mode_map = {
-	// TODO: use enum_size
+const std::array<GLenum, size_t(morda::vertex_array::mode::enum_size)> shader_base::mode_map = {
 	GL_TRIANGLES, // TRIANGLES
 	GL_TRIANGLE_FAN, // TRIANGLE_FAN
 	GL_LINE_LOOP, // LINE_LOOP

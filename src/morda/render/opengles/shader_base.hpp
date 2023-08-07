@@ -135,10 +135,11 @@ protected:
 		assert_opengl_no_error();
 	}
 
-	static const std::array<GLenum, 4> mode_map; // TODO: use enum_size
+	static const std::array<GLenum, size_t(morda::vertex_array::mode::enum_size)> mode_map;
 
 	static GLenum mode_to_gl_mode(morda::vertex_array::mode mode)
 	{
+		// NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
 		return mode_map[unsigned(mode)];
 	}
 
