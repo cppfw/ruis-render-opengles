@@ -12,7 +12,7 @@ this_soname := $(shell cat $(d)soname.txt)
 this_srcs += $(call prorab-src-dir,.)
 
 ifeq ($(prorab_linux),raspbian)
-    this_cxxflags += -I/opt/vc/include
+    this_cxxflags += -isystem /opt/vc/include
     this_ldflags += -L/opt/vc/lib
     this_ldlibs += -lbrcmGLESv2
 else
