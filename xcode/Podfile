@@ -1,9 +1,9 @@
 source 'https://github.com/cppfw/cocoapods-repo.git'
 
-project 'morda-render-opengles/morda-render-opengles.xcodeproj'
+project 'ruis-render-opengles/ruis-render-opengles.xcodeproj'
 
 platform :ios, '13.0'
 
-target "morda-render-opengles" do
+target "ruis-render-opengles" do
 	pod 'morda', '>= 0.5.199'
 end

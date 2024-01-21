@@ -1,9 +1,9 @@
-Name: morda-render-opengles   # human-readable name
+Name: ruis-render-opengles   # human-readable name
 Description: C++ OpenGL ES renderer for morda GUI library
 Version: $(version)
-URL: https://github.com/cppfw/morda-render-opengles
+URL: https://github.com/cppfw/ruis-render-opengles
 Requires:
 Conflicts:
-Libs: -lmorda-render-opengles
+Libs: -lruis-render-opengles
 Libs.private:
 Cflags:

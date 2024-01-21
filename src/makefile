@@ -19,7 +19,7 @@ else
     this_ldlibs += `pkg-config --libs glesv2`
 endif
 
-this_ldlibs += -lmorda
+this_ldlibs += -lruis
 
 $(eval $(prorab-build-lib))
 

@@ -1,4 +1,4 @@
-:name: morda-render-opengles
+:name: ruis-render-opengles
 
 = {name}
 
