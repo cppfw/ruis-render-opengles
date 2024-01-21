@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-using namespace morda::render_opengles;
+using namespace ruis::render_opengles;
 
 opengl_buffer::opengl_buffer() :
 	buffer([]() {

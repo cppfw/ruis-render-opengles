@@ -29,7 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda::render_opengles {
+namespace ruis::render_opengles {
 
 class opengl_buffer
 {
@@ -49,4 +49,4 @@ public:
 private:
 };
 
-} // namespace morda::render_opengles
+} // namespace ruis::render_opengles

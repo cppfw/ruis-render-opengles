@@ -26,9 +26,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "render_factory.hpp"
 
-namespace morda::render_opengles {
+namespace ruis::render_opengles {
 
-class renderer : public morda::renderer
+class renderer : public ruis::renderer
 {
 	bool default_framebuffer_initialized = false;
 
@@ -47,7 +47,7 @@ public:
 
 	~renderer() override = default;
 
-	void set_framebuffer_internal(morda::frame_buffer* fb) override;
+	void set_framebuffer_internal(ruis::frame_buffer* fb) override;
 
 	void clear_framebuffer() override;
 
@@ -69,4 +69,4 @@ public:
 		override;
 };
 
-} // namespace morda::render_opengles
+} // namespace ruis::render_opengles

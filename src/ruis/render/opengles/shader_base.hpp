@@ -37,7 +37,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-namespace morda::render_opengles {
+namespace ruis::render_opengles {
 
 struct shader_wrapper {
 	GLuint id;
@@ -135,15 +135,15 @@ protected:
 		assert_opengl_no_error();
 	}
 
-	static const std::array<GLenum, size_t(morda::vertex_array::mode::enum_size)> mode_map;
+	static const std::array<GLenum, size_t(ruis::vertex_array::mode::enum_size)> mode_map;
 
-	static GLenum mode_to_gl_mode(morda::vertex_array::mode mode)
+	static GLenum mode_to_gl_mode(ruis::vertex_array::mode mode)
 	{
 		// NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
 		return mode_map[unsigned(mode)];
 	}
 
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const;
+	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va) const;
 };
 
-} // namespace morda::render_opengles
+} // namespace ruis::render_opengles

@@ -32,10 +32,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-using namespace morda::render_opengles;
+using namespace ruis::render_opengles;
 
-frame_buffer::frame_buffer(const utki::shared_ref<morda::texture_2d>& color) :
-	morda::frame_buffer(color)
+frame_buffer::frame_buffer(const utki::shared_ref<ruis::texture_2d>& color) :
+	ruis::frame_buffer(color)
 {
 	glGenFramebuffers(1, &this->fbo);
 	assert_opengl_no_error();

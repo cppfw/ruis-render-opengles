@@ -27,7 +27,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "vertex_array.hpp"
 #include "vertex_buffer.hpp"
 
-using namespace morda::render_opengles;
+using namespace ruis::render_opengles;
 
 shader_pos_tex::shader_pos_tex() :
 	shader_base(
@@ -58,7 +58,7 @@ shader_pos_tex::shader_pos_tex() :
 	texture_uniform(this->get_uniform("texture0"))
 {}
 
-void shader_pos_tex::render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)
+void shader_pos_tex::render(const r4::matrix4<float>& m, const ruis::vertex_array& va, const ruis::texture_2d& tex)
 	const
 {
 	ASSERT(dynamic_cast<const texture_2d*>(&tex))

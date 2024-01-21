@@ -37,9 +37,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-using namespace morda::render_opengles;
+using namespace ruis::render_opengles;
 
-const std::array<GLenum, size_t(morda::vertex_array::mode::enum_size)> shader_base::mode_map = {
+const std::array<GLenum, size_t(ruis::vertex_array::mode::enum_size)> shader_base::mode_map = {
 	GL_TRIANGLES, // TRIANGLES
 	GL_TRIANGLE_FAN, // TRIANGLE_FAN
 	GL_LINE_LOOP, // LINE_LOOP
@@ -183,7 +183,7 @@ GLint shader_base::get_uniform(const char* name)
 	return ret;
 }
 
-void shader_base::render(const r4::matrix4<float>& m, const morda::vertex_array& va) const
+void shader_base::render(const r4::matrix4<float>& m, const ruis::vertex_array& va) const
 {
 	ASSERT(this->is_bound())
 

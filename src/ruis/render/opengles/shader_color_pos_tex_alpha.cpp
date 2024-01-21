@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "texture_2d.hpp"
 
-using namespace morda::render_opengles;
+using namespace ruis::render_opengles;
 
 shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
 	shader_base(
@@ -62,9 +62,9 @@ shader_color_pos_tex_alpha::shader_color_pos_tex_alpha() :
 
 void shader_color_pos_tex_alpha::render(
 	const r4::matrix4<float>& m,
-	const morda::vertex_array& va,
+	const ruis::vertex_array& va,
 	r4::vector4<float> color,
-	const morda::texture_2d& tex
+	const ruis::texture_2d& tex
 ) const
 {
 	ASSERT(dynamic_cast<const texture_2d*>(&tex))

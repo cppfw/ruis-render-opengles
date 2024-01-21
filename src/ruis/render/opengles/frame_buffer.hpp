@@ -31,14 +31,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace morda::render_opengles {
+namespace ruis::render_opengles {
 
-class frame_buffer : public morda::frame_buffer
+class frame_buffer : public ruis::frame_buffer
 {
 public:
 	GLuint fbo = 0;
 
-	frame_buffer(const utki::shared_ref<morda::texture_2d>& color);
+	frame_buffer(const utki::shared_ref<ruis::texture_2d>& color);
 
 	frame_buffer(const frame_buffer&) = delete;
 	frame_buffer& operator=(const frame_buffer&) = delete;
@@ -51,4 +51,4 @@ public:
 private:
 };
 
-} // namespace morda::render_opengles
+} // namespace ruis::render_opengles
