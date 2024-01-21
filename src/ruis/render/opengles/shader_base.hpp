@@ -1,5 +1,5 @@
 /*
-morda-render-opengles - OpenGL ES GUI renderer
+ruis-render-opengles - OpenGL ES GUI renderer
 
 Copyright (C) 2012-2023  Ivan Gagis <igagis@gmail.com>
 
@@ -23,8 +23,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <vector>
 
-#include <ruis/render/vertex_array.hpp>
 #include <r4/matrix.hpp>
+#include <ruis/render/vertex_array.hpp>
 #include <utki/config.hpp>
 #include <utki/debug.hpp>
 #include <utki/span.hpp>

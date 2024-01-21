@@ -1,5 +1,5 @@
 /*
-morda-render-opengles - OpenGL ES GUI renderer
+ruis-render-opengles - OpenGL ES GUI renderer
 
 Copyright (C) 2012-2023  Ivan Gagis <igagis@gmail.com>
 
@@ -133,22 +133,19 @@ utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d_internal(
 	return ret;
 }
 
-utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(
-	utki::span<const r4::vector4<float>> vertices
+utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector4<float>> vertices
 )
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(
-	utki::span<const r4::vector3<float>> vertices
+utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector3<float>> vertices
 )
 {
 	return utki::make_shared<vertex_buffer>(vertices);
 }
 
-utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(
-	utki::span<const r4::vector2<float>> vertices
+utki::shared_ref<ruis::vertex_buffer> render_factory::create_vertex_buffer(utki::span<const r4::vector2<float>> vertices
 )
 {
 	return utki::make_shared<vertex_buffer>(vertices);
@@ -185,9 +182,7 @@ std::unique_ptr<ruis::render_factory::shaders> render_factory::create_shaders()
 	return ret;
 }
 
-utki::shared_ref<ruis::frame_buffer> render_factory::create_framebuffer(
-	const utki::shared_ref<ruis::texture_2d>& color
-)
+utki::shared_ref<ruis::frame_buffer> render_factory::create_framebuffer(const utki::shared_ref<ruis::texture_2d>& color)
 {
 	return utki::make_shared<frame_buffer>(color);
 }

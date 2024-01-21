@@ -1,5 +1,5 @@
 /*
-morda-render-opengles - OpenGL ES GUI renderer
+ruis-render-opengles - OpenGL ES GUI renderer
 
 Copyright (C) 2012-2023  Ivan Gagis <igagis@gmail.com>
 
