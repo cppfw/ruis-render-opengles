@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "io.github.cppfw.morda_opengles2_ren_tests"
+        applicationId "io.github.cppfw.ruis_opengles2_ren_tests"
         minSdkVersion 21
         targetSdkVersion 29
 
