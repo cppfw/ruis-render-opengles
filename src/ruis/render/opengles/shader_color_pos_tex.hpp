@@ -21,31 +21,33 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/texture_2d.hpp>
-#include <utki/config.hpp>
+#include <ruis/render/coloring_texturing_shader.hpp>
 
-#if M_OS_NAME == M_OS_NAME_IOS
-#	include <OpenGlES/ES2/glext.h>
-#else
-#	include <GLES2/gl2.h>
-#endif
+#include "shader_base.hpp"
 
 namespace morda::render_opengles {
 
-struct texture_2d : public morda::texture_2d {
-	GLuint tex = 0;
+class shader_color_pos_tex : public morda::coloring_texturing_shader, public shader_base
+{
+	GLint color_uniform;
 
-	texture_2d(r4::vector2<float> dims);
+public:
+	shader_color_pos_tex();
 
-	texture_2d(const texture_2d&) = delete;
-	texture_2d& operator=(const texture_2d&) = delete;
+	shader_color_pos_tex(const shader_color_pos_tex&) = delete;
+	shader_color_pos_tex& operator=(const shader_color_pos_tex&) = delete;
 
-	texture_2d(texture_2d&&) = delete;
-	texture_2d& operator=(texture_2d&&) = delete;
+	shader_color_pos_tex(shader_color_pos_tex&&) = delete;
+	shader_color_pos_tex& operator=(shader_color_pos_tex&&) = delete;
 
-	~texture_2d() override;
+	~shader_color_pos_tex() override = default;
 
-	void bind(unsigned unit_num) const;
+	void render(
+		const r4::matrix4<float>& m,
+		const morda::vertex_array& va,
+		r4::vector4<float> color,
+		const morda::texture_2d& tex
+	) const override;
 };
 
 } // namespace morda::render_opengles

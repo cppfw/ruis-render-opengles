@@ -21,7 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/renderer.hpp>
+#include <ruis/render/renderer.hpp>
 #include <utki/config.hpp>
 
 #include "render_factory.hpp"

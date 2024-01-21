@@ -21,34 +21,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/frame_buffer.hpp>
-#include <morda/render/texture_2d.hpp>
-#include <utki/config.hpp>
+#include <ruis/render/texturing_shader.hpp>
 
-#if M_OS_NAME == M_OS_NAME_IOS
-#	include <OpenGlES/ES2/glext.h>
-#else
-#	include <GLES2/gl2.h>
-#endif
+#include "shader_base.hpp"
 
 namespace morda::render_opengles {
 
-class frame_buffer : public morda::frame_buffer
+class shader_pos_tex : public morda::texturing_shader, public shader_base
 {
+	GLint texture_uniform;
+
 public:
-	GLuint fbo = 0;
+	shader_pos_tex();
 
-	frame_buffer(const utki::shared_ref<morda::texture_2d>& color);
-
-	frame_buffer(const frame_buffer&) = delete;
-	frame_buffer& operator=(const frame_buffer&) = delete;
-
-	frame_buffer(frame_buffer&&) = delete;
-	frame_buffer& operator=(frame_buffer&&) = delete;
-
-	~frame_buffer() override;
-
-private:
+	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)
+		const override;
 };
 
 } // namespace morda::render_opengles

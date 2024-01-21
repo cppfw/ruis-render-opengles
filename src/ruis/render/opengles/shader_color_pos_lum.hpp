@@ -21,26 +21,30 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/shader.hpp>
+#include <ruis/render/coloring_shader.hpp>
 
 #include "shader_base.hpp"
 
 namespace morda::render_opengles {
 
-class shader_pos_clr : public morda::shader, public shader_base
+class shader_color_pos_lum : public morda::coloring_shader, private shader_base
 {
+	GLint color_uniform;
+
 public:
-	shader_pos_clr();
+	shader_color_pos_lum();
 
-	shader_pos_clr(const shader_pos_clr&) = delete;
-	shader_pos_clr& operator=(const shader_pos_clr&) = delete;
+	shader_color_pos_lum(const shader_color_pos_lum&) = delete;
+	shader_color_pos_lum& operator=(const shader_color_pos_lum&) = delete;
 
-	shader_pos_clr(shader_pos_clr&&) = delete;
-	shader_pos_clr& operator=(shader_pos_clr&&) = delete;
+	shader_color_pos_lum(shader_color_pos_lum&&) = delete;
+	shader_color_pos_lum& operator=(shader_color_pos_lum&&) = delete;
 
-	~shader_pos_clr() override = default;
+	~shader_color_pos_lum() override = default;
 
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const override;
+	using morda::coloring_shader::render;
+
+	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color) const override;
 };
 
 } // namespace morda::render_opengles

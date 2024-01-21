@@ -21,30 +21,33 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/coloring_shader.hpp>
+#include <ruis/render/coloring_texturing_shader.hpp>
 
 #include "shader_base.hpp"
 
 namespace morda::render_opengles {
 
-class shader_color_pos_lum : public morda::coloring_shader, private shader_base
+class shader_color_pos_tex_alpha : public morda::coloring_texturing_shader, public shader_base
 {
 	GLint color_uniform;
 
 public:
-	shader_color_pos_lum();
+	shader_color_pos_tex_alpha();
 
-	shader_color_pos_lum(const shader_color_pos_lum&) = delete;
-	shader_color_pos_lum& operator=(const shader_color_pos_lum&) = delete;
+	shader_color_pos_tex_alpha(const shader_color_pos_tex_alpha&) = delete;
+	shader_color_pos_tex_alpha& operator=(const shader_color_pos_tex_alpha&) = delete;
 
-	shader_color_pos_lum(shader_color_pos_lum&&) = delete;
-	shader_color_pos_lum& operator=(shader_color_pos_lum&&) = delete;
+	shader_color_pos_tex_alpha(shader_color_pos_tex_alpha&&) = delete;
+	shader_color_pos_tex_alpha& operator=(shader_color_pos_tex_alpha&&) = delete;
 
-	~shader_color_pos_lum() override = default;
+	~shader_color_pos_tex_alpha() override = default;
 
-	using morda::coloring_shader::render;
-
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color) const override;
+	void render(
+		const r4::matrix4<float>& m,
+		const morda::vertex_array& va,
+		r4::vector4<float> color,
+		const morda::texture_2d& tex
+	) const override;
 };
 
 } // namespace morda::render_opengles

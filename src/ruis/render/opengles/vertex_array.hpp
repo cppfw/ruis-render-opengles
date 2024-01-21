@@ -21,21 +21,31 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/texturing_shader.hpp>
+#include <ruis/render/vertex_array.hpp>
+#include <utki/config.hpp>
 
-#include "shader_base.hpp"
+#if M_OS_NAME == M_OS_NAME_IOS
+#	include <OpenGlES/ES2/glext.h>
+#else
+#	include <GLES2/gl2.h>
+#endif
 
 namespace morda::render_opengles {
 
-class shader_pos_tex : public morda::texturing_shader, public shader_base
+class vertex_array : public morda::vertex_array
 {
-	GLint texture_uniform;
-
 public:
-	shader_pos_tex();
+	vertex_array(buffers_type buffers, const utki::shared_ref<const morda::index_buffer>& indices, mode rendering_mode);
 
-	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, const morda::texture_2d& tex)
-		const override;
+	vertex_array(const vertex_array&) = delete;
+	vertex_array& operator=(const vertex_array&) = delete;
+
+	vertex_array(vertex_array&&) = delete;
+	vertex_array& operator=(vertex_array&&) = delete;
+
+	~vertex_array() override = default;
+
+private:
 };
 
 } // namespace morda::render_opengles

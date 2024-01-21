@@ -21,30 +21,26 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/index_buffer.hpp>
-#include <utki/span.hpp>
+#include <ruis/render/shader.hpp>
 
-#include "opengl_buffer.hpp"
+#include "shader_base.hpp"
 
 namespace morda::render_opengles {
 
-class index_buffer : public morda::index_buffer, public opengl_buffer
+class shader_pos_clr : public morda::shader, public shader_base
 {
 public:
-	const GLenum element_type = GL_UNSIGNED_SHORT;
-	const GLsizei elements_count;
+	shader_pos_clr();
 
-	index_buffer(utki::span<const uint16_t> indices);
+	shader_pos_clr(const shader_pos_clr&) = delete;
+	shader_pos_clr& operator=(const shader_pos_clr&) = delete;
 
-	index_buffer(const index_buffer&) = delete;
-	index_buffer& operator=(const index_buffer&) = delete;
+	shader_pos_clr(shader_pos_clr&&) = delete;
+	shader_pos_clr& operator=(shader_pos_clr&&) = delete;
 
-	index_buffer(index_buffer&&) = delete;
-	index_buffer& operator=(index_buffer&&) = delete;
+	~shader_pos_clr() override = default;
 
-	~index_buffer() override = default;
-
-private:
+	void render(const r4::matrix4<float>& m, const morda::vertex_array& va) const override;
 };
 
 } // namespace morda::render_opengles

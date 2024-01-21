@@ -21,31 +21,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <morda/render/vertex_array.hpp>
-#include <utki/config.hpp>
+#include <ruis/render/coloring_shader.hpp>
 
-#if M_OS_NAME == M_OS_NAME_IOS
-#	include <OpenGlES/ES2/glext.h>
-#else
-#	include <GLES2/gl2.h>
-#endif
+#include "shader_base.hpp"
 
 namespace morda::render_opengles {
 
-class vertex_array : public morda::vertex_array
+class shader_color : public morda::coloring_shader, public shader_base
 {
+	GLint color_uniform;
+
 public:
-	vertex_array(buffers_type buffers, const utki::shared_ref<const morda::index_buffer>& indices, mode rendering_mode);
+	shader_color();
 
-	vertex_array(const vertex_array&) = delete;
-	vertex_array& operator=(const vertex_array&) = delete;
+	shader_color(const shader_color&) = delete;
+	shader_color& operator=(const shader_color&) = delete;
 
-	vertex_array(vertex_array&&) = delete;
-	vertex_array& operator=(vertex_array&&) = delete;
+	shader_color(shader_color&&) = delete;
+	shader_color& operator=(shader_color&&) = delete;
 
-	~vertex_array() override = default;
+	~shader_color() override = default;
 
-private:
+	void render(const r4::matrix4<float>& m, const morda::vertex_array& va, r4::vector4<float> color) const override;
 };
 
 } // namespace morda::render_opengles
