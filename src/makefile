@@ -5,7 +5,7 @@ include prorab-clang-format.mk
 
 $(eval $(call prorab-config, ../config))
 
-this_name := morda-render-opengles
+this_name := ruis-render-opengles
 
 this_soname := $(shell cat $(d)soname.txt)
 
