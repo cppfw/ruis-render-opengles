@@ -9,7 +9,7 @@ Build-Depends:
 	pkg-config,
 	clang-format,
 	clang-tidy,
-	libruis-dev (>= 0.5.160),
+	libruis-dev (>= 0.5.210),
 	libgles2-mesa-dev
 Build-Depends-Indep: doxygen
 Standards-Version: 3.9.2
