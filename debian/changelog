@@ -1,3 +1,9 @@
+libruis-render-opengles (0.1.50) unstable; urgency=medium
+
+  * rename to ruis-render-opengles
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 22 Jan 2024 16:39:39 +0200
+
 libruis-render-opengles (0.1.49) unstable; urgency=medium
 
   * relink
