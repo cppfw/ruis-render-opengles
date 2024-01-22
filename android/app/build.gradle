@@ -11,7 +11,7 @@ android {
 
         externalNativeBuild {
             cmake {
-                targets "mordavokneapp"
+                targets "ruisapp_application"
 
                 arguments "-DANDROID_STL=c++_shared", "-DANDROID_TOOLCHAIN=clang"
             }

@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="io.github.cppfw.morda_opengles2_ren">
+    package="io.github.cppfw.ruis_opengles2_ren">
 
     <application>
 

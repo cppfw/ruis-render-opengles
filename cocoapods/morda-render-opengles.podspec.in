@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name         = "ruis-render-opengles"
   s.version      = "$(version)"
-  s.summary      = "OpenGL ES renderer for morda, a C++ cross-platform GUI library."
+  s.summary      = "OpenGL ES renderer for ruis, a C++ cross-platform GUI library."
   s.homepage     = "https://github.com/cppfw/#{s.name}"
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Ivan Gagis" => "igagis@gmail.com" }
@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
 
   s.ios.vendored_framework = "lib/ios/#{s.name}.xcframework"
 
-  s.dependency 'morda', '>= 0.5.199'
+  s.dependency 'ruis', '>= 0.5.199'
 end

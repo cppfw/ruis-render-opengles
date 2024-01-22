@@ -1,5 +1,5 @@
 Name: ruis-render-opengles   # human-readable name
-Description: C++ OpenGL ES renderer for morda GUI library
+Description: C++ OpenGL ES renderer for ruis GUI library
 Version: $(version)
 URL: https://github.com/cppfw/ruis-render-opengles
 Requires:

@@ -5,5 +5,5 @@ project 'ruis-render-opengles/ruis-render-opengles.xcodeproj'
 platform :ios, '13.0'
 
 target "ruis-render-opengles" do
-	pod 'morda', '>= 0.5.199'
+	pod 'ruis', '>= 0.5.199'
 end

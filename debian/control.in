@@ -9,7 +9,7 @@ Build-Depends:
 	pkg-config,
 	clang-format,
 	clang-tidy,
-	libmorda-dev (>= 0.5.160),
+	libruis-dev (>= 0.5.160),
 	libgles2-mesa-dev
 Build-Depends-Indep: doxygen
 Standards-Version: 3.9.2
@@ -18,8 +18,8 @@ Package: libruis-render-opengles$(soname)
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: OpenGL ES renderer for morda.
- OpenGL ES renderer for morda GUI library.
+Description: OpenGL ES renderer for ruis.
+ OpenGL ES renderer for ruis GUI library.
 
 Package: libruis-render-opengles$(soname)-dbg
 Section: debug
@@ -33,11 +33,11 @@ Architecture: any
 Depends:
 		libruis-render-opengles$(soname) (= ${binary:Version}),
 		libruis-render-opengles$(soname)-dbg (= ${binary:Version}),
-		libmorda-dev (>= 0.5.160),
+		libruis-dev (>= 0.5.160),
 		${misc:Depends}
 Suggests: libruis-render-opengles-doc
-Description: OpenGL ES renderer for morda.
- OpenGL ES renderer for morda GUI library.
+Description: OpenGL ES renderer for ruis.
+ OpenGL ES renderer for ruis GUI library.
 
 Package: libruis-render-opengles-doc
 Section: doc
