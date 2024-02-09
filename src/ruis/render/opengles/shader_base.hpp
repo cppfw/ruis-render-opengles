@@ -29,7 +29,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <utki/debug.hpp>
 #include <utki/span.hpp>
 
-#if M_OS_NAME == M_OS_NAME_IOS
+#if CFG_OS_NAME == CFG_OS_NAME_IOS
 #	include <OpenGlES/ES2/glext.h>
 #else
 #	include <GLES2/gl2.h>
