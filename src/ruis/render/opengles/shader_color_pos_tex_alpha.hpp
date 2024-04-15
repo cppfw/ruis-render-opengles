@@ -29,6 +29,7 @@ namespace ruis::render_opengles {
 
 class shader_color_pos_tex_alpha : public ruis::coloring_texturing_shader, public shader_base
 {
+	GLint texture_uniform;
 	GLint color_uniform;
 
 public:

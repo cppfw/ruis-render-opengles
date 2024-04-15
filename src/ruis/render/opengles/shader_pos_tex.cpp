@@ -61,10 +61,14 @@ shader_pos_tex::shader_pos_tex() :
 void shader_pos_tex::render(const r4::matrix4<float>& m, const ruis::vertex_array& va, const ruis::texture_2d& tex)
 	const
 {
+	constexpr auto texture_unit_number = 0;
+
 	ASSERT(dynamic_cast<const texture_2d*>(&tex))
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-	static_cast<const texture_2d&>(tex).bind(0);
+	static_cast<const texture_2d&>(tex).bind(texture_unit_number);
 	this->bind();
+
+	this->set_uniform_sampler(this->texture_uniform, texture_unit_number);
 
 	this->shader_base::render(m, va);
 }
