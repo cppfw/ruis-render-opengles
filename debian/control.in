@@ -24,17 +24,19 @@ Description: OpenGL ES renderer for ruis.
 Package: libruis-render-opengles$(soname)-dbgsrc
 Section: debug
 Architecture: all
-Depends: libruis-render-opengles$(soname)-dbgsym (= ${binary:Version}), ${misc:Depends}
+Depends:
+	libruis-render-opengles$(soname)-dbgsym (= ${binary:Version}),
+	${misc:Depends}
 Description: debugging sources for libruis-render-opengles$(soname) package.
 
 Package: libruis-render-opengles-dev
 Section: libdevel
 Architecture: any
 Depends:
-		libruis-render-opengles$(soname) (= ${binary:Version}),
-		libruis-render-opengles$(soname)-dbg (= ${binary:Version}),
-		libruis-dev (>= 0.5.160),
-		${misc:Depends}
+	libruis-render-opengles$(soname) (= ${binary:Version}),
+	libruis-render-opengles$(soname)-dbgsrc (= ${binary:Version}),
+	libruis-dev (>= 0.5.160),
+	${misc:Depends}
 Suggests: libruis-render-opengles-doc
 Description: OpenGL ES renderer for ruis.
  OpenGL ES renderer for ruis GUI library.
