@@ -22,3 +22,5 @@ this_src_dir := ruis
 $(eval $(prorab-license))
 
 $(eval $(prorab-clang-format))
+
+$(eval $(prorab-install-dbgsrc))
