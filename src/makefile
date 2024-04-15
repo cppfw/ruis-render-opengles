@@ -2,6 +2,7 @@ include prorab.mk
 include prorab-license.mk
 include prorab-linux.mk
 include prorab-clang-format.mk
+include prorab-install-dbgsrc.mk
 
 $(eval $(call prorab-config, ../config))
 
