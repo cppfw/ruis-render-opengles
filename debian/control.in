@@ -34,7 +34,6 @@ Section: libdevel
 Architecture: any
 Depends:
 	libruis-render-opengles$(soname) (= ${binary:Version}),
-	libruis-render-opengles$(soname)-dbgsrc (= ${binary:Version}),
 	libruis-dev (>= 0.5.160),
 	${misc:Depends}
 Suggests: libruis-render-opengles-doc
