@@ -1,3 +1,9 @@
+libruis-render-opengles (0.1.57) unstable; urgency=medium
+
+  * clear depth buffer to 1
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 22 Apr 2024 00:10:16 +0300
+
 libruis-render-opengles (0.1.56) unstable; urgency=medium
 
   * print shader compile/link log
