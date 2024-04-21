@@ -65,13 +65,13 @@ bool check_for_compile_errors(GLuint shader)
 			GLint len;
 			glGetShaderInfoLog(shader, GLsizei(log.size()), &len, log.data());
 			assert_opengl_no_error();
-			LOG([&](auto& o) {
+			utki::log([&](auto& o) {
 				o << "===Compile log===\n" << log.data() << std::endl;
-			})
+			});
 		} else {
-			LOG([&](auto& o) {
+			utki::log([&](auto& o) {
 				o << "Shader compile log is empty" << std::endl;
-			})
+			});
 		}
 		return true;
 	}
@@ -95,9 +95,9 @@ bool check_for_link_errors(GLuint program)
 			GLint len;
 			glGetProgramInfoLog(program, GLsizei(log.size()), &len, log.data());
 			assert_opengl_no_error();
-			LOG([&](auto& o) {
+			utki::log([&](auto& o) {
 				o << "===Link log===\n" << log.data() << std::endl;
-			})
+			});
 		}
 		return true;
 	}
