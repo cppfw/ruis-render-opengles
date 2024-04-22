@@ -53,7 +53,10 @@ utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(
 	return this->create_texture_2d_internal(format, dims, nullptr, {});
 }
 
-utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(const rasterimage::image_variant& imvar, texture_2d_parameters params)
+utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(
+	const rasterimage::image_variant& imvar,
+	texture_2d_parameters params
+)
 {
 	return std::visit(
 		[this, &imvar, &params](const auto& im) -> utki::shared_ref<ruis::texture_2d> {
