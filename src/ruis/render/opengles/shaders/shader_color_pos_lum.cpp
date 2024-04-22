@@ -26,27 +26,27 @@ using namespace ruis::render_opengles;
 shader_color_pos_lum::shader_color_pos_lum() :
 	shader_base(
 		R"qwertyuiop(
-						attribute highp vec4 a0;
-						attribute highp float a1;
+			attribute highp vec4 a0;
+			attribute highp float a1;
 
-						uniform highp mat4 matrix;
+			uniform highp mat4 matrix;
 
-						varying highp float lum;
+			varying highp float lum;
 
-						void main(void){
-							gl_Position = matrix * a0;
-							lum = a1;
-						}
-					)qwertyuiop",
+			void main(void){
+				gl_Position = matrix * a0;
+				lum = a1;
+			}
+		)qwertyuiop",
 		R"qwertyuiop(
-						uniform lowp vec4 uniform_color;
-		
-						varying highp float lum;
-		
-						void main(void){
-							gl_FragColor = vec4(uniform_color.x, uniform_color.y, uniform_color.z, uniform_color.w * lum);
-						}
-					)qwertyuiop"
+			uniform lowp vec4 uniform_color;
+
+			varying highp float lum;
+
+			void main(void){
+				gl_FragColor = vec4(uniform_color.x, uniform_color.y, uniform_color.z, uniform_color.w * lum);
+			}
+		)qwertyuiop"
 	),
 	color_uniform(this->get_uniform("uniform_color"))
 {}

@@ -26,25 +26,25 @@ using namespace ruis::render_opengles;
 shader_pos_clr::shader_pos_clr() :
 	shader_base(
 		R"qwertyuiop(
-						uniform highp mat4 matrix;
+			uniform highp mat4 matrix;
 
-						attribute highp vec4 a0;
-						attribute highp vec4 a1;
+			attribute highp vec4 a0;
+			attribute highp vec4 a1;
 
-						varying highp vec4 color_varying;
+			varying highp vec4 color_varying;
 
-						void main(void){
-							gl_Position = matrix * a0;
-							color_varying = a1;
-						}
-					)qwertyuiop",
+			void main(void){
+				gl_Position = matrix * a0;
+				color_varying = a1;
+			}
+		)qwertyuiop",
 		R"qwertyuiop(
-						varying highp vec4 color_varying;
-						
-						void main(void){
-							gl_FragColor = color_varying;
-						}
-					)qwertyuiop"
+			varying highp vec4 color_varying;
+			
+			void main(void){
+				gl_FragColor = color_varying;
+			}
+		)qwertyuiop"
 	)
 {}
 

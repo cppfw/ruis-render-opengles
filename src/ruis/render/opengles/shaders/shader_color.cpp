@@ -26,21 +26,21 @@ using namespace ruis::render_opengles;
 shader_color::shader_color() :
 	shader_base(
 		R"qwertyuiop(
-						attribute highp vec4 a0;
+			attribute highp vec4 a0;
 
-						uniform highp mat4 matrix;
-						
-						void main(void){
-							gl_Position = matrix * a0;
-						}
-					)qwertyuiop",
+			uniform highp mat4 matrix;
+			
+			void main(void){
+				gl_Position = matrix * a0;
+			}
+		)qwertyuiop",
 		R"qwertyuiop(
-						uniform lowp vec4 uniform_color;
-		
-						void main(void){
-							gl_FragColor = uniform_color;
-						}
-				)qwertyuiop"
+			uniform lowp vec4 uniform_color;
+
+			void main(void){
+				gl_FragColor = uniform_color;
+			}
+		)qwertyuiop"
 	),
 	color_uniform(this->get_uniform("uniform_color"))
 {}
