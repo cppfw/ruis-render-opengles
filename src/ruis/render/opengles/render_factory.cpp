@@ -23,14 +23,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <utki/config.hpp>
 
+#include "shaders/shader_color.hpp"
+#include "shaders/shader_color_pos_lum.hpp"
+#include "shaders/shader_color_pos_tex.hpp"
+#include "shaders/shader_color_pos_tex_alpha.hpp"
+#include "shaders/shader_pos_clr.hpp"
+#include "shaders/shader_pos_tex.hpp"
+
 #include "frame_buffer.hpp"
 #include "index_buffer.hpp"
-#include "shader_color.hpp"
-#include "shader_color_pos_lum.hpp"
-#include "shader_color_pos_tex.hpp"
-#include "shader_color_pos_tex_alpha.hpp"
-#include "shader_pos_clr.hpp"
-#include "shader_pos_tex.hpp"
 #include "texture_2d.hpp"
 #include "util.hpp"
 #include "vertex_array.hpp"
@@ -128,7 +129,9 @@ utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d_internal(
 	assert_opengl_no_error();
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	assert_opengl_no_error();
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	assert_opengl_no_error();
 
 	return ret;
 }

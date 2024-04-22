@@ -23,11 +23,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <ruis/render/coloring_shader.hpp>
 
-#include "shader_base.hpp"
+#include "../shader_base.hpp"
 
 namespace ruis::render_opengles {
 
-class shader_color : public ruis::coloring_shader, public shader_base
+class shader_color :
+	public ruis::coloring_shader, //
+	public shader_base
 {
 	GLint color_uniform;
 

@@ -19,20 +19,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /* ================ LICENSE END ================ */
 
-#include "shader_color_pos_tex.hpp"
+#include "shader_pos_tex.hpp"
 
-#include "texture_2d.hpp"
+#include "../texture_2d.hpp"
 
 using namespace ruis::render_opengles;
 
-shader_color_pos_tex::shader_color_pos_tex() :
+shader_pos_tex::shader_pos_tex() :
 	shader_base(
 		R"qwertyuiop(
-						attribute highp vec4 a0;
-						attribute highp vec2 a1;
+						attribute highp vec4 a0; //position
+
+						attribute highp vec2 a1; //texture coordinates
 
 						uniform highp mat4 matrix;
-						
+
 						varying highp vec2 tc0;
 
 						void main(void){
@@ -43,25 +44,18 @@ shader_color_pos_tex::shader_color_pos_tex() :
 		R"qwertyuiop(
 						uniform sampler2D texture0;
 		
-						uniform highp vec4 uniform_color;
-		
 						varying highp vec2 tc0;
 		
 						void main(void){
-							gl_FragColor = texture2D(texture0, tc0) * uniform_color;
+							gl_FragColor = texture2D(texture0, tc0);
 						}
 					)qwertyuiop"
 	),
-	texture_uniform(this->get_uniform("texture0")),
-	color_uniform(this->get_uniform("uniform_color"))
+	texture_uniform(this->get_uniform("texture0"))
 {}
 
-void shader_color_pos_tex::render(
-	const r4::matrix4<float>& m,
-	const ruis::vertex_array& va,
-	r4::vector4<float> color,
-	const ruis::texture_2d& tex
-) const
+void shader_pos_tex::render(const r4::matrix4<float>& m, const ruis::vertex_array& va, const ruis::texture_2d& tex)
+	const
 {
 	constexpr auto texture_unit_number = 0;
 
@@ -71,7 +65,6 @@ void shader_color_pos_tex::render(
 	this->bind();
 
 	this->set_uniform_sampler(this->texture_uniform, texture_unit_number);
-	this->set_uniform4f(this->color_uniform, color.x(), color.y(), color.z(), color.w());
 
 	this->shader_base::render(m, va);
 }

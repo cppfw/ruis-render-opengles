@@ -21,20 +21,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/texturing_shader.hpp>
+#include <ruis/render/shader.hpp>
 
-#include "shader_base.hpp"
+#include "../shader_base.hpp"
 
 namespace ruis::render_opengles {
 
-class shader_pos_tex : public ruis::texturing_shader, public shader_base
+class shader_pos_clr :
+	public ruis::shader, //
+	public shader_base
 {
-	GLint texture_uniform;
-
 public:
-	shader_pos_tex();
+	shader_pos_clr();
 
-	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va, const ruis::texture_2d& tex) const override;
+	shader_pos_clr(const shader_pos_clr&) = delete;
+	shader_pos_clr& operator=(const shader_pos_clr&) = delete;
+
+	shader_pos_clr(shader_pos_clr&&) = delete;
+	shader_pos_clr& operator=(shader_pos_clr&&) = delete;
+
+	~shader_pos_clr() override = default;
+
+	void render(const r4::matrix4<float>& m, const ruis::vertex_array& va) const override;
 };
 
 } // namespace ruis::render_opengles
