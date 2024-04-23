@@ -47,10 +47,11 @@ using namespace ruis::render_opengles;
 
 utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(
 	rasterimage::format format,
-	rasterimage::dimensioned::dimensions_type dims
+	rasterimage::dimensioned::dimensions_type dims,
+	texture_2d_parameters params
 )
 {
-	return this->create_texture_2d_internal(format, dims, nullptr, {});
+	return this->create_texture_2d_internal(format, dims, nullptr, std::move(params));
 }
 
 utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d(
@@ -83,10 +84,8 @@ utki::shared_ref<ruis::texture_2d> render_factory::create_texture_2d_internal(
 	texture_2d_parameters params
 )
 {
-	// TODO: turn these asserts to real checks with exceptions throwing
 	ASSERT(data.size() % rasterimage::to_num_channels(type) == 0)
 	ASSERT(data.size() % dims.x() == 0)
-
 	ASSERT(data.size() == 0 || data.size() / rasterimage::to_num_channels(type) / dims.x() == dims.y())
 
 	auto ret = utki::make_shared<texture_2d>(dims.to<float>());
