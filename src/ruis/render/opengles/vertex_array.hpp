@@ -30,12 +30,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-namespace ruis::render_opengles {
+namespace ruis::render::opengles {
 
-class vertex_array : public ruis::vertex_array
+class vertex_array : public ruis::render::vertex_array
 {
 public:
-	vertex_array(buffers_type buffers, const utki::shared_ref<const ruis::index_buffer>& indices, mode rendering_mode);
+	vertex_array(
+		buffers_type buffers,
+		const utki::shared_ref<const ruis::render::index_buffer>& indices,
+		mode rendering_mode
+	);
 
 	vertex_array(const vertex_array&) = delete;
 	vertex_array& operator=(const vertex_array&) = delete;
@@ -48,4 +52,4 @@ public:
 private:
 };
 
-} // namespace ruis::render_opengles
+} // namespace ruis::render::opengles

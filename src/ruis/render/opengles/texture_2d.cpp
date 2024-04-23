@@ -23,10 +23,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "util.hpp"
 
-using namespace ruis::render_opengles;
+using namespace ruis::render::opengles;
 
 texture_2d::texture_2d(r4::vector2<float> dims) :
-	ruis::texture_2d(dims)
+	ruis::render::texture_2d(dims)
 {
 	glGenTextures(1, &this->tex);
 	assert_opengl_no_error();

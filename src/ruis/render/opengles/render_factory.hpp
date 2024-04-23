@@ -23,9 +23,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <ruis/render/render_factory.hpp>
 
-namespace ruis::render_opengles {
+namespace ruis::render::opengles {
 
-class render_factory : public ruis::render_factory
+class render_factory : public ruis::render::render_factory
 {
 public:
 	render_factory() = default;
@@ -38,7 +38,7 @@ public:
 
 	~render_factory() override = default;
 
-	utki::shared_ref<ruis::texture_2d> create_texture_2d(
+	utki::shared_ref<ruis::render::texture_2d> create_texture_2d(
 		rasterimage::format format,
 		rasterimage::dimensioned::dimensions_type dims,
 		texture_2d_parameters params
@@ -49,25 +49,30 @@ public:
 		texture_2d_parameters params
 	) override;
 
-	utki::shared_ref<ruis::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices) override;
-	utki::shared_ref<ruis::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector3<float>> vertices) override;
-	utki::shared_ref<ruis::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector2<float>> vertices) override;
-	utki::shared_ref<ruis::vertex_buffer> create_vertex_buffer(utki::span<const float> vertices) override;
+	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices
+	) override;
+	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector3<float>> vertices
+	) override;
+	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector2<float>> vertices
+	) override;
+	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const float> vertices) override;
 
-	utki::shared_ref<ruis::index_buffer> create_index_buffer(utki::span<const uint16_t> indices) override;
+	utki::shared_ref<ruis::render::index_buffer> create_index_buffer(utki::span<const uint16_t> indices) override;
 
-	utki::shared_ref<ruis::vertex_array> create_vertex_array(
-		std::vector<utki::shared_ref<const ruis::vertex_buffer>> buffers,
-		const utki::shared_ref<const ruis::index_buffer>& indices,
-		ruis::vertex_array::mode rendering_mode
+	utki::shared_ref<ruis::render::vertex_array> create_vertex_array(
+		std::vector<utki::shared_ref<const ruis::render::vertex_buffer>> buffers,
+		const utki::shared_ref<const ruis::render::index_buffer>& indices,
+		ruis::render::vertex_array::mode rendering_mode
 	) override;
 
 	std::unique_ptr<shaders> create_shaders() override;
 
-	utki::shared_ref<ruis::frame_buffer> create_framebuffer(const utki::shared_ref<ruis::texture_2d>& color) override;
+	utki::shared_ref<ruis::render::frame_buffer> create_framebuffer(
+		const utki::shared_ref<ruis::render::texture_2d>& color
+	) override;
 
 private:
-	utki::shared_ref<ruis::texture_2d> create_texture_2d_internal(
+	utki::shared_ref<ruis::render::texture_2d> create_texture_2d_internal(
 		rasterimage::format type,
 		rasterimage::dimensioned::dimensions_type dims,
 		utki::span<const uint8_t> data,
@@ -75,4 +80,4 @@ private:
 	);
 };
 
-} // namespace ruis::render_opengles
+} // namespace ruis::render::opengles

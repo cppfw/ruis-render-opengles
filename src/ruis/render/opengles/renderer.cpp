@@ -32,10 +32,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #	include <GLES2/gl2.h>
 #endif
 
-using namespace ruis::render_opengles;
+using namespace ruis::render::opengles;
 
 renderer::renderer(std::unique_ptr<render_factory> factory) :
-	ruis::renderer(std::move(factory), []() {
+	ruis::render::renderer(std::move(factory), []() {
 		renderer::params p;
 		p.max_texture_size = []() {
 			// the variable is initialized via output argument, so no need to initialize it here
@@ -54,7 +54,7 @@ renderer::renderer(std::unique_ptr<render_factory> factory) :
 	glEnable(GL_CULL_FACE);
 }
 
-void renderer::set_framebuffer_internal(ruis::frame_buffer* fb)
+void renderer::set_framebuffer_internal(ruis::render::frame_buffer* fb)
 {
 	if (!this->default_framebuffer_initialized) {
 		// On some platforms the default framebuffer is not 0, so because of this
@@ -159,7 +159,7 @@ void renderer::set_blend_enabled(bool enable)
 
 namespace {
 
-const std::array<GLenum, size_t(ruis::renderer::blend_factor::enum_size)> blend_func = {
+const std::array<GLenum, size_t(ruis::render::renderer::blend_factor::enum_size)> blend_func = {
 	GL_ZERO,
 	GL_ONE,
 	GL_SRC_COLOR,
