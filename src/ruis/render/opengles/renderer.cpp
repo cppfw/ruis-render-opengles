@@ -35,21 +35,32 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengles;
 
 renderer::renderer(std::unique_ptr<render_factory> factory) :
-	ruis::render::renderer(std::move(factory), []() {
-		renderer::params p;
-		p.max_texture_size = []() {
-			// the variable is initialized via output argument, so no need to initialize it here
-			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-			GLint val;
-			glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
-			assert_opengl_no_error();
-			ASSERT(val > 0, [&](auto& o) {
-				o << "val = " << val;
-			})
-			return unsigned(val);
-		}();
-		return p;
-	}())
+	ruis::render::renderer(
+		std::move(factory),
+		{.max_texture_size =
+			 []() {
+				 // the variable is initialized via output argument, so no need to initialize it here
+				 // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+				 GLint val;
+				 glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
+				 assert_opengl_no_error();
+				 ASSERT(val > 0, [&](auto& o) {
+					 o << "val = " << val;
+				 })
+				 return unsigned(val);
+			 }(),
+		 .initial_matrix = ruis::matrix4()
+							   // OpenGL identity matrix:
+							   //   viewport edges: left = -1, right = 1, top = 1, bottom = -1
+							   //   z-axis towards viewer
+							   .set_identity()
+							   // x-axis right, y-axis down, z-axis away
+							   .scale(1, -1, -1)
+							   // viewport edges: left = 0, top = 0
+							   .translate(-1, -1)
+							   // viewport edges: right = 1, bottom = 1
+							   .scale(2, 2)}
+	)
 {
 	glEnable(GL_CULL_FACE);
 }
