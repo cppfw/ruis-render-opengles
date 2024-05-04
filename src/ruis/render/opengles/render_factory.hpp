@@ -49,7 +49,7 @@ public:
 		texture_2d_parameters params
 	) override;
 
-	virtual utki::shared_ref<texture_2d> create_texture_2d(
+	utki::shared_ref<texture_2d> create_texture_2d(
 		rasterimage::image_variant&& imvar,
 		texture_2d_parameters params
 	) override;
