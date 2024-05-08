@@ -38,12 +38,13 @@ using namespace ruis::render::opengles;
 
 frame_buffer::frame_buffer( //
 	std::shared_ptr<ruis::render::texture_2d> color,
-	std::shared_ptr<ruis::render::texture_depth> depth
+	std::shared_ptr<ruis::render::texture_depth> depth,
+	std::shared_ptr<ruis::render::texture_stencil> stencil
 ) :
 	ruis::render::frame_buffer( //
 		std::move(color),
 		std::move(depth),
-		nullptr
+		std::move(stencil)
 	)
 {
 	glGenFramebuffers(1, &this->fbo);
@@ -73,6 +74,10 @@ frame_buffer::frame_buffer( //
 
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex.tex, 0);
 		assert_opengl_no_error();
+	}
+
+	if (this->stencil) {
+		throw std::logic_error("frame_buffer(): OpenGL ES stencil texture support is not implemented");
 	}
 
 	// Check for completeness

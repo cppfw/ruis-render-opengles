@@ -39,7 +39,8 @@ public:
 
 	frame_buffer( //
 		std::shared_ptr<ruis::render::texture_2d> color,
-		std::shared_ptr<ruis::render::texture_depth> depth
+		std::shared_ptr<ruis::render::texture_depth> depth,
+		std::shared_ptr<ruis::render::texture_stencil> stencil
 	);
 
 	frame_buffer(const frame_buffer&) = delete;
