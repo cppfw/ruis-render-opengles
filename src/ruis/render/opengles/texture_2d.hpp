@@ -21,21 +21,26 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+#include <rasterimage/image_variant.hpp>
+#include <ruis/render/render_factory.hpp>
 #include <ruis/render/texture_2d.hpp>
 #include <utki/config.hpp>
 
-#if CFG_OS_NAME == CFG_OS_NAME_IOS
-#	include <OpenGlES/ES2/glext.h>
-#else
-#	include <GLES2/gl2.h>
-#endif
+#include "opengl_texture.hpp"
 
 namespace ruis::render::opengles {
 
-struct texture_2d : public ruis::render::texture_2d {
-	GLuint tex = 0;
-
-	texture_2d(r4::vector2<uint32_t> dims);
+class texture_2d :
+	public ruis::render::texture_2d, //
+	public opengl_texture
+{
+public:
+	texture_2d(
+		rasterimage::format type,
+		rasterimage::dimensioned::dimensions_type dims,
+		utki::span<const uint8_t> data,
+		ruis::render::render_factory::texture_2d_parameters params
+	);
 
 	texture_2d(const texture_2d&) = delete;
 	texture_2d& operator=(const texture_2d&) = delete;
@@ -43,9 +48,7 @@ struct texture_2d : public ruis::render::texture_2d {
 	texture_2d(texture_2d&&) = delete;
 	texture_2d& operator=(texture_2d&&) = delete;
 
-	~texture_2d() override;
-
-	void bind(unsigned unit_num) const;
+	~texture_2d() override = default;
 };
 
 } // namespace ruis::render::opengles

@@ -25,23 +25,100 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengles;
 
-texture_2d::texture_2d(r4::vector2<uint32_t> dims) :
+texture_2d::texture_2d(
+	rasterimage::format type,
+	rasterimage::dimensioned::dimensions_type dims,
+	utki::span<const uint8_t> data,
+	ruis::render::render_factory::texture_2d_parameters params
+) :
 	ruis::render::texture_2d(dims)
 {
-	glGenTextures(1, &this->tex);
-	assert_opengl_no_error();
-	ASSERT(this->tex != 0)
-}
+	ASSERT(data.size() % rasterimage::to_num_channels(type) == 0)
+	ASSERT(data.size() % dims.x() == 0)
+	ASSERT(data.size() == 0 || data.size() / rasterimage::to_num_channels(type) / dims.x() == dims.y())
 
-texture_2d::~texture_2d()
-{
-	glDeleteTextures(1, &this->tex);
-}
+	this->bind(0);
 
-void texture_2d::bind(unsigned unit_num) const
-{
-	glActiveTexture(GL_TEXTURE0 + unit_num);
+	GLint internal_format = [&type]() {
+		switch (type) {
+			default:
+				ASSERT(false)
+			case rasterimage::format::grey:
+				return GL_LUMINANCE;
+			case rasterimage::format::greya:
+				return GL_LUMINANCE_ALPHA;
+			case rasterimage::format::rgb:
+				return GL_RGB;
+			case rasterimage::format::rgba:
+				return GL_RGBA;
+		}
+	}();
+
+	// we will be passing pixels to OpenGL which are 1-byte aligned
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	assert_opengl_no_error();
-	glBindTexture(GL_TEXTURE_2D, this->tex);
+
+	glTexImage2D(
+		GL_TEXTURE_2D,
+		0, // 0th level, no mipmaps
+		internal_format, // internal format
+		GLsizei(dims.x()),
+		GLsizei(dims.y()),
+		0, // border, should be 0!
+		internal_format, // format of the texel data
+		GL_UNSIGNED_BYTE,
+		data.size() == 0 ? nullptr : data.data()
+	);
+	assert_opengl_no_error();
+
+	if (!data.empty() && params.mipmap != texture_2d::mipmap::none) {
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+
+	auto to_gl_filter = [](texture_2d::filter f) {
+		switch (f) {
+			case texture_2d::filter::nearest:
+				return GL_NEAREST;
+			case texture_2d::filter::linear:
+				return GL_LINEAR;
+		}
+		return GL_NEAREST;
+	};
+
+	GLint mag_filter = to_gl_filter(params.mag_filter);
+
+	GLint min_filter = [&]() {
+		switch (params.mipmap) {
+			case texture_2d::mipmap::none:
+				return to_gl_filter(params.min_filter);
+			case texture_2d::mipmap::nearest:
+				switch (params.min_filter) {
+					case texture_2d::filter::nearest:
+						return GL_NEAREST_MIPMAP_NEAREST;
+					case texture_2d::filter::linear:
+						return GL_LINEAR_MIPMAP_NEAREST;
+				}
+				break;
+			case texture_2d::mipmap::linear:
+				switch (params.min_filter) {
+					case texture_2d::filter::nearest:
+						return GL_NEAREST_MIPMAP_LINEAR;
+					case texture_2d::filter::linear:
+						return GL_LINEAR_MIPMAP_LINEAR;
+				}
+				break;
+		}
+		return GL_NEAREST;
+	}();
+
+	// It is necessary to set filter parameters for every texture. Otherwise it may not work.
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
+	assert_opengl_no_error();
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
+	assert_opengl_no_error();
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	assert_opengl_no_error();
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	assert_opengl_no_error();
 }
