@@ -35,21 +35,32 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengles;
 
 renderer::renderer(std::unique_ptr<render_factory> factory) :
-	ruis::render::renderer(std::move(factory), []() {
-		renderer::params p;
-		p.max_texture_size = []() {
-			// the variable is initialized via output argument, so no need to initialize it here
-			// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-			GLint val;
-			glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
-			assert_opengl_no_error();
-			ASSERT(val > 0, [&](auto& o) {
-				o << "val = " << val;
-			})
-			return unsigned(val);
-		}();
-		return p;
-	}())
+	ruis::render::renderer(
+		std::move(factory),
+		{.max_texture_size =
+			 []() {
+				 // the variable is initialized via output argument, so no need to initialize it here
+				 // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+				 GLint val;
+				 glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
+				 assert_opengl_no_error();
+				 ASSERT(val > 0, [&](auto& o) {
+					 o << "val = " << val;
+				 })
+				 return unsigned(val);
+			 }(),
+		 .initial_matrix = ruis::matrix4()
+							   // OpenGL identity matrix:
+							   //   viewport edges: left = -1, right = 1, top = 1, bottom = -1
+							   //   z-axis towards viewer
+							   .set_identity()
+							   // x-axis right, y-axis down, z-axis away
+							   .scale(1, -1, -1)
+							   // viewport edges: left = 0, top = 0
+							   .translate(-1, -1)
+							   // viewport edges: right = 1, bottom = 1
+							   .scale(2, 2)}
+	)
 {
 	glEnable(GL_CULL_FACE);
 }
@@ -86,17 +97,22 @@ void renderer::set_framebuffer_internal(ruis::render::frame_buffer* fb)
 	assert_opengl_no_error();
 }
 
-void renderer::clear_framebuffer()
+void renderer::clear_framebuffer_color()
 {
-	glClearColor(0, 0, 0, 1);
-	assert_opengl_no_error();
+	// Default clear color is RGBA = (0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	assert_opengl_no_error();
+}
 
+void renderer::clear_framebuffer_depth()
+{
 	// Default clear depth value is 1, see glClearDepthf()
 	glClear(GL_DEPTH_BUFFER_BIT);
 	assert_opengl_no_error();
+}
 
+void renderer::clear_framebuffer_stencil()
+{
 	// Default clear stencil value is 0, see glClearStencil()
 	glClear(GL_STENCIL_BUFFER_BIT);
 	assert_opengl_no_error();
@@ -149,7 +165,7 @@ r4::rectangle<uint32_t> renderer::get_scissor() const
 
 void renderer::set_scissor(r4::rectangle<uint32_t> r)
 {
-	glScissor(r.p.x(), r.p.y(), r.d.x(), r.d.y());
+	glScissor(GLint(r.p.x()), GLint(r.p.y()), GLint(r.d.x()), GLint(r.d.y()));
 	assert_opengl_no_error();
 }
 
@@ -175,7 +191,7 @@ r4::rectangle<uint32_t> renderer::get_viewport() const
 
 void renderer::set_viewport(r4::rectangle<uint32_t> r)
 {
-	glViewport(r.p.x(), r.p.y(), r.d.x(), r.d.y());
+	glViewport(GLint(r.p.x()), GLint(r.p.y()), GLint(r.d.x()), GLint(r.d.y()));
 	assert_opengl_no_error();
 }
 
@@ -227,4 +243,13 @@ void renderer::set_blend_func(
 		// NOLINTNEXTLINE(cppcoreguidelines-pro-bounds-constant-array-index)
 		blend_func[unsigned(dst_alpha)]
 	);
+}
+
+void renderer::set_depth_test_enabled(bool enable)
+{
+	if (enable) {
+		glEnable(GL_DEPTH_TEST);
+	} else {
+		glDisable(GL_DEPTH_TEST);
+	}
 }

@@ -59,11 +59,25 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
 	texture_2d_parameters params
 )
 {
+	auto imvar_copy = imvar;
+	return this->create_texture_2d(std::move(imvar_copy), std::move(params));
+}
+
+utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
+	rasterimage::image_variant&& imvar,
+	texture_2d_parameters params
+)
+{
+	auto iv = std::move(imvar);
 	return std::visit(
-		[this, &imvar, &params](const auto& im) -> utki::shared_ref<ruis::render::texture_2d> {
+		[this, &imvar = iv, &params](auto&& im) -> utki::shared_ref<ruis::render::texture_2d> {
 			if constexpr (sizeof(im.pixels().front().front()) != 1) {
-				throw std::logic_error("render_factory::create_texture_2d(): non-8bit images are not supported");
+				throw std::logic_error(
+					"render_factory::create_texture_2d(): "
+					"non-8bit images are not supported"
+				);
 			} else {
+				im.span().flip_vertical();
 				auto data = im.pixels();
 				return this->create_texture_2d_internal(
 					imvar.get_format(),
@@ -73,7 +87,7 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d(
 				);
 			}
 		},
-		imvar.variant
+		iv.variant
 	);
 }
 
@@ -88,7 +102,7 @@ utki::shared_ref<ruis::render::texture_2d> render_factory::create_texture_2d_int
 	ASSERT(data.size() % dims.x() == 0)
 	ASSERT(data.size() == 0 || data.size() / rasterimage::to_num_channels(type) / dims.x() == dims.y())
 
-	auto ret = utki::make_shared<texture_2d>(dims.to<float>());
+	auto ret = utki::make_shared<texture_2d>(dims);
 
 	// TODO: save previous bind and restore it after?
 	ret.get().bind(0);
@@ -215,6 +229,11 @@ utki::shared_ref<ruis::render::vertex_array> render_factory::create_vertex_array
 }
 
 utki::shared_ref<ruis::render::index_buffer> render_factory::create_index_buffer(utki::span<const uint16_t> indices)
+{
+	return utki::make_shared<index_buffer>(indices);
+}
+
+utki::shared_ref<ruis::render::index_buffer> render_factory::create_index_buffer(utki::span<const uint32_t> indices)
 {
 	return utki::make_shared<index_buffer>(indices);
 }
