@@ -39,20 +39,7 @@ texture_2d::texture_2d(
 
 	this->bind(0);
 
-	GLint internal_format = [&type]() {
-		switch (type) {
-			default:
-				ASSERT(false)
-			case rasterimage::format::grey:
-				return GL_LUMINANCE;
-			case rasterimage::format::greya:
-				return GL_LUMINANCE_ALPHA;
-			case rasterimage::format::rgb:
-				return GL_RGB;
-			case rasterimage::format::rgba:
-				return GL_RGBA;
-		}
-	}();
+	GLint internal_format = to_opengl_format(type);
 
 	// we will be passing pixels to OpenGL which are 1-byte aligned
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -64,7 +51,7 @@ texture_2d::texture_2d(
 		internal_format, // internal format
 		GLsizei(dims.x()),
 		GLsizei(dims.y()),
-		0, // border, should be 0!
+		0, // border, should be 0
 		internal_format, // format of the texel data
 		GL_UNSIGNED_BYTE,
 		data.size() == 0 ? nullptr : data.data()

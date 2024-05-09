@@ -37,10 +37,17 @@ opengl_texture::~opengl_texture()
 	glDeleteTextures(1, &this->tex);
 }
 
-void opengl_texture::bind(unsigned unit_num) const
+void opengl_texture::set_active_texture(unsigned unit_num) const
 {
+	// OpenGL ES guarantees that GL_TEXTUREi = GL_TEXTURE0 + i
 	glActiveTexture(GL_TEXTURE0 + unit_num);
 	assert_opengl_no_error();
+}
+
+void opengl_texture::bind(unsigned unit_num) const
+{
+	this->set_active_texture(unit_num);
+
 	glBindTexture(GL_TEXTURE_2D, this->tex);
 	assert_opengl_no_error();
 }

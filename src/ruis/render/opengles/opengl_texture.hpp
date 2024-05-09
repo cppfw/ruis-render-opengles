@@ -45,6 +45,9 @@ struct opengl_texture {
 	~opengl_texture();
 
 	void bind(unsigned unit_num) const;
+
+protected:
+	void set_active_texture(unsigned unit_num) const;
 };
 
 } // namespace ruis::render::opengles

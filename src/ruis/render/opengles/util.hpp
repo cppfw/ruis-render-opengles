@@ -21,6 +21,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+#include <rasterimage/image_variant.hpp>
 #include <utki/config.hpp>
 #include <utki/debug.hpp>
 
@@ -72,6 +73,23 @@ inline void assert_opengl_no_error()
 			break;
 	}
 #endif
+}
+
+inline GLint to_opengl_format(rasterimage::format f)
+{
+	switch (f) {
+		default:
+			ASSERT(false)
+			[[fallthrough]];
+		case rasterimage::format::grey:
+			return GL_LUMINANCE;
+		case rasterimage::format::greya:
+			return GL_LUMINANCE_ALPHA;
+		case rasterimage::format::rgb:
+			return GL_RGB;
+		case rasterimage::format::rgba:
+			return GL_RGBA;
+	}
 }
 
 } // namespace ruis::render::opengles
