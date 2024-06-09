@@ -56,6 +56,7 @@ capabilities get_capabilities(){
 	auto* exts_str = glGetString(GL_EXTENSIONS);
 	assert_opengl_no_error();
 
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 	std::string_view exts_sv(reinterpret_cast<const char*>(exts_str));
 
 	// std::cout << "exts = " << exts_sv << std::endl;
