@@ -21,10 +21,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-namespace ruis::render::opengles{
+namespace ruis::render::opengles {
 
-struct capabilities{
-    bool oes_element_index_uint;
+struct capabilities {
+	bool oes_element_index_uint;
 };
 
-}
+} // namespace ruis::render::opengles

@@ -51,8 +51,9 @@ using namespace std::string_view_literals;
 
 using namespace ruis::render::opengles;
 
-namespace{
-capabilities get_capabilities(){
+namespace {
+capabilities get_capabilities()
+{
 	auto* exts_str = glGetString(GL_EXTENSIONS);
 	assert_opengl_no_error();
 
@@ -63,11 +64,9 @@ capabilities get_capabilities(){
 
 	auto exts = utki::split(exts_sv, ' ');
 
-	return capabilities{
-		.oes_element_index_uint = utki::contains(exts, "GL_OES_element_index_uint"sv)
-	};
+	return capabilities{.oes_element_index_uint = utki::contains(exts, "GL_OES_element_index_uint"sv)};
 }
-}
+} // namespace
 
 render_factory::render_factory() :
 	caps(get_capabilities())
@@ -232,7 +231,7 @@ utki::shared_ref<ruis::render::index_buffer> render_factory::create_index_buffer
 
 utki::shared_ref<ruis::render::index_buffer> render_factory::create_index_buffer(utki::span<const uint32_t> indices)
 {
-	if(!this->caps.oes_element_index_uint){
+	if (!this->caps.oes_element_index_uint) {
 		throw std::runtime_error("This OpenGL ES implementation does not support 32bit vertex indices");
 	}
 	return utki::make_shared<index_buffer>(indices);
