@@ -23,12 +23,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <ruis/render/render_factory.hpp>
 
+#include "capabilities.hpp"
+
 namespace ruis::render::opengles {
 
 class render_factory : public ruis::render::render_factory
 {
 public:
-	render_factory() = default;
+	const capabilities caps;
+
+	render_factory();
 
 	render_factory(const render_factory&) = delete;
 	render_factory& operator=(const render_factory&) = delete;
