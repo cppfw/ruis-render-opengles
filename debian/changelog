@@ -1,3 +1,9 @@
+libruis-render-opengles (0.1.61) unstable; urgency=medium
+
+  * check for uint index extension
+
+ -- Ivan Gagis <igagis@gmail.com>  Mon, 10 Jun 2024 10:37:18 +0300
+
 libruis-render-opengles (0.1.60) unstable; urgency=medium
 
   * texture_cube
