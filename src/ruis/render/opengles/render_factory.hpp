@@ -21,13 +21,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include <ruis/render/render_factory.hpp>
+#include <ruis/render/factory.hpp>
 
 #include "capabilities.hpp"
 
 namespace ruis::render::opengles {
 
-class render_factory : public ruis::render::render_factory
+class render_factory : public ruis::render::factory
 {
 public:
 	const capabilities caps;

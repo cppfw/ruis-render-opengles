@@ -22,7 +22,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include <rasterimage/image_variant.hpp>
-#include <ruis/render/render_factory.hpp>
+#include <ruis/render/factory.hpp>
 #include <ruis/render/texture_2d.hpp>
 #include <utki/config.hpp>
 
