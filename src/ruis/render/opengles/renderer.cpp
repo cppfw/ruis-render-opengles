@@ -34,7 +34,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengles;
 
-renderer::renderer(std::unique_ptr<factory> factory) :
+renderer::renderer(std::unique_ptr<ruis::render::opengles::factory> factory) :
 	ruis::render::renderer(
 		std::move(factory),
 		{.max_texture_size =

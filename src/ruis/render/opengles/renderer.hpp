@@ -37,7 +37,7 @@ class renderer : public ruis::render::renderer
 	uint32_t default_framebuffer = 0;
 
 public:
-	renderer(std::unique_ptr<factory> factory = std::make_unique<factory>());
+	renderer(std::unique_ptr<ruis::render::opengles::factory> factory = std::make_unique<ruis::render::opengles::factory>());
 
 	renderer(const renderer&) = delete;
 	renderer& operator=(const renderer&) = delete;
