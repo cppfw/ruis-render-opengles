@@ -58,7 +58,8 @@ public:
 		texture_2d_parameters params
 	) override;
 
-	utki::shared_ref<ruis::render::texture_depth> create_texture_depth(rasterimage::dimensioned::dimensions_type dims
+	utki::shared_ref<ruis::render::texture_depth> create_texture_depth(
+		rasterimage::dimensioned::dimensions_type dims
 	) override;
 
 	utki::shared_ref<ruis::render::texture_cube> create_texture_cube(
@@ -70,11 +71,14 @@ public:
 		rasterimage::image_variant&& negative_z
 	) override;
 
-	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector4<float>> vertices
+	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(
+		utki::span<const r4::vector4<float>> vertices
 	) override;
-	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector3<float>> vertices
+	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(
+		utki::span<const r4::vector3<float>> vertices
 	) override;
-	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const r4::vector2<float>> vertices
+	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(
+		utki::span<const r4::vector2<float>> vertices
 	) override;
 	utki::shared_ref<ruis::render::vertex_buffer> create_vertex_buffer(utki::span<const float> vertices) override;
 
