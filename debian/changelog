@@ -1,3 +1,9 @@
+libruis-render-opengles (0.1.65) unstable; urgency=medium
+
+  * ubuntu noble
+
+ -- Ivan Gagis <igagis@gmail.com>  Tue, 10 Sep 2024 11:57:26 +0300
+
 libruis-render-opengles (0.1.64) unstable; urgency=medium
 
   * update
