@@ -38,14 +38,14 @@ jobs:
     name: linux - ${{ matrix.image_owner }}${{ matrix.os }}:${{ matrix.codename }} | ${{ matrix.labels[0] }}
     steps:
       - name: add cppfw deb repo
-        uses: myci-actions/add-deb-repo@master
+        uses: myci-actions/add-deb-repo@main
         with:
           repo: deb https://gagis.hopto.org/repo/cppfw/${{ matrix.os }} ${{ matrix.codename }} main
           repo-name: cppfw
           keys-asc: https://gagis.hopto.org/repo/cppfw/pubkey.gpg
           install: myci git
       - name: add llvm repo (for clang-format)
-        uses: myci-actions/add-deb-repo@master
+        uses: myci-actions/add-deb-repo@main
         with:
           repo: deb https://apt.llvm.org/${{ matrix.codename }} llvm-toolchain-${{ matrix.codename }} main
           repo-name: llvm
@@ -57,9 +57,9 @@ jobs:
           
           apt install --assume-yes devscripts equivs
       - name: git clone
-        uses: myci-actions/checkout@master
+        uses: myci-actions/checkout@main
       - name: set PACKAGE_VERSION
-        uses: myci-actions/export-env-var@master
+        uses: myci-actions/export-env-var@main
         with: {name: PACKAGE_VERSION, value: $(myci-deb-version.sh debian/changelog)}
       - name: prepare debian package
         run: myci-deb-prepare.sh
@@ -92,9 +92,9 @@ jobs:
     - name: install ci tools
       run: brew install myci
     - name: git clone
-      uses: myci-actions/checkout@master
+      uses: myci-actions/checkout@main
     - name: set PACKAGE_VERSION
-      uses: myci-actions/export-env-var@master
+      uses: myci-actions/export-env-var@main
       with: {name: PACKAGE_VERSION, value: $(myci-deb-version.sh debian/changelog)}
     - name: add cocoapods repo
       run: pod repo add --silent cppfw https://$MYCI_GIT_USERNAME@github.com/cppfw/cocoapods-repo.git
@@ -124,16 +124,16 @@ jobs:
     container: mingc/android-build-box:latest
     steps:
     - name: git clone
-      uses: myci-actions/checkout@master
+      uses: myci-actions/checkout@main
     - name: add cppfw deb repo
-      uses: myci-actions/add-deb-repo@master
+      uses: myci-actions/add-deb-repo@main
       with:
         repo: deb https://gagis.hopto.org/repo/cppfw/$(lsb_release --id --short | tr '[:upper:]' '[:lower:]') $(lsb_release --codename --short) main
         repo-name: cppfw
         keys-asc: https://gagis.hopto.org/repo/cppfw/pubkey.gpg
         install: myci
     - name: set PACKAGE_VERSION
-      uses: myci-actions/export-env-var@master
+      uses: myci-actions/export-env-var@main
       with: {name: PACKAGE_VERSION, value: $(myci-deb-version.sh debian/changelog)}
     - name: build
       run: |
