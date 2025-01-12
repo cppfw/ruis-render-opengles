@@ -29,8 +29,12 @@ using namespace ruis::render::opengles;
 
 vertex_array::vertex_array(
 	buffers_type buffers,
-	const utki::shared_ref<const ruis::render::index_buffer>& indices,
+	utki::shared_ref<const ruis::render::index_buffer> indices,
 	mode rendering_mode
 ) :
-	ruis::render::vertex_array(std::move(buffers), indices, rendering_mode)
+	ruis::render::vertex_array(
+		std::move(buffers), //
+		std::move(indices),
+		rendering_mode
+	)
 {}
