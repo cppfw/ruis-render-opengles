@@ -1,3 +1,9 @@
+libruis-render-opengles (0.1.67) unstable; urgency=medium
+
+  * conan: emscripten
+
+ -- Ivan Gagis <igagis@gmail.com>  Thu, 06 Feb 2025 18:04:01 +0200
+
 libruis-render-opengles (0.1.66) unstable; urgency=medium
 
   * update
