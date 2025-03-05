@@ -35,7 +35,12 @@ namespace ruis::render::opengles {
 class vertex_array : public ruis::render::vertex_array
 {
 public:
-	vertex_array(buffers_type buffers, utki::shared_ref<const ruis::render::index_buffer> indices, mode rendering_mode);
+	vertex_array(
+		utki::shared_ref<ruis::render::renderer> renderer, //
+		buffers_type buffers,
+		utki::shared_ref<const ruis::render::index_buffer> indices,
+		mode rendering_mode
+	);
 
 	vertex_array(const vertex_array&) = delete;
 	vertex_array& operator=(const vertex_array&) = delete;
