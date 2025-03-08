@@ -68,7 +68,8 @@ capabilities get_capabilities()
 }
 } // namespace
 
-factory::factory() :
+factory::factory(utki::shared_ref<ruis::render::context> render_context) :
+	ruis::render::factory(std::move(render_context)),
 	caps(get_capabilities())
 {
 	// std::cout << "GL_OES_element_index_uint = " << this->caps.oes_element_index_uint << std::endl;

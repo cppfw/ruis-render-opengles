@@ -24,6 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <ruis/render/factory.hpp>
 
 #include "capabilities.hpp"
+#include "context.hpp"
 
 namespace ruis::render::opengles {
 
@@ -32,7 +33,7 @@ class factory : public ruis::render::factory
 public:
 	const capabilities caps;
 
-	factory();
+	factory(utki::shared_ref<ruis::render::context> render_context);
 
 	factory(const factory&) = delete;
 	factory& operator=(const factory&) = delete;
