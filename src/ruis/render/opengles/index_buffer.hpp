@@ -36,7 +36,7 @@ public:
 
 private:
 	index_buffer(
-		utki::shared_ref<ruis::render::renderer> renderer, //
+		utki::shared_ref<ruis::render::context> render_context, //
 		const void* data,
 		size_t size_bytes,
 		size_t size,
@@ -45,11 +45,11 @@ private:
 
 public:
 	index_buffer(
-		utki::shared_ref<ruis::render::renderer> renderer, //
+		utki::shared_ref<ruis::render::context> render_context, //
 		utki::span<const uint16_t> indices
 	);
 	index_buffer(
-		utki::shared_ref<ruis::render::renderer> renderer, //
+		utki::shared_ref<ruis::render::context> render_context, //
 		utki::span<const uint32_t> indices
 	);
 

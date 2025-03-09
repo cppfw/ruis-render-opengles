@@ -122,7 +122,7 @@ utki::shared_ref<ruis::render::texture_2d> factory::create_texture_2d_internal(
 )
 {
 	return utki::make_shared<texture_2d>(
-		this->get_renderer(), //
+		this->render_context, //
 		type,
 		dims,
 		data,
@@ -135,7 +135,7 @@ utki::shared_ref<ruis::render::texture_depth> factory::create_texture_depth(
 )
 {
 	return utki::make_shared<texture_depth>(
-		this->get_renderer(), //
+		this->render_context, //
 		dims
 	);
 }
@@ -188,7 +188,7 @@ utki::shared_ref<ruis::render::texture_cube> factory::create_texture_cube(
 	}
 
 	return utki::make_shared<texture_cube>(
-		this->get_renderer(), //
+		this->render_context, //
 		faces
 	);
 }
@@ -198,7 +198,7 @@ utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(
 )
 {
 	return utki::make_shared<vertex_buffer>(
-		this->get_renderer(), //
+		this->render_context, //
 		vertices
 	);
 }
@@ -208,7 +208,7 @@ utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(
 )
 {
 	return utki::make_shared<vertex_buffer>(
-		this->get_renderer(), //
+		this->render_context, //
 		vertices
 	);
 }
@@ -218,7 +218,7 @@ utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(
 )
 {
 	return utki::make_shared<vertex_buffer>(
-		this->get_renderer(), //
+		this->render_context, //
 		vertices
 	);
 }
@@ -226,7 +226,7 @@ utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(
 utki::shared_ref<ruis::render::vertex_buffer> factory::create_vertex_buffer(utki::span<const float> vertices)
 {
 	return utki::make_shared<vertex_buffer>(
-		this->get_renderer(), //
+		this->render_context, //
 		vertices
 	);
 }
@@ -238,7 +238,7 @@ utki::shared_ref<ruis::render::vertex_array> factory::create_vertex_array(
 )
 {
 	return utki::make_shared<vertex_array>(
-		this->get_renderer(), //
+		this->render_context, //
 		std::move(buffers),
 		std::move(indices),
 		rendering_mode
@@ -248,7 +248,7 @@ utki::shared_ref<ruis::render::vertex_array> factory::create_vertex_array(
 utki::shared_ref<ruis::render::index_buffer> factory::create_index_buffer(utki::span<const uint16_t> indices)
 {
 	return utki::make_shared<index_buffer>(
-		this->get_renderer(), //
+		this->render_context, //
 		indices
 	);
 }
@@ -259,7 +259,7 @@ utki::shared_ref<ruis::render::index_buffer> factory::create_index_buffer(utki::
 		throw std::runtime_error("This OpenGL ES implementation does not support 32bit vertex indices");
 	}
 	return utki::make_shared<index_buffer>(
-		this->get_renderer(), //
+		this->render_context, //
 		indices
 	);
 }
