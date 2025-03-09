@@ -28,6 +28,7 @@ namespace ruis::render::opengles {
 class context : public ruis::render::context
 {
 public:
+	utki::shared_ref<shaders> create_shaders() override;
 };
 
 } // namespace ruis::render::opengles
