@@ -29,10 +29,19 @@ namespace ruis::render::opengles {
 
 class context : public ruis::render::context
 {
+	bool default_framebuffer_initialized = false;
+
+	// NOTE: GLuint is fixed 32bit type, according to
+	// OpenGL specs, so use uint32_t.
+	uint32_t default_framebuffer = 0;
+
 public:
 	context();
 
 	const capabilities caps;
+
+	// ===============================
+	// ====== factory functions ======
 
 	utki::shared_ref<shaders> create_shaders() override;
 
@@ -99,6 +108,45 @@ private:
 		utki::span<const uint8_t> data,
 		texture_2d_parameters params
 	);
+
+public:
+	// =====================================
+	// ====== state control functions ======
+
+	void set_framebuffer_internal(ruis::render::frame_buffer* fb) override;
+
+	void clear_framebuffer_color() override;
+
+	void clear_framebuffer_depth() override;
+
+	void clear_framebuffer_stencil() override;
+
+	r4::vector2<uint32_t> to_window_coords(ruis::vec2 point) const override;
+
+	bool is_scissor_enabled() const noexcept override;
+
+	void enable_scissor(bool enable) override;
+
+	r4::rectangle<uint32_t> get_scissor() const override;
+
+	void set_scissor(r4::rectangle<uint32_t> r) override;
+
+	r4::rectangle<uint32_t> get_viewport() const override;
+
+	void set_viewport(r4::rectangle<uint32_t> r) override;
+
+	void enable_blend(bool enable) override;
+
+	void set_blend_func(
+		blend_factor src_color,
+		blend_factor dst_color,
+		blend_factor src_alpha,
+		blend_factor dst_alpha
+	) override;
+
+	bool is_depth_enabled() const noexcept override;
+
+	void enable_depth(bool enable) override;
 };
 
 } // namespace ruis::render::opengles
