@@ -24,8 +24,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <ruis/render/renderer.hpp>
 #include <utki/config.hpp>
 
-#include "factory.hpp"
-
 namespace ruis::render::opengles {
 
 class renderer : public ruis::render::renderer
@@ -37,7 +35,7 @@ class renderer : public ruis::render::renderer
 	uint32_t default_framebuffer = 0;
 
 public:
-	renderer(std::unique_ptr<ruis::render::opengles::factory> factory);
+	renderer(utki::shared_ref<ruis::render::context> render_context);
 
 	renderer(const renderer&) = delete;
 	renderer& operator=(const renderer&) = delete;

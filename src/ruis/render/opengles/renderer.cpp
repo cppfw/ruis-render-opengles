@@ -34,9 +34,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengles;
 
-renderer::renderer(std::unique_ptr<ruis::render::opengles::factory> factory) :
+renderer::renderer(utki::shared_ref<ruis::render::context> render_context) :
 	ruis::render::renderer(
-		std::move(factory),
+		std::move(render_context),
 		{// .max_texture_size =
 		 //  []() {
 		 // 	 // the variable is initialized via output argument, so no need to initialize it here
