@@ -1,7 +1,7 @@
-#include <ruis/render/opengles/renderer.hpp>
+#include <ruis/render/opengles/context.hpp>
 
 int main(int argc, const char** argv){
-	auto r = utki::make_shared<ruis::render::opengles::renderer>();
+	auto c = utki::make_shared<ruis::render::opengles::context>();
 
 	std::cout << "hello ruis-render-opengles!" << std::endl;
 
