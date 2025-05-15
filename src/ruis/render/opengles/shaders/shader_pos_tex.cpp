@@ -29,9 +29,8 @@ shader_pos_tex::shader_pos_tex(utki::shared_ref<ruis::render::context> render_co
 	ruis::render::texturing_shader(std::move(render_context)),
 	shader_base(
 		R"qwertyuiop(
-			attribute highp vec4 a0; //position
-
-			attribute highp vec2 a1; //texture coordinates
+			attribute highp vec4 a0; // position
+			attribute highp vec2 a1; // texture coordinates
 
 			uniform highp mat4 matrix;
 
@@ -39,7 +38,7 @@ shader_pos_tex::shader_pos_tex(utki::shared_ref<ruis::render::context> render_co
 
 			void main(void){
 				gl_Position = matrix * a0;
-				tc0 = vec2(a1.x, 1.0f - a1.y);
+				tc0 = vec2(a1.x, 1.0 - a1.y);
 			}
 		)qwertyuiop",
 		R"qwertyuiop(
