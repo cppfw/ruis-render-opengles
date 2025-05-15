@@ -1,3 +1,9 @@
+libruis-render-opengles (0.1.72) unstable; urgency=medium
+
+  * emsc: use GL_DEPTH_COMPONENT
+
+ -- Ivan Gagis <igagis@gmail.com>  Fri, 16 May 2025 01:01:09 +0300
+
 libruis-render-opengles (0.1.71) unstable; urgency=medium
 
   * remove float literal suffix from shaders
