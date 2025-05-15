@@ -21,6 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "texture_depth.hpp"
 
+#include <utki/config.hpp>
+
 #include "util.hpp"
 
 using namespace ruis::render::opengles;
@@ -39,7 +41,16 @@ texture_depth::texture_depth(
 	glTexImage2D( //
 		GL_TEXTURE_2D,
 		0, // 0th level, no mipmaps
+#if CFG_OS_NAME == CFG_OS_NAME_EMSCRIPTEN
+		// According to https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_depth_texture
+		// WebGL needs GL_DEPTH_COMPONENT as internal format.
+		// Otherwise it doesn't work:
+		// - framebuffer with such depth attachment fails test for being complete.And WebGL prints warning
+		// - WebGL texImage2D() prints warning: "Invalid internalformat: 0x81a5"
+		GL_DEPTH_COMPONENT, // internal format
+#else
 		GL_DEPTH_COMPONENT16, // internal format
+#endif
 		GLsizei(dims.x()),
 		GLsizei(dims.y()),
 		0, // border, deprecated, should be 0
