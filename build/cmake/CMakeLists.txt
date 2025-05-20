@@ -9,18 +9,21 @@ set(dir_name ruis)
 # Otherwise VCPKG does not set the CMAKE_PREFIX_PATH to find packages.
 find_package(myci CONFIG REQUIRED)
 
+find_package(JPEG REQUIRED)
+
+if(WIN32)
+    find_package(unofficial-angle REQUIRED CONFIG)
+    set(gles2_dep unofficial::angle::GLESv2)
+else()
+    set(gles2_dep)
+endif()
+
 set(srcs)
 myci_add_source_files(srcs
     DIRECTORY
         ../../src/${dir_name}
     RECURSIVE
 )
-
-if(WIN32)
-    set(gles2_dep GLESv2)
-else()
-    set(gles2_dep)
-endif()
 
 myci_declare_library(${name}
     SOURCES
@@ -44,6 +47,6 @@ myci_declare_library(${name}
         ruis
         Freetype
     EXTERNAL_DEPENDENCIES
-        JPEG
+        JPEG::JPEG
         ${gles2_dep}
 )
