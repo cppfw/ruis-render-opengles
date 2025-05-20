@@ -13,7 +13,7 @@ find_package(JPEG REQUIRED)
 
 if(WIN32)
     find_package(unofficial-angle REQUIRED CONFIG)
-    set(gles2_dep unofficial::angle::GLESv2)
+    set(gles2_dep unofficial::angle::libGLESv2)
 else()
     set(gles2_dep)
 endif()
