@@ -10,10 +10,10 @@ set(dir_name ruis)
 find_package(myci CONFIG REQUIRED)
 
 find_package(JPEG REQUIRED)
-find_package(Freetype REQUIRED CONFIG)
+find_package(Freetype CONFIG REQUIRED)
 
 if(WIN32)
-    find_package(unofficial-angle REQUIRED CONFIG)
+    find_package(unofficial-angle CONFIG REQUIRED)
     set(gles2_dep unofficial::angle::libGLESv2)
 else()
     set(gles2_dep)

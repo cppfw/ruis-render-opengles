@@ -21,7 +21,7 @@ find_package(Freetype CONFIG REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(JPEG REQUIRED)
 if(WIN32)
-    find_package(unofficial-angle REQUIRED CONFIG)
+    find_package(unofficial-angle CONFIG REQUIRED)
 endif()
 
 find_package(ruis-render-opengles CONFIG REQUIRED)
