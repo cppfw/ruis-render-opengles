@@ -10,6 +10,7 @@ set(dir_name ruis)
 find_package(myci CONFIG REQUIRED)
 
 find_package(JPEG REQUIRED)
+find_package(Freetype REQUIRED CONFIG)
 
 if(WIN32)
     find_package(unofficial-angle REQUIRED CONFIG)
@@ -45,8 +46,8 @@ myci_declare_library(${name}
         svgdom
         svgren
         ruis
-        Freetype
     EXTERNAL_DEPENDENCIES
         JPEG::JPEG
+        Freetype::Freetype
         ${gles2_dep}
 )
