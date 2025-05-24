@@ -10,6 +10,7 @@ set(dir_name ruis)
 find_package(myci CONFIG REQUIRED)
 
 find_package(JPEG REQUIRED)
+find_package(PNG REQUIRED)
 find_package(Freetype CONFIG REQUIRED)
 
 if(WIN32)
@@ -52,6 +53,7 @@ myci_declare_library(${name}
         ruis
     EXTERNAL_DEPENDENCIES
         JPEG::JPEG
+        PNG::PNG
         Freetype::Freetype
         ${gles2_dep}
 )

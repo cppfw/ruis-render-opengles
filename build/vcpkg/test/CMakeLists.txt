@@ -20,6 +20,7 @@ find_package(ruis CONFIG REQUIRED)
 find_package(Freetype CONFIG REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(JPEG REQUIRED)
+find_package(PNG REQUIRED)
 
 # GLES2
 if(WIN32)
