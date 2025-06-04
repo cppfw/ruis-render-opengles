@@ -9,10 +9,6 @@ set(dir_name ruis)
 # Otherwise VCPKG does not set the CMAKE_PREFIX_PATH to find packages.
 find_package(myci CONFIG REQUIRED)
 
-find_package(JPEG REQUIRED)
-find_package(PNG REQUIRED)
-find_package(Freetype CONFIG REQUIRED)
-
 if(WIN32)
     find_package(unofficial-angle CONFIG REQUIRED)
     set(gles2_dep unofficial::angle::libGLESv2)
@@ -39,21 +35,7 @@ myci_declare_library(${name}
     INSTALL_INCLUDE_DIRECTORIES
         ../../src/${dir_name}
     DEPENDENCIES
-        rasterimage
-        r4
-        papki
-        tml
-        utki
-        agg
-        veg
-        mikroxml
-        cssom
-        svgdom
-        svgren
         ruis
     EXTERNAL_DEPENDENCIES
-        JPEG::JPEG
-        PNG::PNG
-        Freetype::Freetype
         ${gles2_dep}
 )
