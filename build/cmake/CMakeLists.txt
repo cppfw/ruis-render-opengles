@@ -11,11 +11,18 @@ find_package(myci CONFIG REQUIRED)
 
 if(WIN32)
     find_package(unofficial-angle CONFIG REQUIRED)
-    set(gles2_dep unofficial::angle::libGLESv2)
+    set(gles2_dep
+        unofficial::angle::libEGL
+        unofficial::angle::libGLESv2
+    )
 elseif(LINUX)
     find_package(PkgConfig REQUIRED)
+    pkg_check_modules(EGL REQUIRED IMPORTED_TARGET "egl")
     pkg_check_modules(GLES2 REQUIRED IMPORTED_TARGET "glesv2")
-    set(gles2_dep PkgConfig::GLES2)
+    set(gles2_dep
+        PkgConfig::EGL
+        PkgConfig::GLES2
+    )
 else()
     set(gles2_dep)
 endif()
