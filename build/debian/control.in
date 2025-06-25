@@ -17,15 +17,27 @@ Standards-Version: 3.9.2
 Package: libruis-render-opengles$(soname)
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends:
+	${shlibs:Depends},
+	${misc:Depends}
 Description: OpenGL ES renderer for ruis.
- OpenGL ES renderer for ruis GUI library.
+	OpenGL ES renderer for ruis GUI library.
+
+Package: libruis-render-opengles-dbg$(soname)
+Section: libs
+Architecture: any
+Depends:
+	${shlibs:Depends},
+	${misc:Depends}
+Description: OpenGL renderer for ruis.
+	Debug version of libruis-render-opengles.
 
 Package: libruis-render-opengles$(soname)-dbgsrc
 Section: debug
 Architecture: all
 Depends:
 	libruis-render-opengles$(soname)-dbgsym (= ${binary:Version}),
+	libruis-render-opengles-dbg$(soname)-dbgsym (= ${binary:Version}),
 	${misc:Depends}
 Description: debugging sources for libruis-render-opengles$(soname) package.
 
@@ -34,6 +46,7 @@ Section: libdevel
 Architecture: any
 Depends:
 	libruis-render-opengles$(soname) (= ${binary:Version}),
+	libruis-render-opengles-dbg$(soname) (= ${binary:Version}),
 	libruis-dev (>= 0.5.160),
 	${misc:Depends}
 Suggests: libruis-render-opengles-doc
