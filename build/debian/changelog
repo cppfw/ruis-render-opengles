@@ -1,3 +1,9 @@
+libruis-render-opengles (0.1.77) unstable; urgency=medium
+
+  * debian dbg package
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 25 Jun 2025 16:25:20 +0300
+
 libruis-render-opengles (0.1.76) unstable; urgency=medium
 
   * cmake: config transient deps
