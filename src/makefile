@@ -16,7 +16,7 @@ this_srcs += $(call prorab-src-dir,$(this_src_dir))
 
 this_ldlibs += `pkg-config --libs glesv2`
 
-this_ldlibs += -lruis$(this_dbg)
+this_ldlibs += -l ruis$(this_dbg)
 
 $(eval $(prorab-build-lib))
 
