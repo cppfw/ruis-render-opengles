@@ -4,6 +4,8 @@
 
 #include <ruis/render/opengles/context.hpp>
 
+#include <iostream>
+
 int main(int argc, const char** argv){
     std::function<void()> f = [](){
         ruis::render::opengles::context c;
