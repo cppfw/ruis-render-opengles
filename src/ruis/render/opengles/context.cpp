@@ -66,34 +66,41 @@ capabilities get_capabilities()
 }
 } // namespace
 
-context::context() :
-	ruis::render::context({// .max_texture_size =
-						   //  []() {
-						   // 	 // the variable is initialized via output argument, so no need to initialize it here
-						   // 	 // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-						   // 	 GLint val;
-						   // 	 glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
-						   // 	 assert_opengl_no_error();
-						   // 	 ASSERT(val > 0, [&](auto& o) {
-						   // 		 o << "val = " << val;
-						   // 	 })
-						   // 	 return unsigned(val);
-						   //  }(),
-						   .initial_matrix = ruis::matrix4()
-												 // OpenGL identity matrix:
-												 //   viewport edges: left = -1, right = 1, top = 1, bottom = -1
-												 //   z-axis towards viewer
-												 .set_identity()
-												 // x-axis right, y-axis down, z-axis away
-												 .scale(1, -1, -1)
-												 // viewport edges: left = 0, top = 0
-												 .translate(-1, -1)
-												 // viewport edges: right = 1, bottom = 1
-												 .scale(2, 2)
-	}),
+context::context(utki::shared_ref<ruis::native_window> native_window) :
+	ruis::render::context(
+		std::move(native_window),
+		// clang-format off
+		{
+			// .max_texture_size =
+			//  []() {
+			// 	 // the variable is initialized via output argument, so no need to initialize it here
+			// 	 // NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+			// 	 GLint val;
+			// 	 glGetIntegerv(GL_MAX_TEXTURE_SIZE, &val);
+			// 	 assert_opengl_no_error();
+			// 	 ASSERT(val > 0, [&](auto& o) {
+			// 		 o << "val = " << val;
+			// 	 })
+			// 	 return unsigned(val);
+			//  }(),
+			.initial_matrix = ruis::matrix4()
+				// OpenGL identity matrix:
+				//   viewport edges: left = -1, right = 1, top = 1, bottom = -1
+				//   z-axis towards viewer
+				.set_identity()
+				// x-axis right, y-axis down, z-axis away
+				.scale(1, -1, -1)
+				// viewport edges: left = 0, top = 0
+				.translate(-1, -1)
+				// viewport edges: right = 1, bottom = 1
+				.scale(2, 2)
+		} // clang-format on
+	),
 	caps(get_capabilities())
 {
-	glEnable(GL_CULL_FACE);
+	this->apply([]() {
+		glEnable(GL_CULL_FACE);
+	});
 }
 
 utki::shared_ref<ruis::render::context::shaders> context::make_shaders()
