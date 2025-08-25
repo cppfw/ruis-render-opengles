@@ -66,7 +66,7 @@ capabilities get_capabilities()
 }
 } // namespace
 
-context::context(utki::shared_ref<ruis::native_window> native_window) :
+context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 	ruis::render::context(
 		std::move(native_window),
 		// clang-format off

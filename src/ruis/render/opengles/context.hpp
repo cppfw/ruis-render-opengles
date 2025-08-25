@@ -36,7 +36,7 @@ class context : public ruis::render::context
 	uint32_t default_framebuffer = 0;
 
 public:
-	context(utki::shared_ref<ruis::native_window> native_window);
+	context(utki::shared_ref<ruis::render::native_window> native_window);
 
 	const capabilities caps;
 
