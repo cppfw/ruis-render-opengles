@@ -25,8 +25,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 using namespace ruis::render::opengles;
 
-shader_pos_tex::shader_pos_tex(utki::shared_ref<ruis::render::context> render_context) :
-	ruis::render::texturing_shader(std::move(render_context)),
+shader_pos_tex::shader_pos_tex(utki::shared_ref<const ruis::render::context> rendering_context) :
+	ruis::render::texturing_shader(std::move(rendering_context)),
 	shader_base(
 		R"qwertyuiop(
 			attribute highp vec4 a0; // position
@@ -67,7 +67,10 @@ void shader_pos_tex::render(
 	static_cast<const texture_2d&>(tex).bind(texture_unit_number);
 	this->bind();
 
-	this->set_uniform_sampler(this->texture_uniform, texture_unit_number);
+	this->set_uniform_sampler(
+		this->texture_uniform, //
+		texture_unit_number
+	);
 
 	this->shader_base::render(m, va);
 }

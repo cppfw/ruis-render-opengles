@@ -36,7 +36,7 @@ class vertex_array : public ruis::render::vertex_array
 {
 public:
 	vertex_array(
-		utki::shared_ref<ruis::render::context> render_context, //
+		utki::shared_ref<const ruis::render::context> rendering_context, //
 		buffers_type buffers,
 		utki::shared_ref<const ruis::render::index_buffer> indices,
 		mode rendering_mode
