@@ -49,52 +49,56 @@ frame_buffer::frame_buffer( //
 		std::move(stencil)
 	)
 {
-	glGenFramebuffers(1, &this->fbo);
-	assert_opengl_no_error();
-
-	// the variable is initialized via output argument, so no need to initialize it here
-	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
-	GLint old_fb;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
-	assert_opengl_no_error();
-
-	if (this->color) {
-		ASSERT(dynamic_cast<texture_2d*>(this->color.get()))
-		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-		auto& tex = static_cast<texture_2d&>(*this->color);
-
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
+	// In OpenGL ES framebuffer objects are not shared between contexts,
+	// so make sure the owning context is bound when deleting the framebuffer object.
+	this->rendering_context.get().apply([this]() {
+		glGenFramebuffers(1, &this->fbo);
 		assert_opengl_no_error();
-	}
 
-	if (this->depth) {
-		ASSERT(dynamic_cast<texture_depth*>(this->depth.get()))
-		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-		auto& tex = static_cast<texture_depth&>(*this->depth);
+		// the variable is initialized via output argument, so no need to initialize it here
+		// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
+		GLint old_fb;
+		glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fb);
 
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex.tex, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, this->fbo);
 		assert_opengl_no_error();
-	}
 
-	if (this->stencil) {
-		throw std::logic_error("frame_buffer(): OpenGL ES stencil texture support is not implemented");
-	}
+		if (this->color) {
+			ASSERT(dynamic_cast<texture_2d*>(this->color.get()))
+			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+			auto& tex = static_cast<texture_2d&>(*this->color);
 
-	// Check for completeness
-	{
-		GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-		assert_opengl_no_error();
-		if (status != GL_FRAMEBUFFER_COMPLETE) {
-			throw std::runtime_error(
-				utki::cat("frame_buffer(): OpenGL ES framebuffer is incomplete: status = ", unsigned(status))
-			);
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
+			assert_opengl_no_error();
 		}
-	}
 
-	glBindFramebuffer(GL_FRAMEBUFFER, old_fb);
-	assert_opengl_no_error();
+		if (this->depth) {
+			ASSERT(dynamic_cast<texture_depth*>(this->depth.get()))
+			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
+			auto& tex = static_cast<texture_depth&>(*this->depth);
+
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex.tex, 0);
+			assert_opengl_no_error();
+		}
+
+		if (this->stencil) {
+			throw std::logic_error("frame_buffer(): OpenGL ES stencil texture support is not implemented");
+		}
+
+		// Check for completeness
+		{
+			GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+			assert_opengl_no_error();
+			if (status != GL_FRAMEBUFFER_COMPLETE) {
+				throw std::runtime_error(
+					utki::cat("frame_buffer(): OpenGL ES framebuffer is incomplete: status = ", unsigned(status))
+				);
+			}
+		}
+
+		glBindFramebuffer(GL_FRAMEBUFFER, old_fb);
+		assert_opengl_no_error();
+	});
 }
 
 frame_buffer::~frame_buffer()
