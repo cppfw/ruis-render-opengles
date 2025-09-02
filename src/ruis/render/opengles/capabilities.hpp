@@ -24,7 +24,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 namespace ruis::render::opengles {
 
 struct capabilities {
-	bool oes_element_index_uint;
+	bool oes_element_index_uint = false;
 };
 
 } // namespace ruis::render::opengles
