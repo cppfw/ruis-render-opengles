@@ -1,8 +1,9 @@
-libruis-render-opengles (0.2.0) UNRELEASED; urgency=medium
+libruis-render-opengles (0.3.0) UNRELEASED; urgency=medium
 
   * multiwindow
+  * multiwindow
 
- -- Ivan Gagis <igagis@gmail.com>  Sun, 05 Oct 2025 19:26:11 +0300
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 05 Oct 2025 20:34:04 +0300
 
 libruis-render-opengles (0.1.79) unstable; urgency=medium
 
