@@ -41,13 +41,16 @@ texture_depth::texture_depth(
 	glTexImage2D( //
 		GL_TEXTURE_2D,
 		0, // 0th level, no mipmaps
-#if CFG_OS_NAME == CFG_OS_NAME_EMSCRIPTEN
+#if CFG_OS_NAME == CFG_OS_NAME_EMSCRIPTEN || CFG_OS_NAME == CFG_OS_NAME_IOS
 		// According to https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_depth_texture
 		// WebGL needs GL_DEPTH_COMPONENT as internal format.
 		// Otherwise it doesn't work:
-		// - framebuffer with such depth attachment fails test for being complete.And WebGL prints warning
+		// - framebuffer with such depth attachment fails test for being complete. And WebGL prints warning.
 		// - WebGL texImage2D() prints warning: "Invalid internalformat: 0x81a5"
-		GL_DEPTH_COMPONENT, // internal format
+
+        // And iOS also needs this one instead of GL_DEPTH_COMPONENT16.
+
+        GL_DEPTH_COMPONENT, // internal format
 #else
 		GL_DEPTH_COMPONENT16, // internal format
 #endif

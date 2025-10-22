@@ -68,7 +68,8 @@ frame_buffer::frame_buffer( //
 			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 			auto& tex = static_cast<texture_2d&>(*this->color);
 
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
+			glFramebufferTexture2D(GL_FRAMEBUFFER,//
+				 GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex.tex, 0);
 			assert_opengl_no_error();
 		}
 
@@ -77,7 +78,8 @@ frame_buffer::frame_buffer( //
 			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 			auto& tex = static_cast<texture_depth&>(*this->depth);
 
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex.tex, 0);
+			glFramebufferTexture2D(GL_FRAMEBUFFER,//
+				 GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, tex.tex, 0);
 			assert_opengl_no_error();
 		}
 
