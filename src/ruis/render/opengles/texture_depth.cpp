@@ -48,9 +48,9 @@ texture_depth::texture_depth(
 		// - framebuffer with such depth attachment fails test for being complete. And WebGL prints warning.
 		// - WebGL texImage2D() prints warning: "Invalid internalformat: 0x81a5"
 
-        // And iOS also needs this one instead of GL_DEPTH_COMPONENT16.
+		// And iOS also needs this one instead of GL_DEPTH_COMPONENT16.
 
-        GL_DEPTH_COMPONENT, // internal format
+		GL_DEPTH_COMPONENT, // internal format
 #else
 		GL_DEPTH_COMPONENT16, // internal format
 #endif
