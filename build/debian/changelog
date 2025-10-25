@@ -1,3 +1,9 @@
+libruis-render-opengles (0.3.3) unstable; urgency=medium
+
+  * deb: fix debug src path
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 26 Oct 2025 00:52:10 +0300
+
 libruis-render-opengles (0.3.2) unstable; urgency=medium
 
   * fix ios
