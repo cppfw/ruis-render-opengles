@@ -24,21 +24,7 @@ myci_declare_library(${name}
     INSTALL_INCLUDE_DIRECTORIES
         ../../src/${dir_name}
     DEPENDENCIES
-        rasterimage
-        r4
-        fsif
-        tml
-        utki
-        agg
-        veg
-        mikroxml
-        cssom
-        svgdom
-        svgren
         ruis
-        JPEG::JPEG
-        PNG::PNG
-        Freetype::Freetype
     LINUX_ONLY_DEPENDENCIES
         PkgConfig::glesv2
     WINDOWS_ONLY_DEPENDENCIES
