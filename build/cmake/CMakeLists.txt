@@ -44,3 +44,12 @@ myci_declare_library(${name}
     WINDOWS_ONLY_DEPENDENCIES
         unofficial-angle/unofficial::angle::libGLESv2
 )
+
+if(APPLE)
+    target_link_libraries(${name}
+        PRIVATE
+            # Link the iOS frameworks directly using the -framework flag string.
+            # The quotes are important so CMake passes it as a single linker argument.
+            "-framework OpenGLES"
+    )
+endif()
