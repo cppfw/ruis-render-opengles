@@ -83,7 +83,7 @@ context::context(utki::shared_ref<ruis::render::native_window> native_window) :
 			// 	 })
 			// 	 return unsigned(val);
 			//  }(),
-			.initial_matrix = ruis::matrix4()
+			.initial_matrix = ruis::mat4()
 				// OpenGL identity matrix:
 				//   viewport edges: left = -1, right = 1, top = 1, bottom = -1
 				//   z-axis towards viewer
