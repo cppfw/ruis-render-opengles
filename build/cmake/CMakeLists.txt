@@ -38,4 +38,7 @@ if(APPLE)
             # The quotes are important so CMake passes it as a single linker argument.
             "-framework OpenGLES"
     )
+
+    # Define the GLES_SILENCE_DEPRECATION macro to silence OpenGL ES deprecation warnings on Apple platforms.
+    target_compile_definitions(${name} PRIVATE GLES_SILENCE_DEPRECATION)
 endif()
