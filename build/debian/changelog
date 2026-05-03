@@ -1,3 +1,9 @@
+libruis-render-opengles (0.3.9) unstable; urgency=medium
+
+  * ios: silence deprecation warnings
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 03 May 2026 15:31:18 +0300
+
 libruis-render-opengles (0.3.8) unstable; urgency=medium
 
   * update
