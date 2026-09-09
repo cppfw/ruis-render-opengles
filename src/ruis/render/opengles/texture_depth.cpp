@@ -28,11 +28,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengles;
 
 texture_depth::texture_depth(
-	utki::shared_ref<const ruis::render::context> rendering_context, //
+	const utki::shared_ref<const ruis::render::context>& rendering_context, //
 	r4::vector2<uint32_t> dims
 ) :
 	ruis::render::texture_depth(
-		std::move(rendering_context), //
+		rendering_context, //
 		dims
 	)
 {

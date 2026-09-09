@@ -26,10 +26,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengles;
 
 texture_cube::texture_cube(
-	utki::shared_ref<const ruis::render::context> rendering_context, //
+	const utki::shared_ref<const ruis::render::context>& rendering_context, //
 	const std::array<cube_face_image, num_cube_faces>& side_images
 ) :
-	ruis::render::texture_cube(std::move(rendering_context))
+	ruis::render::texture_cube(rendering_context)
 {
 	this->bind(0);
 
