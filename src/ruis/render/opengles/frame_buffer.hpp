@@ -52,6 +52,8 @@ public:
 
 	~frame_buffer() override;
 
+	rasterimage::image_variant get_color_pixels() override;
+
 private:
 };
 

@@ -21,6 +21,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "frame_buffer.hpp"
 
+#include <vector>
+
 #include <utki/config.hpp>
 #include <utki/string.hpp>
 
@@ -121,4 +123,40 @@ frame_buffer::~frame_buffer()
 		glDeleteFramebuffers(1, &this->fbo);
 		assert_opengl_no_error();
 	});
+}
+
+rasterimage::image_variant frame_buffer::get_color_pixels()
+{
+	std::vector<uint8_t> buf(static_cast<size_t>(this->dims().x()) * this->dims().y() * sizeof(uint32_t));
+
+	// Primary: read the framebuffer. apply() binds this FBO and sets the viewport to the full
+	// framebuffer size, restoring both afterwards. This is a probe-only path, so the extra
+	// bind/unbind is acceptable. OpenGL ES has no glReadBuffer(); a single color attachment FBO
+	// is read from color attachment zero directly.
+	bool fbo_read_ok = false;
+	this->apply([&]() {
+		glReadPixels(
+			0, //
+			0,
+			GLsizei(this->dims().x()),
+			GLsizei(this->dims().y()),
+			GL_RGBA,
+			GL_UNSIGNED_BYTE,
+			buf.data()
+		);
+		fbo_read_ok = (glGetError() == GL_NO_ERROR);
+	});
+
+	// Unlike desktop OpenGL, OpenGL ES has no glGetTexImage()/glGetTexSubImage(): a texture
+	// cannot be read back without a framebuffer, so glReadPixels on the FBO is the only path.
+	if (!fbo_read_ok) {
+		throw std::runtime_error("opengles::frame_buffer::get_color_pixels(): framebuffer readback failed");
+	}
+
+	// glReadPixels returns the rows from the framebuffer's bottom edge upwards, so the captured
+	// image is vertically flipped; restore the conventional top-down row order before handing it
+	// out (both write_png and the probe transport expect top-down rows).
+	auto im = rasterimage::image<uint8_t, sizeof(uint32_t)>::make(this->dims(), buf.data());
+	im.span().flip_vertical();
+	return {std::move(im)};
 }
