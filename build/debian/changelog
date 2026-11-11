@@ -1,3 +1,9 @@
+libruis-render-opengles (0.3.10) unstable; urgency=medium
+
+  * implement get_color_pixels()
+
+ -- Ivan Gagis <igagis@gmail.com>  Wed, 11 Nov 2026 12:53:06 +0200
+
 libruis-render-opengles (0.3.9) unstable; urgency=medium
 
   * ios: silence deprecation warnings
