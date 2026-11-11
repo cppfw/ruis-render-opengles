@@ -19,6 +19,7 @@
       },
       "utki",
       "ruis",
+      "rasterimage",
       {
         "name" : "angle",
         "platform" : "windows"

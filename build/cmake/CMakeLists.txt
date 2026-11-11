@@ -24,6 +24,7 @@ myci_declare_library(${name}
     INSTALL_INCLUDE_DIRECTORIES
         ../../src/${dir_name}
     DEPENDENCIES
+        rasterimage
         ruis
     LINUX_ONLY_DEPENDENCIES
         PkgConfig::glesv2
