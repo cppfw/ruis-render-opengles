@@ -146,7 +146,7 @@ program_wrapper::program_wrapper(const char* vertex_shader_code, const char* fra
 	GLint max_num_attribs;
 	glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &max_num_attribs);
 	assert_opengl_no_error();
-	ASSERT(max_num_attribs >= 0)
+	utki::assert(max_num_attribs >= 0, SL);
 
 	for (GLuint i = 0; i < GLuint(max_num_attribs); ++i) {
 		std::stringstream ss;
@@ -186,16 +186,16 @@ GLint shader_base::get_uniform(const char* name)
 
 void shader_base::render(const r4::matrix4<float>& m, const ruis::render::vertex_array& va) const
 {
-	ASSERT(this->is_bound())
+	utki::assert(this->is_bound(), SL);
 
 	this->set_matrix(m);
 
-	ASSERT(dynamic_cast<const index_buffer*>(&va.indices.get()))
+	utki::assert(dynamic_cast<const index_buffer*>(&va.indices.get()), SL);
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 	auto& ivbo = static_cast<const index_buffer&>(va.indices.get());
 
 	for (unsigned i = 0; i != va.buffers.size(); ++i) {
-		ASSERT(dynamic_cast<const vertex_buffer*>(&va.buffers[i].get()))
+		utki::assert(dynamic_cast<const vertex_buffer*>(&va.buffers[i].get()), SL);
 		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 		const auto& vbo = static_cast<const vertex_buffer&>(va.buffers[i].get());
 		glBindBuffer(GL_ARRAY_BUFFER, vbo.buffer);
@@ -212,7 +212,7 @@ void shader_base::render(const r4::matrix4<float>& m, const ruis::render::vertex
 	}
 
 	{
-		ASSERT(dynamic_cast<const index_buffer*>(&va.indices.get()))
+		utki::assert(dynamic_cast<const index_buffer*>(&va.indices.get()), SL);
 		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
 		const auto& ivbo = static_cast<const index_buffer&>(va.indices.get());
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ivbo.buffer);

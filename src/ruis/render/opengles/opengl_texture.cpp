@@ -29,7 +29,7 @@ opengl_texture::opengl_texture()
 {
 	glGenTextures(1, &this->tex);
 	assert_opengl_no_error();
-	ASSERT(this->tex != 0)
+	utki::assert(this->tex != 0, SL);
 }
 
 opengl_texture::~opengl_texture()

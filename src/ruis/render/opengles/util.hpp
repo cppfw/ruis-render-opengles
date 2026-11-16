@@ -41,35 +41,59 @@ inline void assert_opengl_no_error()
 		case GL_NO_ERROR:
 			return;
 		case GL_INVALID_ENUM:
-			ASSERT(false, [](auto& o) {
-				o << "OpenGL error: GL_INVALID_ENUM";
-			})
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_INVALID_ENUM";
+				},
+				SL
+			);
 			break;
 		case GL_INVALID_VALUE:
-			ASSERT(false, [](auto& o) {
-				o << "OpenGL error: GL_INVALID_VALUE";
-			})
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_INVALID_VALUE";
+				},
+				SL
+			);
 			break;
 		case GL_INVALID_OPERATION:
-			ASSERT(false, [](auto& o) {
-				o << "OpenGL error: GL_INVALID_OPERATION";
-			})
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_INVALID_OPERATION";
+				},
+				SL
+			);
 			break;
 		case GL_INVALID_FRAMEBUFFER_OPERATION:
-			ASSERT(false, [](auto& o) {
-				o << "OpenGL error: GL_INVALID_FRAMEBUFFER_OPERATION";
-			})
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_INVALID_FRAMEBUFFER_OPERATION";
+				},
+				SL
+			);
 			break;
 		case GL_OUT_OF_MEMORY:
 			// TODO: throw exception
-			ASSERT(false, [](auto& o) {
-				o << "OpenGL error: GL_OUT_OF_MEMORY";
-			})
+			utki::assert(
+				false,
+				[](auto& o) {
+					o << "OpenGL error: GL_OUT_OF_MEMORY";
+				},
+				SL
+			);
 			break;
 		default:
-			ASSERT(false, [&](auto& o) {
-				o << "Unknown OpenGL error, code = " << int(error);
-			})
+			utki::assert(
+				false,
+				[&](auto& o) {
+					o << "Unknown OpenGL error, code = " << int(error);
+				},
+				SL
+			);
 			break;
 	}
 #endif
@@ -79,7 +103,7 @@ inline GLint to_opengl_format(rasterimage::format f)
 {
 	switch (f) {
 		default:
-			ASSERT(false)
+			utki::assert(false, SL);
 			[[fallthrough]];
 		case rasterimage::format::grey:
 			return GL_LUMINANCE;
