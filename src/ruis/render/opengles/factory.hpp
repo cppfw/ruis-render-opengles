@@ -52,6 +52,11 @@ class shader_color_pos_lum;
 class factory : public ruis::render::factory
 {
 public:
+	// the native_window holds the actual shared (headless) GL context, so this
+	// concrete factory retains it (the abstract ruis::render::factory does not)
+	// to keep the context alive for all make_* calls.
+	const utki::shared_ref<ruis::render::native_window> native_window;
+
 	const capabilities caps;
 
 	factory(utki::shared_ref<ruis::render::native_window> native_window);

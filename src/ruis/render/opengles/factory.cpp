@@ -68,10 +68,11 @@ capabilities get_capabilities()
 } // namespace
 
 factory::factory(utki::shared_ref<ruis::render::native_window> native_window) :
+	native_window(std::move(native_window)),
 	caps([&]() {
 		// bind the headless GL context and leave it current so that object
 		// creation (make_*) operates on the shared GL context.
-		this->bind(native_window.get());
+		this->bind(this->native_window.get());
 		return get_capabilities();
 	}())
 {}
