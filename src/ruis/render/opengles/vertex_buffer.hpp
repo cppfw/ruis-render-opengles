@@ -38,19 +38,19 @@ public:
 	const GLenum type;
 
 	vertex_buffer(
-		const utki::shared_ref<const ruis::render::context>& rendering_context, //
+		const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 		utki::span<const r4::vector4<float>> vertices
 	);
 	vertex_buffer(
-		const utki::shared_ref<const ruis::render::context>& rendering_context, //
+		const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 		utki::span<const r4::vector3<float>> vertices
 	);
 	vertex_buffer(
-		const utki::shared_ref<const ruis::render::context>& rendering_context, //
+		const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 		utki::span<const r4::vector2<float>> vertices
 	);
 	vertex_buffer(
-		const utki::shared_ref<const ruis::render::context>& rendering_context, //
+		const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 		utki::span<const float> vertices
 	);
 
