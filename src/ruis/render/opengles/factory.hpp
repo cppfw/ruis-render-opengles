@@ -46,15 +46,12 @@ class shader_color_pos_lum;
 /**
  * @brief OpenGL ES render factory.
  *
- * Holds the headless (shared) GL context window. The factory binds this context in
- * its constructor and leaves it current, so that all make_* calls operate on the
- * shared GL context.
+ * The factory binds the headless (shared) GL context in its constructor and
+ * leaves it current, so that all make_* calls operate on the shared GL context.
  */
 class factory : public ruis::render::factory
 {
 public:
-	const utki::shared_ref<ruis::render::native_window> native_window;
-
 	const capabilities caps;
 
 	factory(utki::shared_ref<ruis::render::native_window> native_window);
