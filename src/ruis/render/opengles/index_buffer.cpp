@@ -34,7 +34,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 using namespace ruis::render::opengles;
 
 index_buffer::index_buffer(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	const void* data,
 	size_t size_bytes,
 	size_t size,
@@ -60,7 +60,7 @@ index_buffer::index_buffer(
 }
 
 index_buffer::index_buffer(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	utki::span<const uint16_t> indices
 ) :
 	index_buffer(
@@ -73,7 +73,7 @@ index_buffer::index_buffer(
 {}
 
 index_buffer::index_buffer(
-	const utki::shared_ref<const ruis::render::context>& rendering_context, //
+	const utki::shared_ref<const ruis::render::factory>& rendering_context, //
 	utki::span<const uint32_t> indices
 ) :
 	index_buffer(
