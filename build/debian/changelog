@@ -1,3 +1,9 @@
+libruis-render-opengles (0.3.11) unstable; urgency=medium
+
+  * update
+
+ -- Ivan Gagis <igagis@gmail.com>  Sun, 22 Nov 2026 02:19:44 +0200
+
 libruis-render-opengles (0.3.10) unstable; urgency=medium
 
   * implement get_color_pixels()
