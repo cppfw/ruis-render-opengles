@@ -72,14 +72,14 @@ factory::factory(utki::shared_ref<ruis::render::native_window> native_window) :
 	caps([&]() {
 		// bind the headless GL context and leave it current so that object
 		// creation (make_*) operates on the shared GL context.
-		this->native_window.get().bind_rendering_context();
+		this->bind(this->native_window.get());
 		return get_capabilities();
 	}())
 {}
 
 void factory::bind() const
 {
-	this->native_window.get().bind_rendering_context();
+	this->bind(this->native_window.get());
 }
 
 utki::shared_ref<ruis::render::factory::shaders> factory::make_shaders() const
